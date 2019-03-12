@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32" height="32" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="linear-gradient" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#eae926"/>
+      <stop offset="1" stop-color="#72e81f"/>
+    </linearGradient>
+  </defs>
+  <g id="qrcode" transform="translate(-351 -69)">
+    <path id="qrcode-2" data-name="qrcode" d="M0,45.714H13.714V32H0Zm4.571-9.143H9.143v4.571H4.571ZM18.286,32V45.714H32V32Zm9.143,9.143H22.857V36.571h4.571ZM0,64H13.714V50.286H0Zm4.571-9.143H9.143v4.571H4.571Zm25.143-4.571H32v9.143H25.143V57.143H22.857V64H18.286V50.286h6.857v2.286h4.571Zm0,11.429H32V64H29.714Zm-4.571,0h2.286V64H25.143Z" transform="translate(351 37)" fill="url(#linear-gradient)"/>
+  </g>
+</svg>

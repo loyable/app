@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="81.621" height="24.243" viewBox="0 0 81.621 24.243">
+  <g id="Indietro" transform="translate(-19.379 -73.879)">
+    <g id="Indietro-2" data-name="Indietro">
+      <g id="Arrow_Right" data-name="Arrow Right" transform="translate(416 373.5) rotate(180)">
+        <line id="Line_2" data-name="Line 2" x2="10" y2="10" transform="translate(384.5 277.5)" fill="none" stroke="#1681ff" stroke-linecap="round" stroke-width="3"/>
+        <line id="Line_3" data-name="Line 3" x2="10" y2="10" transform="translate(394.5 287.5) rotate(90)" fill="none" stroke="#1681ff" stroke-linecap="round" stroke-width="3"/>
+      </g>
+      <text id="Indietro-3" data-name="Indietro" transform="translate(71 92)" fill="#0070f5" font-size="17" font-family="CircularStd-Book" font-weight="500" letter-spacing="-0.02em"><tspan x="-29.367" y="0">Indietro</tspan></text>
+    </g>
+  </g>
+</svg>
