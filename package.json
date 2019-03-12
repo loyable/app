@@ -4,12 +4,28 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "react-devtools": "react-devtools"
+  },
+  "rnpm": {
+    "assets": [
+      "./app/assets/fonts/"
+    ]
   },
   "dependencies": {
     "react": "16.8.3",
     "react-native": "0.59.0",
-    "react-navigation": "^3.3.2"
+    "react-native-gesture-handler": "^1.1.0",
+    "react-native-maps": "^0.23.0",
+    "react-native-qrcode": "^0.2.7",
+    "react-native-remote-svg": "^1.4.2",
+    "react-native-vector-icons": "^6.4.1",
+    "react-navigation": "^3.3.2",
+    "react-redux": "^6.0.1",
+    "react-redux-firebase": "^2.2.6",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/core": "7.3.4",
@@ -17,6 +33,7 @@
     "babel-jest": "24.5.0",
     "jest": "24.5.0",
     "metro-react-native-babel-preset": "0.53.0",
+    "react-devtools": "^3.6.1",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
