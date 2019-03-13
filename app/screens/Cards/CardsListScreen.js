@@ -54,7 +54,9 @@ class CardsListScreen extends Component {
       <FlatList
         data={cards}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => <Card settings={item} />}
+        renderItem={({ item }) => (
+          <Card settings={item} navigation={this.props.navigation} />
+        )}
         onEndReached={() => this.setState({ isLoading: false })}
       />
     );

@@ -6,7 +6,8 @@ import {
   ScrollView,
   SafeAreaView,
   StyleSheet,
-  FlatList
+  FlatList,
+  TouchableWithoutFeedback
 } from "react-native";
 
 import vars from "../../../config/styles";
@@ -77,85 +78,91 @@ class Card extends Component {
 
     if (card.settings.design === "vertical") {
       return (
-        <View style={styles.container}>
-          <View style={styles.card}>
-            <View style={styles.header}>
-              {card.header.logo.verticalPosition === "center" && (
-                <View style={styles.textContainer}>
-                  <Text style={styles.text1}>{card.header.text1.value}</Text>
-                  <Text style={styles.text2}>{card.header.text2.value}</Text>
-                </View>
-              )}
-              <Image
-                style={styles.logo}
-                source={{
-                  uri: card.header.logo.src
-                }}
-              />
+        <TouchableWithoutFeedback onPress={() => console.log("pressed")}>
+          <View style={styles.container}>
+            <View style={styles.card}>
+              <View style={styles.header}>
+                {card.header.logo.verticalPosition === "center" && (
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text1}>{card.header.text1.value}</Text>
+                    <Text style={styles.text2}>{card.header.text2.value}</Text>
+                  </View>
+                )}
+                <Image
+                  style={styles.logo}
+                  source={{
+                    uri: card.header.logo.src
+                  }}
+                />
 
-              {card.header.logo.verticalPosition !== "center" && (
-                <View style={styles.textContainer}>
-                  <Text style={styles.text1}>{card.header.text1.value}</Text>
-                  <Text style={styles.text2}>{card.header.text2.value}</Text>
-                </View>
-              )}
+                {card.header.logo.verticalPosition !== "center" && (
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text1}>{card.header.text1.value}</Text>
+                    <Text style={styles.text2}>{card.header.text2.value}</Text>
+                  </View>
+                )}
 
-              <Text style={styles.footer}>{card.footer.value}</Text>
+                <Text style={styles.footer}>{card.footer.value}</Text>
+              </View>
+              <View style={styles.rowContainer}>
+                {this.createGrid(card, styles)}
+              </View>
             </View>
-            <View style={styles.rowContainer}>
-              {this.createGrid(card, styles)}
+            <View style={styles.infoContainer}>
+              <Text style={styles.title}>{card.settings.text.title.value}</Text>
+
+              <Text style={styles.address}>
+                {card.settings.text.address.value}
+              </Text>
             </View>
           </View>
-          <View style={styles.infoContainer}>
-            <Text style={styles.title}>{card.settings.text.title.value}</Text>
-
-            <Text style={styles.address}>
-              {card.settings.text.address.value}
-            </Text>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
       );
     } else {
       return (
-        <View style={styles.container}>
-          <View style={styles.card}>
-            <View style={styles.header}>
-              {card.header.logo.verticalPosition === "center" && (
-                <View style={styles.textContainer}>
-                  <Text style={styles.text1}>{card.header.text1.value}</Text>
-                </View>
-              )}
-              <Image
-                style={styles.logo}
-                source={{
-                  uri: card.header.logo.src
-                }}
-              />
-              {card.header.logo.verticalPosition === "center" && (
-                <View style={styles.textContainer}>
-                  <Text style={styles.text2}>{card.header.text2.value}</Text>
-                </View>
-              )}
-              {card.header.logo.verticalPosition !== "center" && (
-                <View style={styles.textContainer}>
-                  <Text style={styles.text1}>{card.header.text1.value}</Text>
-                  <Text style={styles.text2}>{card.header.text2.value}</Text>
-                </View>
-              )}
+        <TouchableWithoutFeedback
+          onPress={() => this.props.navigation.navigate("Details")}
+        >
+          <View style={styles.container}>
+            <View style={styles.card}>
+              <View style={styles.header}>
+                {card.header.logo.verticalPosition === "center" && (
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text1}>{card.header.text1.value}</Text>
+                  </View>
+                )}
+                <Image
+                  style={styles.logo}
+                  source={{
+                    uri: card.header.logo.src
+                  }}
+                />
+                {card.header.logo.verticalPosition === "center" && (
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text2}>{card.header.text2.value}</Text>
+                  </View>
+                )}
+                {card.header.logo.verticalPosition !== "center" && (
+                  <View style={styles.textContainer}>
+                    <Text style={styles.text1}>{card.header.text1.value}</Text>
+                    <Text style={styles.text2}>{card.header.text2.value}</Text>
+                  </View>
+                )}
+              </View>
+              <View style={styles.rowContainer}>
+                {this.createGrid(card, styles)}
+              </View>
+              <Text style={styles.footer}>{card.footer.value}</Text>
             </View>
-            <View style={styles.rowContainer}>
-              {this.createGrid(card, styles)}
-            </View>
-            <Text style={styles.footer}>{card.footer.value}</Text>
-          </View>
-          <View style={styles.infoContainer}>
-            <Text style={styles.title}>{card.settings.text.title.value}</Text>
+            <View style={styles.infoContainer}>
+              <Text style={styles.title}>{card.settings.text.title.value}</Text>
 
-            <Text style={styles.address}>
-              {card.settings.text.address.value}
-            </Text>
+              <Text style={styles.address}>
+                {card.settings.text.address.value}
+              </Text>
+            </View>
           </View>
-        </View>
+        </TouchableWithoutFeedback>
       );
     }
   }

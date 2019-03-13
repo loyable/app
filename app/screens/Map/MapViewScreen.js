@@ -118,7 +118,7 @@ class MapViewScreen extends Component {
             showsUserLocation={true}
             userLocationAnnotationTitle=""
             showsCompass={false}
-            showsMyLocationButton={true}
+            showsMyLocationButton={false}
           >
             <MapView.Marker
               coordinate={{
