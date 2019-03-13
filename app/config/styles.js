@@ -116,5 +116,18 @@ export default (vars = {
       },
       elevation: 1
     }
+  },
+  cardDetails: {
+    style: {
+      shadow: {
+        color: "#000",
+        offset: {
+          width: 0,
+          height: 0
+        },
+        opacity: 0.1,
+        radius: 6
+      }
+    }
   }
 });

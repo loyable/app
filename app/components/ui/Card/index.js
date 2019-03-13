@@ -17,6 +17,7 @@ import Box from "./Box";
 /*
   PROPS:
   - settings: object
+  - showInfo: boolean (not showing title and address) for details screens
 */
 
 class Card extends Component {
@@ -78,7 +79,9 @@ class Card extends Component {
 
     if (card.settings.design === "vertical") {
       return (
-        <TouchableWithoutFeedback onPress={() => console.log("pressed")}>
+        <TouchableWithoutFeedback
+          onPress={() => this.props.navigation.navigate("Details", { card })}
+        >
           <View style={styles.container}>
             <View style={styles.card}>
               <View style={styles.header}>
@@ -121,7 +124,7 @@ class Card extends Component {
     } else {
       return (
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigation.navigate("Details")}
+          onPress={() => this.props.navigation.navigate("Details", { card })}
         >
           <View style={styles.container}>
             <View style={styles.card}>
