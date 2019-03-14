@@ -37,6 +37,12 @@ export default createStackNavigator(
     }
   },
   {
-    headerMode: "none"
+    headerTransitionPreset: "uikit",
+    headerLayoutPreset: "center",
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        header: <Header navigation={navigation} />
+      };
+    }
   }
 );

@@ -33,6 +33,7 @@ const CardDetailsStack = createStackNavigator(
   },
   {
     initialRouteName: "CardsList",
+    headerMode: "none",
     headerTransitionPreset: "uikit",
     headerLayoutPreset: "center",
     defaultNavigationOptions: ({ navigation }) => {
