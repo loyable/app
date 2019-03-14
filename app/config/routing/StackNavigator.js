@@ -14,6 +14,8 @@ import BackIcon from "../../components/icons/BackIcon";
 import QRCodeScreen from "../../screens/QRCodeScreen";
 import SettingsScreen from "../../screens/SettingsScreen";
 
+import Header from "../../components/ui/Header";
+
 //Global Vars
 import vars from "../styles";
 
@@ -26,7 +28,7 @@ export default createStackNavigator(
       screen: QRCodeScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerLeft: <BackIcon navigation={navigation} />
+          header: <Header backArrow={true} navigation={navigation} />
         };
       }
     },
@@ -35,16 +37,6 @@ export default createStackNavigator(
     }
   },
   {
-    headerMode: "float",
-    headerTransitionPreset: "uikit",
-    headerLayoutPreset: "center",
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        headerStyle: vars.headerStyle,
-        headerTitle: <LogoIcon navigation={navigation} link="Cards" />,
-        headerLeft: <HamburgerIcon navigation={navigation} />,
-        headerRight: <QRCodeIcon navigation={navigation} />
-      };
-    }
+    headerMode: "none"
   }
 );

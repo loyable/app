@@ -14,10 +14,12 @@ class LogoIcon extends Component {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate(this.props.link)}
-        style={styles.icon}
         activeOpacity={0.8}
       >
-        <SVG source={require("../../assets/icons/logo.svg")} />
+        <SVG
+          style={styles.icon}
+          source={require("../../assets/icons/logo.svg")}
+        />
       </TouchableOpacity>
     );
   }
@@ -30,12 +32,8 @@ LogoIcon.propTypes = {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 100,
-    height: 50,
-    paddingVertical:
-      Platform.OS === "android"
-        ? vars.header.paddingVerticalAndroid
-        : vars.header.paddingVerticalIOS
+    width: 110,
+    height: 50
   }
 });
 export default LogoIcon;

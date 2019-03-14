@@ -7,7 +7,7 @@ import CardsGridScreen from "./CardsGridScreen";
 import DetailsScreen from "./DetailsScreen";
 import CardDetailsScreen from "./CardDetailsScreen";
 
-import BackIcon from "../../components/icons/BackIcon";
+import Header from "../../components/ui/Header";
 
 const CardDetailsStack = createStackNavigator(
   {
@@ -18,7 +18,7 @@ const CardDetailsStack = createStackNavigator(
       screen: DetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerLeft: <BackIcon navigation={navigation} />
+          header: <Header backArrow={true} navigation={navigation} />
         };
       }
     },
@@ -26,14 +26,20 @@ const CardDetailsStack = createStackNavigator(
       screen: CardDetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          headerLeft: <BackIcon navigation={navigation} />
+          header: <Header backArrow={true} navigation={navigation} />
         };
       }
     }
   },
   {
-    headerMode: "none",
-    initialRouteName: "CardsList"
+    initialRouteName: "CardsList",
+    headerTransitionPreset: "uikit",
+    headerLayoutPreset: "center",
+    defaultNavigationOptions: ({ navigation }) => {
+      return {
+        header: <Header navigation={navigation} />
+      };
+    }
   }
 );
 

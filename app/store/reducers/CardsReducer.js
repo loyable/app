@@ -1,7 +1,236 @@
 const initialState = {
   filter: "",
   cardsFiltered: [],
-  cards: []
+  cards: [
+    {
+      id: "62db33d8-bc6e-4864-b50f-281aab7c9893",
+      marked: 8,
+      settings: {
+        text: {
+          title: {
+            value: "MiNi Sushi"
+          },
+          address: {
+            value: "Via Emilio Morosini, 5, 20135 Milano MI"
+          }
+        },
+        style: {
+          height: 210,
+          backgroundColor: "#333"
+        },
+        marks: {
+          total: 10,
+          rows: 2,
+          style: {
+            shape: {
+              type: "round",
+              value: 12
+            },
+            width: 50,
+            height: 50,
+            backgroundColor: "#fff",
+            padding: 2
+          },
+          mark: {
+            image: {
+              src:
+                "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+              width: 38,
+              height: 11
+            },
+            style: {
+              shape: {
+                type: "round",
+                value: 12
+              },
+              backgroundColor: "#000"
+            }
+          }
+        }
+      },
+      header: {
+        logo: {
+          src:
+            "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+          width: 112,
+          height: 35,
+          position: "left"
+        },
+        text1: {
+          value: "Tessera Pranzo",
+          fontSize: 20,
+          color: "#fff",
+          textAlign: "right"
+        },
+        text2: {
+          value: "Ogni 10 Pranzi 1 Omaggio!",
+          fontSize: 16,
+          color: "#fff",
+          textAlign: "right"
+        }
+      },
+      footer: {
+        value: "N.B. Non valido nei giorni festivi",
+        fontSize: 14,
+        color: "#fff",
+        textAlign: "right"
+      }
+    },
+    {
+      id: "fa21dd26-501e-4ce5-886c-59e97854df96",
+      marked: 5,
+      settings: {
+        text: {
+          title: {
+            value: "Spontini - Papiniano"
+          },
+          address: {
+            value: "Viale Papiniano, 23, 20123 Milano MI"
+          }
+        },
+        style: {
+          height: 270,
+          backgroundColor: "#b40001",
+          borderRadius: 10
+        },
+        marks: {
+          total: 15,
+          rows: 3,
+          rowSpacing: 10,
+          style: {
+            width: 50,
+            height: 50,
+            backgroundColor: "#fff",
+            borderRadius: 25,
+            padding: 2,
+            shape: {
+              type: "circle"
+            }
+          },
+          mark: {
+            image: {
+              src: "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+              width: 35,
+              height: 16
+            },
+            style: {
+              shape: {
+                type: "circle"
+              },
+              backgroundColor: "#b40001",
+              borderWidth: 0,
+              borderColor: "#fff"
+            }
+          }
+        }
+      },
+      header: {
+        logo: {
+          src: "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+          width: 112,
+          height: 52,
+          position: "left"
+        },
+        text1: {
+          value: "Menu Pranzo",
+          fontSize: 20,
+          color: "#fff",
+          textAlign: "right"
+        },
+        text2: {
+          value: "15 Pizze 1 Omaggio",
+          fontSize: 16,
+          color: "#fff",
+          textAlign: "right"
+        }
+      },
+      footer: {
+        value: "Scadenza: 05/05/2019",
+        fontSize: 14,
+        color: "#fff",
+        textAlign: "right"
+      }
+    },
+    {
+      id: "7188e682-4184-4b6f-8243-78c4c41da2f7",
+      marked: 3,
+      settings: {
+        design: "horizontal",
+        text: {
+          title: {
+            value: "Il Pomodorino"
+          },
+          address: {
+            value: "Via Crema, 3, 20135 Milano MI"
+          }
+        },
+        style: {
+          height: 280,
+          backgroundColor: "#fff",
+          borderRadius: 10
+        },
+        marks: {
+          total: 10,
+          rows: 2,
+          rowSpacing: 10,
+          style: {
+            width: 50,
+            height: 50,
+            backgroundColor: "#fff",
+            borderRadius: 30,
+            borderWidth: 1,
+            borderColor: "#eee",
+            shape: {
+              type: "circle"
+            }
+          },
+          mark: {
+            image: {
+              src:
+                "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png",
+              width: 38,
+              height: 23
+            },
+            style: {
+              shape: {
+                type: "circle"
+              },
+              backgroundColor: "#fff",
+              borderWidth: 1,
+              borderColor: "#aaa"
+            }
+          }
+        }
+      },
+      header: {
+        logo: {
+          src:
+            "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png",
+          width: 112,
+          height: 69,
+          position: "center"
+        },
+        text1: {
+          value: "Menu Pranzo",
+          fontSize: 20,
+          color: "#333",
+          textAlign: "center"
+        },
+        text2: {
+          value: "10 Pizze 1 Omaggio",
+          fontSize: 16,
+          color: "#aaa",
+          textAlign: "center"
+        }
+      },
+      footer: {
+        value: "Valido solo nel weekend",
+        fontSize: 14,
+        color: "#aaa",
+        textAlign: "center"
+      }
+    }
+  ]
 };
 
 const CardsReducer = (state = initialState, action) => {

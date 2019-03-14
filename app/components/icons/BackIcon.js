@@ -12,8 +12,8 @@ class BackIcon extends Component {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.goBack()}
-        style={{ marginLeft: 10 }}
         activeOpacity={0.8}
+        style={{ paddingLeft: vars.header.paddingLeftBackArrow }}
       >
         <SVG source={require("../../assets/icons/back.svg")} />
       </TouchableOpacity>

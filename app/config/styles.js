@@ -46,12 +46,13 @@ export default (vars = {
   },
   headerStyle: {
     height: 60,
+    backgroundColor: "#fff",
     borderBottomWidth: 0,
     elevation: 0
   },
   header: {
-    paddingVerticalAndroid: 5,
-    paddingVerticalIOS: 0
+    paddingHorizontal: 20,
+    paddingLeftBackArrow: 10
   },
   card: {
     container: {
@@ -63,7 +64,8 @@ export default (vars = {
     },
     infoContainer: {
       marginHorizontal: 5,
-      marginVertical: 0
+      marginTop: 5,
+      marginBottom: 0
     },
     marks: {
       total: 10,

@@ -14,10 +14,13 @@ class HamburgerIcon extends Component {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.openDrawer()}
-        style={styles.icon}
+        style={{ paddingLeft: vars.header.paddingHorizontal }}
         activeOpacity={0.8}
       >
-        <SVG source={require("../../assets/icons/hamburger.svg")} />
+        <SVG
+          style={styles.icon}
+          source={require("../../assets/icons/hamburger.svg")}
+        />
       </TouchableOpacity>
     );
   }
@@ -30,12 +33,7 @@ HamburgerIcon.propTypes = {
 const styles = StyleSheet.create({
   icon: {
     width: 30,
-    height: Platform.OS === "android" ? 30 : 25,
-    marginLeft: 20,
-    paddingVertical:
-      Platform.OS === "android"
-        ? vars.header.paddingVerticalAndroid
-        : vars.header.paddingVerticalIOS
+    height: 25
   }
 });
 export default HamburgerIcon;

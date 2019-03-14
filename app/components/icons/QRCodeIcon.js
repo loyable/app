@@ -14,10 +14,13 @@ class QRCodeIcon extends Component {
     return (
       <TouchableOpacity
         onPress={() => this.props.navigation.navigate("QRCode")}
-        style={styles.icon}
+        style={{ paddingRight: vars.header.paddingHorizontal }}
         activeOpacity={0.8}
       >
-        <SVG source={require("../../assets/icons/qrcode.svg")} />
+        <SVG
+          style={styles.icon}
+          source={require("../../assets/icons/qrcode.svg")}
+        />
       </TouchableOpacity>
     );
   }
@@ -29,13 +32,8 @@ QRCodeIcon.propTypes = {
 
 const styles = StyleSheet.create({
   icon: {
-    width: 30,
-    height: 30,
-    marginRight: 20,
-    paddingVertical:
-      Platform.OS === "android"
-        ? vars.header.paddingVerticalAndroid
-        : vars.header.paddingVerticalIOS
+    width: 32,
+    height: 32
   }
 });
 export default QRCodeIcon;

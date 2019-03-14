@@ -21,6 +21,10 @@ import Box from "./Box";
 */
 
 class Card extends Component {
+  static defaultProps = {
+    showInfo: true
+  };
+
   createGrid(card, styles) {
     /*
       Funzione createGrid()
@@ -111,13 +115,17 @@ class Card extends Component {
                 {this.createGrid(card, styles)}
               </View>
             </View>
-            <View style={styles.infoContainer}>
-              <Text style={styles.title}>{card.settings.text.title.value}</Text>
+            {this.props.showInfo && (
+              <View style={styles.infoContainer}>
+                <Text style={styles.title}>
+                  {card.settings.text.title.value}
+                </Text>
 
-              <Text style={styles.address}>
-                {card.settings.text.address.value}
-              </Text>
-            </View>
+                <Text style={styles.address}>
+                  {card.settings.text.address.value}
+                </Text>
+              </View>
+            )}
           </View>
         </TouchableWithoutFeedback>
       );
@@ -157,13 +165,17 @@ class Card extends Component {
               </View>
               <Text style={styles.footer}>{card.footer.value}</Text>
             </View>
-            <View style={styles.infoContainer}>
-              <Text style={styles.title}>{card.settings.text.title.value}</Text>
+            {this.props.showInfo && (
+              <View style={styles.infoContainer}>
+                <Text style={styles.title}>
+                  {card.settings.text.title.value}
+                </Text>
 
-              <Text style={styles.address}>
-                {card.settings.text.address.value}
-              </Text>
-            </View>
+                <Text style={styles.address}>
+                  {card.settings.text.address.value}
+                </Text>
+              </View>
+            )}
           </View>
         </TouchableWithoutFeedback>
       );
@@ -173,7 +185,8 @@ class Card extends Component {
   getStyles(card) {
     return {
       container: {
-        marginBottom: vars.card.container.marginBottom
+        marginBottom:
+          this.props.showInfo === true ? vars.card.container.marginBottom : 0
       },
       card: {
         flexDirection: card.settings.design === "vertical" ? "row" : "column", //row if vertical | column if horizontal
@@ -189,9 +202,6 @@ class Card extends Component {
         padding: card.settings.style.padding
           ? card.settings.style.padding
           : vars.card.style.padding,
-        marginBottom: card.settings.style.marginBottom
-          ? card.settings.style.marginBottom
-          : vars.card.style.marginBottom,
         shadowColor: card.settings.style.shadow
           ? card.settings.style.shadow.color
           : vars.card.style.shadow.color,
@@ -330,7 +340,8 @@ class Card extends Component {
       },
       infoContainer: {
         marginHorizontal: vars.card.infoContainer.marginHorizontal,
-        marginVertical: vars.card.infoContainer.marginVertical
+        marginTop: vars.card.infoContainer.marginTop,
+        marginBottom: vars.card.infoContainer.marginBottom
       },
       title: {
         fontSize: card.settings.text.title.fontSize
