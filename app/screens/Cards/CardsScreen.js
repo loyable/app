@@ -18,7 +18,13 @@ const CardDetailsStack = createStackNavigator(
       screen: DetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          header: <Header backArrow={true} navigation={navigation} />
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
         };
       }
     },
@@ -26,7 +32,13 @@ const CardDetailsStack = createStackNavigator(
       screen: CardDetailsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          header: <Header backArrow={true} navigation={navigation} />
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
         };
       }
     }

@@ -8,9 +8,16 @@ import QRCodeIcon from "../../icons/QRCodeIcon";
 import BackIcon from "../../icons/BackIcon";
 import vars from "../../../config/styles";
 
+/*
+  PROPS:
+  - backArrow: boolean (show the back arrow)
+  - bottomShadow: boolean (show the bottom shadow)
+*/
+
 class Header extends Component {
   static defaultProps = {
-    backArrow: false
+    backArrow: false,
+    showBottomShadow: false
   };
 
   render() {
@@ -20,7 +27,14 @@ class Header extends Component {
         backgroundColor: vars.headerStyle.backgroundColor,
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        shadowColor: this.props.showBottomShadow ? "#000" : undefined,
+        shadowOffset: {
+          width: 0,
+          height: this.props.showBottomShadow ? 3 : 0
+        },
+        shadowOpacity: this.props.showBottomShadow ? 0.1 : 0,
+        shadowRadius: this.props.showBottomShadow ? 2 : 0
       },
       headerContainer: {
         backgroundColor: "#fff"

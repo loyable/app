@@ -90,7 +90,7 @@ export default (vars = {
       shadow: {
         color: "#333",
         offset: {
-          width: 3,
+          width: 0,
           height: 0
         },
         opacity: 0.1,
