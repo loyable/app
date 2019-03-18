@@ -93,6 +93,7 @@ class MapViewScreen extends Component {
     );
   }
   render() {
+    const cards = this.props.cards.cardsFiltered;
     return (
       <SafeAreaView style={styles.pageContainer}>
         <SearchBar
@@ -144,7 +145,7 @@ class MapViewScreen extends Component {
                   }}
                 />
               </View>
-              <Tooltip />
+              <Tooltip card={cards[0]} navigation={this.props.navigation} />
             </MapView.Marker>
           </MapView>
         </View>

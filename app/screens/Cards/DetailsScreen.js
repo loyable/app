@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView, Button, StyleSheet } from "react-native";
+import { Text, View, ScrollView, StyleSheet } from "react-native";
 
 import MapView from "react-native-maps";
 
 import Card from "../../components/ui/Card";
+
+import BackIcon from "../../components/icons/BackIcon";
 
 //global vars
 import vars from "../../config/styles";
@@ -12,11 +14,16 @@ import CardAnalyticsCircle from "./CardAnalyticsCircle";
 class DetailsScreen extends Component {
   render() {
     const card = this.props.navigation.getParam("card");
-    console.log(card);
+    const navigateTo = this.props.navigation.getParam("navigateTo");
     return (
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
-          <Card settings={card} showInfo={false} />
+          <Card
+            settings={card}
+            showInfo={false}
+            navigation={this.props.navigation}
+            navigateTo={navigateTo}
+          />
         </View>
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
@@ -42,6 +49,7 @@ class DetailsScreen extends Component {
             userLocationAnnotationTitle=""
             showsCompass={false}
             showsMyLocationButton={false}
+            scrollEnabled={false}
           />
           <View style={styles.cardDetailsContainer}>
             <Text style={styles.cardAnalyticsTitle}>Dati storici</Text>
@@ -85,7 +93,7 @@ class DetailsScreen extends Component {
                     size={35}
                     fontSize={22}
                     color="#fff"
-                    backgroundColor="#C812FF"
+                    backgroundColor="#f00"
                   />
                 </View>
                 <View style={styles.cardHistoryTextContainer}>
@@ -102,7 +110,7 @@ class DetailsScreen extends Component {
                     size={35}
                     fontSize={22}
                     color="#fff"
-                    backgroundColor="#72E81F"
+                    backgroundColor="#10E5E8"
                   />
                 </View>
                 <View style={styles.cardHistoryTextContainer}>
@@ -115,10 +123,6 @@ class DetailsScreen extends Component {
             </View>
           </View>
         </View>
-        <Button
-          onPress={() => this.props.navigation.navigate("CardDetails")}
-          title="Go to Card Details"
-        />
       </ScrollView>
     );
   }

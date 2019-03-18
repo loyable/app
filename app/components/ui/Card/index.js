@@ -22,6 +22,7 @@ import Box from "./Box";
 
 class Card extends Component {
   static defaultProps = {
+    navigateTo: "Details",
     showInfo: true
   };
 
@@ -84,7 +85,14 @@ class Card extends Component {
     if (card.settings.design === "vertical") {
       return (
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigation.navigate("Details", { card })}
+          onPress={() => {
+            if (this.props.navigateTo !== "none") {
+              this.props.navigation.navigate(this.props.navigateTo, {
+                card,
+                navigateTo: "CardDetails"
+              });
+            }
+          }}
         >
           <View style={styles.container}>
             <View style={styles.card}>
@@ -132,7 +140,14 @@ class Card extends Component {
     } else {
       return (
         <TouchableWithoutFeedback
-          onPress={() => this.props.navigation.navigate("Details", { card })}
+          onPress={() => {
+            if (this.props.navigateTo !== "none") {
+              this.props.navigation.navigate(this.props.navigateTo, {
+                card,
+                navigateTo: "CardDetails"
+              });
+            }
+          }}
         >
           <View style={styles.container}>
             <View style={styles.card}>

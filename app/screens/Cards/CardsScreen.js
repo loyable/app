@@ -15,44 +15,33 @@ const CardDetailsStack = createStackNavigator(
       screen: CardsListScreen
     },
     Details: {
-      screen: DetailsScreen,
-      navigationOptions: ({ navigation }) => {
-        return {
-          header: (
-            <Header
-              backArrow={true}
-              navigation={navigation}
-              showBottomShadow={true}
-            />
-          )
-        };
-      }
+      screen: DetailsScreen
     },
     CardDetails: {
-      screen: CardDetailsScreen,
-      navigationOptions: ({ navigation }) => {
-        return {
-          header: (
-            <Header
-              backArrow={true}
-              navigation={navigation}
-              showBottomShadow={true}
-            />
-          )
-        };
-      }
+      screen: CardDetailsScreen
     }
   },
   {
     initialRouteName: "CardsList",
-    headerMode: "none",
-    headerTransitionPreset: "uikit",
-    headerLayoutPreset: "center",
-    defaultNavigationOptions: ({ navigation }) => {
-      return {
-        header: <Header navigation={navigation} />
-      };
+    headerMode: "none"
+  }
+);
+
+const CardGridDetailsStack = createStackNavigator(
+  {
+    CardsGrid: {
+      screen: CardsGridScreen
+    },
+    DetailsGrid: {
+      screen: DetailsScreen
+    },
+    CardGridDetails: {
+      screen: CardDetailsScreen
     }
+  },
+  {
+    initialRouteName: "CardsGrid",
+    headerMode: "none"
   }
 );
 
@@ -62,7 +51,7 @@ export default createSwitchNavigator(
       screen: CardDetailsStack
     },
     CardsGrid: {
-      screen: CardsGridScreen
+      screen: CardGridDetailsStack
     }
   },
   {

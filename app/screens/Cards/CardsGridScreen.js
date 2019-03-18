@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Text,
   View,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableWithoutFeedback
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -60,7 +61,12 @@ class CardsGridScreen extends Component {
         data={cards}
         keyExtractor={item => item.id}
         renderItem={({ item, index }) => (
-          <Card settings={item} isLastOddItem={index === lastItem} />
+          <Card
+            settings={item}
+            navigation={this.props.navigation}
+            navigateTo="DetailsGrid"
+            isLastOddItem={index === lastItem}
+          />
         )}
         numColumns={2}
         onEndReached={() => this.setState({ isLoading: false })}

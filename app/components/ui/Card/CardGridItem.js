@@ -1,9 +1,18 @@
 import React, { Component } from "react";
-import { Image, View, StyleSheet } from "react-native";
+import {
+  Image,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback
+} from "react-native";
 
 import vars from "../../../config/styles";
 
 class CardGridItem extends Component {
+  static defaultProps = {
+    navigateTo: "Details"
+  };
+
   getStyles(card) {
     return {
       container: {
@@ -40,14 +49,23 @@ class CardGridItem extends Component {
     const styles = StyleSheet.create(this.getStyles(card));
 
     return (
-      <View style={styles.container}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: card.header.logo.src
-          }}
-        />
-      </View>
+      <TouchableWithoutFeedback
+        onPress={() =>
+          this.props.navigation.navigate(this.props.navigateTo, {
+            card,
+            navigateTo: "CardGridDetails"
+          })
+        }
+      >
+        <View style={styles.container}>
+          <Image
+            style={styles.logo}
+            source={{
+              uri: card.header.logo.src
+            }}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }
