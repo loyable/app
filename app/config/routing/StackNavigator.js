@@ -28,13 +28,7 @@ export default createStackNavigator(
       screen: QRCodeScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          header: (
-            <Header
-              backArrow={true}
-              navigation={navigation}
-              showBottomShadow={true}
-            />
-          )
+          header: <Header backArrow={true} navigation={navigation} />
         };
       }
     },
