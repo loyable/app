@@ -1,0 +1,23 @@
+{
+  "id": "e61665bf-9d4b-478f-b82c-5db61efd84c1",
+  "name": "MiNi Sushi",
+  "address": {
+    "value": "Via Emilio Morosini, 5, 20135 Milano MI",
+    "coordinate": {
+      "lat": 45.4563687,
+      "lng": 9.2090525
+    }
+  },
+  "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, blanditiis. Nesciunt, aperiam suscipit? Corrupti quam minima sequi voluptate, vitae neque?",
+  "logo": {
+    "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+    "width": 227,
+    "height": 72,
+    "backgroundColor": "#333"
+  },
+  "cards": [
+    {
+      "id": "62db33d8-bc6e-4864-b50f-281aab7c9893"
+    }
+  ]
+}

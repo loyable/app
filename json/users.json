@@ -1,0 +1,28 @@
+{
+  "id": "4048ed6b-bcad-4e73-9852-1ba4c585acdb",
+  "phone": "+393391848457",
+  "merchants": [
+    {
+      "merchantID": "e61665bf-9d4b-478f-b82c-5db61efd84c1",
+      "cards": [
+        {
+          "id": "62db33d8-bc6e-4864-b50f-281aab7c9893",
+          "marked": 5,
+          "history": [
+            {
+              "type": "add",
+              "value": "+1"
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "merchantID": "e61665bf-9d4b-478f-b82c-5db61efd84c1",
+          "type": "completed",
+          "value": "+1"
+        }
+      ]
+    }
+  ]
+}
