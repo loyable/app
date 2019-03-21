@@ -49,7 +49,6 @@ class CardsListScreen extends Component {
     this.state = {
       isLoading: true
     };
-
     props.WATCH_CARDS();
   }
 

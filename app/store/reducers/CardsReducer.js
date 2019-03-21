@@ -4,230 +4,334 @@ const initialState = {
   cards: [
     {
       id: "62db33d8-bc6e-4864-b50f-281aab7c9893",
-      marked: 8,
+      marked: 5,
       settings: {
-        text: {
-          title: {
-            value: "MiNi Sushi"
-          },
-          address: {
-            value: "Via Emilio Morosini, 5, 20135 Milano MI"
-          }
-        },
-        style: {
-          height: 210,
-          backgroundColor: "#333"
-        },
+        design: "horizontal",
         marks: {
-          total: 10,
-          rows: 2,
-          style: {
-            shape: {
-              type: "round",
-              value: 12
-            },
-            width: 50,
-            height: 50,
-            backgroundColor: "#fff",
-            padding: 2
-          },
           mark: {
             image: {
-              src:
-                "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
               width: 38,
-              height: 11
+              height: 11,
+              src:
+                "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png"
             },
             style: {
+              backgroundColor: "#000",
               shape: {
                 type: "round",
                 value: 12
               },
-              backgroundColor: "#000"
+              borderColor: "#fff",
+              borderWidth: 0
             }
+          },
+          rows: 2,
+          total: 10,
+          rowSpacing: 15,
+          style: {
+            backgroundColor: "#fff",
+            width: 50,
+            height: 50,
+            padding: 2,
+            borderWidth: 0,
+            borderColor: "#fff",
+            shape: {
+              type: "round",
+              value: 12
+            }
+          }
+        },
+        style: {
+          height: 210,
+          backgroundColor: "#333",
+          borderRadius: 10,
+          borderWidth: 0,
+          borderColor: "#fff"
+        },
+        text: {
+          title: {
+            value: "MiNi Sushi",
+            fontSize: 22,
+            textAlign: "left",
+            color: "#3c3c3c",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 22,
+            letterSpacing: 0
+          },
+          address: {
+            value: "Via Emilio Morosini, 5, 20135 Milano MI",
+            fontSize: 16,
+            textAlign: "left",
+            color: "#8e8e8e",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 16,
+            letterSpacing: 0
           }
         }
       },
       header: {
         logo: {
-          src:
-            "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
           width: 112,
           height: 35,
-          position: "left"
+          position: "left",
+          src:
+            "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+          verticalPosition: "top",
+          marginBottom: 0,
+          marginLeft: 0
         },
         text1: {
           value: "Tessera Pranzo",
-          fontSize: 20,
           color: "#fff",
-          textAlign: "right"
+          fontSize: 20,
+          textAlign: "right",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 20,
+          letterSpacing: 0
         },
         text2: {
           value: "Ogni 10 Pranzi 1 Omaggio!",
-          fontSize: 16,
           color: "#fff",
-          textAlign: "right"
+          fontSize: 16,
+          textAlign: "right",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 16,
+          letterSpacing: 0
         }
       },
       footer: {
         value: "N.B. Non valido nei giorni festivi",
-        fontSize: 14,
         color: "#fff",
-        textAlign: "right"
+        fontSize: 14,
+        textAlign: "right",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        lineHeight: 14,
+        letterSpacing: 0
       }
     },
     {
       id: "fa21dd26-501e-4ce5-886c-59e97854df96",
-      marked: 5,
       settings: {
-        text: {
-          title: {
-            value: "Spontini - Papiniano"
+        design: "horizontal",
+        marks: {
+          mark: {
+            image: {
+              width: 35,
+              height: 16,
+              src: "http://www.pizzeriaspontini.it//graphic/headLogo.png"
+            },
+            style: {
+              backgroundColor: "#b40001",
+              shape: {
+                type: "circle",
+                value: 0
+              },
+              borderColor: "#fff",
+              borderWidth: 0
+            }
           },
-          address: {
-            value: "Viale Papiniano, 23, 20123 Milano MI"
+          rows: 3,
+          total: 15,
+          rowSpacing: 10,
+          style: {
+            backgroundColor: "#fff",
+            width: 50,
+            height: 50,
+            padding: 2,
+            borderWidth: 0,
+            borderColor: "#fff",
+            shape: {
+              type: "circle",
+              value: 0
+            }
           }
         },
         style: {
           height: 270,
           backgroundColor: "#b40001",
-          borderRadius: 10
+          borderRadius: 10,
+          borderWidth: 0,
+          borderColor: "#fff"
         },
-        marks: {
-          total: 15,
-          rows: 3,
-          rowSpacing: 10,
-          style: {
-            width: 50,
-            height: 50,
-            backgroundColor: "#fff",
-            borderRadius: 25,
-            padding: 2,
-            shape: {
-              type: "circle"
-            }
+        text: {
+          title: {
+            value: "Spontini - Papiniano",
+            fontSize: 22,
+            textAlign: "left",
+            color: "#3c3c3c",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 22,
+            letterSpacing: 0
           },
-          mark: {
-            image: {
-              src: "http://www.pizzeriaspontini.it//graphic/headLogo.png",
-              width: 35,
-              height: 16
-            },
-            style: {
-              shape: {
-                type: "circle"
-              },
-              backgroundColor: "#b40001",
-              borderWidth: 0,
-              borderColor: "#fff"
-            }
+          address: {
+            value: "Viale Papiniano, 23, 20123 Milano MI",
+            fontSize: 16,
+            textAlign: "left",
+            color: "#8e8e8e",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 16,
+            letterSpacing: 0
           }
         }
       },
       header: {
         logo: {
-          src: "http://www.pizzeriaspontini.it//graphic/headLogo.png",
           width: 112,
           height: 52,
-          position: "left"
+          position: "left",
+          src: "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+          verticalPosition: "top",
+          marginBottom: 0,
+          marginLeft: 0
         },
         text1: {
           value: "Menu Pranzo",
-          fontSize: 20,
           color: "#fff",
-          textAlign: "right"
+          fontSize: 20,
+          textAlign: "right",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 20,
+          letterSpacing: 0
         },
         text2: {
           value: "15 Pizze 1 Omaggio",
-          fontSize: 16,
           color: "#fff",
-          textAlign: "right"
+          fontSize: 16,
+          textAlign: "right",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 16,
+          letterSpacing: 0
         }
       },
       footer: {
         value: "Scadenza: 05/05/2019",
-        fontSize: 14,
         color: "#fff",
-        textAlign: "right"
+        fontSize: 14,
+        textAlign: "right",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        lineHeight: 14,
+        letterSpacing: 0
       }
     },
     {
       id: "7188e682-4184-4b6f-8243-78c4c41da2f7",
-      marked: 3,
       settings: {
         design: "horizontal",
-        text: {
-          title: {
-            value: "Il Pomodorino"
+        marks: {
+          mark: {
+            image: {
+              width: 38,
+              height: 23,
+              src:
+                "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png"
+            },
+            style: {
+              backgroundColor: "#fff",
+              shape: {
+                type: "circle",
+                value: 0
+              },
+              borderColor: "#aaa",
+              borderWidth: 1
+            }
           },
-          address: {
-            value: "Via Crema, 3, 20135 Milano MI"
+          rows: 2,
+          total: 10,
+          rowSpacing: 10,
+          style: {
+            backgroundColor: "#fff",
+            width: 50,
+            height: 50,
+            padding: 2,
+            borderWidth: 1,
+            borderColor: "#eee",
+            shape: {
+              type: "circle",
+              value: 0
+            }
           }
         },
         style: {
           height: 280,
           backgroundColor: "#fff",
-          borderRadius: 10
+          borderRadius: 10,
+          borderWidth: 0,
+          borderColor: "#fff"
         },
-        marks: {
-          total: 10,
-          rows: 2,
-          rowSpacing: 10,
-          style: {
-            width: 50,
-            height: 50,
-            backgroundColor: "#fff",
-            borderRadius: 30,
-            borderWidth: 1,
-            borderColor: "#eee",
-            shape: {
-              type: "circle"
-            }
+        text: {
+          title: {
+            value: "Il Pomodorino",
+            fontSize: 22,
+            textAlign: "left",
+            color: "#3c3c3c",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 22,
+            letterSpacing: 0
           },
-          mark: {
-            image: {
-              src:
-                "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png",
-              width: 38,
-              height: 23
-            },
-            style: {
-              shape: {
-                type: "circle"
-              },
-              backgroundColor: "#fff",
-              borderWidth: 1,
-              borderColor: "#aaa"
-            }
+          address: {
+            value: "Via Crema, 3, 20135 Milano MI",
+            fontSize: 16,
+            textAlign: "left",
+            color: "#8e8e8e",
+            fontStyle: "normal",
+            fontWeight: "normal",
+            lineHeight: 16,
+            letterSpacing: 0
           }
         }
       },
       header: {
         logo: {
-          src:
-            "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png",
           width: 112,
           height: 69,
-          position: "center"
+          position: "center",
+          src:
+            "http://www.ilpomodorino.net/wp-content/uploads/2017/01/logo-283×174_il-pomodorino.png",
+          verticalPosition: "top",
+          marginBottom: 0,
+          marginLeft: 0
         },
         text1: {
           value: "Menu Pranzo",
-          fontSize: 20,
           color: "#333",
-          textAlign: "center"
+          fontSize: 20,
+          textAlign: "center",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 20,
+          letterSpacing: 0
         },
         text2: {
           value: "10 Pizze 1 Omaggio",
-          fontSize: 16,
           color: "#aaa",
-          textAlign: "center"
+          fontSize: 16,
+          textAlign: "center",
+          fontStyle: "normal",
+          fontWeight: "normal",
+          lineHeight: 16,
+          letterSpacing: 0
         }
       },
       footer: {
         value: "Valido solo nel weekend",
-        fontSize: 14,
         color: "#aaa",
-        textAlign: "center"
+        fontSize: 14,
+        textAlign: "center",
+        fontStyle: "normal",
+        fontWeight: "normal",
+        lineHeight: 14,
+        letterSpacing: 0
       }
     }
   ]

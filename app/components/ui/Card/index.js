@@ -45,7 +45,7 @@ class Card extends Component {
     const columns = Math.floor(total / rows);
 
     //Inizializzo il contatore
-    let markedCounter = marked;
+    let markedCounter = marked ? marked : 0;
 
     //Inizializzo la griglia
     let grid = [];

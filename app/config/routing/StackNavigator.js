@@ -5,12 +5,6 @@ import { createStackNavigator } from "react-navigation";
 //Import TabNavigator
 import TabNavigator from "./TabNavigator";
 
-//Import Icons
-import LogoIcon from "../../components/icons/LogoIcon";
-import HamburgerIcon from "../../components/icons/HamburgerIcon";
-import QRCodeIcon from "../../components/icons/QRCodeIcon";
-import BackIcon from "../../components/icons/BackIcon";
-
 import QRCodeScreen from "../../screens/QRCodeScreen";
 import SettingsScreen from "../../screens/SettingsScreen";
 

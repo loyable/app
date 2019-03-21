@@ -11,7 +11,9 @@ import CardAnalyticsCircle from "./CardAnalyticsCircle";
 class CardDetailsScreen extends Component {
   render() {
     const card = this.props.navigation.getParam("card");
-
+    const total = card.settings.marks.total;
+    const marked = card.marked ? card.marked : 0;
+    const remaining = total - marked;
     return (
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
@@ -28,7 +30,7 @@ class CardDetailsScreen extends Component {
             <View style={styles.cardAnalyticsContainer}>
               <View style={styles.cardAnalyticsItem}>
                 <CardAnalyticsCircle
-                  number={card.marked}
+                  number={marked}
                   color="#fff"
                   backgroundColor="#72E81F"
                 />
@@ -36,7 +38,7 @@ class CardDetailsScreen extends Component {
               </View>
               <View style={styles.cardAnalyticsItem}>
                 <CardAnalyticsCircle
-                  number={card.settings.marks.total - card.marked}
+                  number={remaining}
                   color="#fff"
                   backgroundColor="#C812FF"
                 />
