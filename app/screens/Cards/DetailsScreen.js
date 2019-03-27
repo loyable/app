@@ -13,13 +13,15 @@ import CardAnalyticsCircle from "./CardAnalyticsCircle";
 
 class DetailsScreen extends Component {
   render() {
-    const card = this.props.navigation.getParam("card");
+    const merchant = this.props.navigation.getParam("merchant");
+    const card = merchant.cards[0].card;
+
     const navigateTo = this.props.navigation.getParam("navigateTo");
     return (
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
           <Card
-            settings={card}
+            settings={merchant}
             showInfo={false}
             navigation={this.props.navigation}
             navigateTo={navigateTo}
@@ -27,13 +29,12 @@ class DetailsScreen extends Component {
         </View>
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
-            <Text style={styles.title}>{card.settings.text.title.value}</Text>
+            <Text style={styles.title}>{merchant.merchant.name}</Text>
             <Text style={styles.description}>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio
-              modi dicta impedit possimus. Repellendus, praesentium.
+              {merchant.merchant.description}
             </Text>
             <Text style={styles.address}>
-              {card.settings.text.address.value}
+              {merchant.merchant.address.value}
             </Text>
           </View>
           <MapView

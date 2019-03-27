@@ -24,6 +24,9 @@ export const GET_CARDS = cards => {
 
 export const WATCH_CARDS = () => {
   return function(dispatch) {
+    fetch("http://localhost:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/")
+      .then(response => response.json())
+      .then(user => console.log(user));
     firebase
       .database()
       .ref("cards")

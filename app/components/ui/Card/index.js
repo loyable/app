@@ -26,16 +26,17 @@ class Card extends Component {
     showInfo: true
   };
 
-  createGrid(card, styles) {
+  createGrid(marked, card, styles) {
     /*
       Funzione createGrid()
       PARAMETRI:
+      - merchant
       - card
       - styles
     */
 
-    //Destrutturo le variabili
-    const { marked, settings } = card;
+    //Destrutturo le variabili 
+    const { settings } = card;
 
     const { marks } = settings;
 
@@ -78,7 +79,10 @@ class Card extends Component {
   }
 
   render() {
-    const card = this.props.settings;
+    const merchant = this.props.settings;
+
+    const card = merchant.cards[0].card;
+    const marked = merchant.cards[0].marked;
 
     const styles = StyleSheet.create(this.getStyles(card));
 
@@ -88,7 +92,7 @@ class Card extends Component {
           onPress={() => {
             if (this.props.navigateTo !== "none") {
               this.props.navigation.navigate(this.props.navigateTo, {
-                card,
+                merchant,
                 navigateTo: "CardDetails"
               });
             }
@@ -120,17 +124,17 @@ class Card extends Component {
                 <Text style={styles.footer}>{card.footer.value}</Text>
               </View>
               <View style={styles.rowContainer}>
-                {this.createGrid(card, styles)}
+                {this.createGrid(marked, card, styles)}
               </View>
             </View>
             {this.props.showInfo && (
               <View style={styles.infoContainer}>
                 <Text style={styles.title}>
-                  {card.settings.text.title.value}
+                  {merchant.merchant.name}
                 </Text>
 
                 <Text style={styles.address}>
-                  {card.settings.text.address.value}
+                  {merchant.merchant.address.value}
                 </Text>
               </View>
             )}
@@ -143,7 +147,7 @@ class Card extends Component {
           onPress={() => {
             if (this.props.navigateTo !== "none") {
               this.props.navigation.navigate(this.props.navigateTo, {
-                card,
+                merchant,
                 navigateTo: "CardDetails"
               });
             }
@@ -176,18 +180,18 @@ class Card extends Component {
                 )}
               </View>
               <View style={styles.rowContainer}>
-                {this.createGrid(card, styles)}
+                {this.createGrid(marked, card, styles)}
               </View>
               <Text style={styles.footer}>{card.footer.value}</Text>
             </View>
             {this.props.showInfo && (
               <View style={styles.infoContainer}>
                 <Text style={styles.title}>
-                  {card.settings.text.title.value}
+                  {merchant.merchant.name}
                 </Text>
 
                 <Text style={styles.address}>
-                  {card.settings.text.address.value}
+                  {merchant.merchant.address.value}
                 </Text>
               </View>
             )}

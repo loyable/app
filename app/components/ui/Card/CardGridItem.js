@@ -44,7 +44,9 @@ class CardGridItem extends Component {
     };
   }
   render() {
-    const card = this.props.settings;
+    const merchant = this.props.settings;
+
+    const card = merchant.cards[0].card;
 
     const styles = StyleSheet.create(this.getStyles(card));
 
@@ -52,7 +54,7 @@ class CardGridItem extends Component {
       <TouchableWithoutFeedback
         onPress={() =>
           this.props.navigation.navigate(this.props.navigateTo, {
-            card,
+            merchant,
             navigateTo: "CardGridDetails"
           })
         }

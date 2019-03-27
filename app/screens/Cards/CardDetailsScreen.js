@@ -10,7 +10,10 @@ import CardAnalyticsCircle from "./CardAnalyticsCircle";
 
 class CardDetailsScreen extends Component {
   render() {
-    const card = this.props.navigation.getParam("card");
+    const merchant = this.props.navigation.getParam("merchant");
+
+    const card = merchant.cards[0].card;
+
     const total = card.settings.marks.total;
     const marked = card.marked ? card.marked : 0;
     const remaining = total - marked;
@@ -18,7 +21,7 @@ class CardDetailsScreen extends Component {
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
           <Card
-            settings={card}
+            settings={merchant}
             showInfo={false}
             navigation={this.props.navigation}
             navigateTo="none"

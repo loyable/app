@@ -12,7 +12,7 @@ import {
 
 import { connect } from "react-redux";
 
-import { WATCH_CARDS } from "../../store/actions";
+import { WATCH_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -32,8 +32,8 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    WATCH_CARDS: () => {
-      dispatch(WATCH_CARDS());
+    WATCH_USER: () => {
+      dispatch(WATCH_USER());
     }
   };
 };
@@ -44,7 +44,7 @@ class CardsGridScreen extends Component {
     this.state = {
       isLoading: true
     };
-    props.WATCH_CARDS();
+    props.WATCH_USER();
   }
 
   isOdd(num) {
@@ -52,14 +52,14 @@ class CardsGridScreen extends Component {
     else return false;
   }
 
-  getCards(cards) {
+  getCards(user) {
     let lastItem;
-    if (this.isOdd(cards.length)) lastItem = cards.length - 1;
+    if (this.isOdd(user.user.merchants.length)) lastItem = user.user.merchants - 1;
 
     return (
       <FlatList
-        data={cards}
-        keyExtractor={item => item.id}
+        data={user.user.merchants}
+        keyExtractor={item => item.merchantID}
         renderItem={({ item, index }) => (
           <Card
             settings={item}
@@ -75,7 +75,7 @@ class CardsGridScreen extends Component {
   }
 
   render() {
-    const { cards, cardsFiltered, filter } = this.props.cards;
+    const { user, userFiltered, filter } = this.props.user;
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
@@ -85,29 +85,9 @@ class CardsGridScreen extends Component {
           navigateTo="CardsList"
           activeArray={[false, true]}
         />
-        {cards.length === 0 ||
-        (filter.length !== 0 && cardsFiltered.length === 0) ? (
-          this.state.isLoading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator
-                size="large"
-                color={vars.color.activityIndicator}
-              />
-            </View>
-          ) : (
-            <View style={styles.noCardsContainer}>
-              <Text style={styles.noCardsText}>
-                {settings.locale.it.noCardsText}
-              </Text>
-            </View>
-          )
-        ) : (
           <ScrollView contentContainerStyle={styles.container}>
-            {filter.length === 0
-              ? cards.length !== 0 && this.getCards(cards)
-              : cardsFiltered.length !== 0 && this.getCards(cardsFiltered)}
+            {user.hasOwnProperty("user") && this.getCards(user)}
           </ScrollView>
-        )}
       </SafeAreaView>
     );
   }

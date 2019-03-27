@@ -1,4 +1,4 @@
-export default (vars = {
+export default {
   font: {
     regular: "CircularStd-Book",
     bold: "CircularStd-Bold"
@@ -132,4 +132,4 @@ export default (vars = {
       }
     }
   }
-});
+};

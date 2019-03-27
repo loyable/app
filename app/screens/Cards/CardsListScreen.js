@@ -12,7 +12,7 @@ import {
 
 import { connect } from "react-redux";
 
-import { WATCH_CARDS } from "../../store/actions";
+import { WATCH_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -36,8 +36,8 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    WATCH_CARDS: () => {
-      dispatch(WATCH_CARDS());
+    WATCH_USER: () => {
+      dispatch(WATCH_USER());
     }
   };
 };
@@ -49,14 +49,14 @@ class CardsListScreen extends Component {
     this.state = {
       isLoading: true
     };
-    props.WATCH_CARDS();
+    props.WATCH_USER();
   }
 
-  getCards(cards) {
+  getCards(user) {
     return (
       <FlatList
-        data={cards}
-        keyExtractor={item => item.id}
+        data={user.user.merchants}
+        keyExtractor={item => item.merchantID}
         renderItem={({ item }) => (
           <Card settings={item} navigation={this.props.navigation} />
         )}
@@ -66,7 +66,7 @@ class CardsListScreen extends Component {
   }
 
   render() {
-    const { cards, cardsFiltered, filter } = this.props.cards;
+    const { user, filter, userFiltered } = this.props.user;
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
@@ -76,30 +76,10 @@ class CardsListScreen extends Component {
           navigateTo="CardsGrid"
           activeArray={[true, false]}
         />
-
-        {cards.length === 0 ||
-        (filter.length !== 0 && cardsFiltered.length === 0) ? (
-          this.state.isLoading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator
-                size="large"
-                color={vars.color.activityIndicator}
-              />
-            </View>
-          ) : (
-            <View style={styles.noCardsContainer}>
-              <Text style={styles.noCardsText}>
-                {settings.locale.it.noCardsText}
-              </Text>
-            </View>
-          )
-        ) : (
+        
           <ScrollView contentContainerStyle={styles.container}>
-            {filter.length === 0
-              ? cards.length !== 0 && this.getCards(cards)
-              : cardsFiltered.length !== 0 && this.getCards(cardsFiltered)}
+            {user.hasOwnProperty("user") && this.getCards(user)}
           </ScrollView>
-        )}
       </SafeAreaView>
     );
   }
