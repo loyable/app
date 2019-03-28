@@ -76,10 +76,10 @@ class CardsListScreen extends Component {
           navigateTo="CardsGrid"
           activeArray={[true, false]}
         />
-        
-          <ScrollView contentContainerStyle={styles.container}>
-            {user.hasOwnProperty("user") && this.getCards(user)}
-          </ScrollView>
+
+        <ScrollView contentContainerStyle={styles.container}>
+          {user.hasOwnProperty("user") && this.getCards(user)}
+        </ScrollView>
       </SafeAreaView>
     );
   }
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4f4f4"
   },
   container: {
-    padding: 12
+    paddingTop: 12
   },
   loadingContainer: {
     flex: 1,
@@ -109,139 +109,6 @@ const styles = StyleSheet.create({
     color: vars.color.noCardsText
   }
 });
-
-const cardProto = {
-  id: "", //card design id
-  marked: 3,
-  settings: {
-    design: "horizontal",
-    text: {
-      title: {
-        value: "MiNi Sushi", //required
-        fontSize: 22,
-        fontFamily: "custom",
-        color: "custom",
-        textAlign: "left",
-        fontStyle: "normal",
-        fontWeight: "normal",
-        lineHeight: 22, //default == fontSize
-        letterSpacing: 0
-      },
-      address: {
-        value: "Via Emilio Morosini, 5, 20135 Milano MI", //required
-        fontSize: 16,
-        fontFamily: "custom",
-        color: "custom",
-        textAlign: "left",
-        fontStyle: "normal",
-        fontWeight: "normal",
-        lineHeight: 16, //default == fontSize
-        letterSpacing: 0
-      }
-    },
-    style: {
-      height: 200, //default == 200
-      backgroundColor: "#000", //default == #000
-      borderRadius: 10, //default == 10
-      marginBottom: 5, //default == 5
-      shadow: {
-        color: "#333",
-        offset: {
-          width: 3,
-          height: 0
-        },
-        opacity: 0.1,
-        radius: 4
-      },
-      borderWidth: 0, //default == 0
-      borderColor: "", //default == undefined,
-      elevation: 1 //default == 1
-    },
-    marks: {
-      total: 10, //required, default == 10
-      marked: 3, //required, default == 0
-      rows: 2, //required, default == 2
-      rowSpacing: 10, //default 20
-      style: {
-        shape: {
-          //required
-          type: "round", //required
-          value: 12 //default
-        },
-        width: 50, //required
-        height: 50, //required
-        backgroundColor: "#fff", //default = #fff
-        padding: 1,
-        justifyContent: "space-evenly", //default space-evenly
-        padding: 1, //default == 1
-        borderWidth: 0,
-        borderColor: ""
-      },
-      mark: {
-        image: {
-          src:
-            "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
-          width: 38,
-          height: 11
-        },
-        style: {
-          shape: {
-            //required
-            type: "circle",
-            value: ""
-          },
-          backgroundColor: "#000", //default = #000
-          borderWidth: 0,
-          borderColor: ""
-        }
-      }
-    }
-  },
-  header: {
-    logo: {
-      src: "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
-      width: 112,
-      height: 35,
-      position: "left",
-      verticalPosition: "top",
-      marginRight: 0,
-      marginBottom: 0
-    },
-    text1: {
-      value: "Tessera Pranzo", //required
-      fontSize: 20,
-      fontFamily: "custom",
-      color: "custom", //default #fff
-      textAlign: "left",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      lineHeight: 22, //default == fontSize
-      letterSpacing: 0
-    },
-    text2: {
-      value: "Descrizione", //required
-      fontSize: 16,
-      fontFamily: "custom",
-      color: "custom", //default #fff
-      textAlign: "left",
-      fontStyle: "normal",
-      fontWeight: "normal",
-      lineHeight: 16, //default == fontSize
-      letterSpacing: 0
-    }
-  },
-  footer: {
-    value: "Via Emilio Morosini, 5, 20135 Milano MI", //required
-    fontSize: 14,
-    fontFamily: "custom",
-    color: "custom",
-    textAlign: "left",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    lineHeight: 14, //default == fontSize
-    letterSpacing: 0
-  }
-};
 
 export default connect(
   mapStateToProps,

@@ -55,16 +55,13 @@ export default {
     paddingLeftBackArrow: 10
   },
   card: {
-    container: {
-      marginBottom: 15 //margin under each card
-    },
     logo: {
       marginBottom: 10,
       marginRight: 10
     },
     infoContainer: {
-      marginHorizontal: 5,
-      marginTop: 5,
+      marginHorizontal: 12,
+      marginTop: 10,
       marginBottom: 0
     },
     marks: {

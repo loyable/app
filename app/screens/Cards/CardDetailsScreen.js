@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, ScrollView, View, StyleSheet } from "react-native";
 
-import Card from "../../components/ui/Card";
+import CardItem from "../../components/ui/Card/CardItem";
 
 //global vars
 import vars from "../../config/styles";
@@ -10,19 +10,18 @@ import CardAnalyticsCircle from "./CardAnalyticsCircle";
 
 class CardDetailsScreen extends Component {
   render() {
-    const merchant = this.props.navigation.getParam("merchant");
+    const item = this.props.navigation.getParam("item");
 
-    const card = merchant.cards[0].card;
+    const card = item.card;
 
     const total = card.settings.marks.total;
-    const marked = card.marked ? card.marked : 0;
+    const marked = item.marked ? item.marked : 0;
     const remaining = total - marked;
     return (
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
-          <Card
-            settings={merchant}
-            showInfo={false}
+          <CardItem
+            settings={item}
             navigation={this.props.navigation}
             navigateTo="none"
           />
@@ -50,13 +49,7 @@ class CardDetailsScreen extends Component {
             </View>
             <Text style={styles.descriptionTitle}>Descrizione</Text>
             <Text style={styles.description}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-              harum accusamus pariatur quam labore at aliquam eius dolorum
-              voluptates excepturi, iure, deleniti perspiciatis dolores autem
-              delectus sapiente aspernatur soluta inventore enim veniam
-              necessitatibus hic corporis itaque! Nostrum et officia, quis nobis
-              accusantium accusamus repellat a velit perferendis, aperiam magnam
-              aspernatur.
+              {card.settings.description.value}
             </Text>
           </View>
           <View style={styles.cardDetailsContainer}>

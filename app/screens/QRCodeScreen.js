@@ -5,30 +5,30 @@ import { Text, View, SafeAreaView, StyleSheet } from "react-native";
 
 import uuid from "uuid/v4";
 
+import { connect } from "react-redux";
+
 import QRCode from "react-native-qrcode";
 
-export default class QRCodeScreen extends Component {
-  constructor() {
-    super();
-    this.state = {
-      uid: uuid()
-    };
-  }
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+class QRCodeScreen extends Component {
   render() {
+    const { user } = this.props.user;
+    const uuid = user.user.id;
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Mostra il codice QR</Text>
         <View style={styles.qrcode}>
-          <QRCode
-            value={this.state.uid}
-            size={250}
-            bgColor="black"
-            fgColor="white"
-          />
+          <QRCode value={uuid} size={250} bgColor="black" fgColor="white" />
         </View>
 
         <Text style={styles.subtitle}>Il tuo identificativo:</Text>
-        <Text style={styles.description}>{this.state.uid}</Text>
+        <Text style={styles.description}>{uuid}</Text>
       </SafeAreaView>
     );
   }
@@ -60,3 +60,5 @@ const styles = StyleSheet.create({
     paddingVertical: 40
   }
 });
+
+export default connect(mapStateToProps)(QRCodeScreen);

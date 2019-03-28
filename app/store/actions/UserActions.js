@@ -1,4 +1,3 @@
-
 import { store } from "../../store";
 
 export const FILTER_MERCHANT = () => {
@@ -14,6 +13,7 @@ export const SET_FILTER = text => {
     payload: text
   };
 };
+
 export const LOAD_USER = user => {
   return {
     type: "LOAD_USER",
@@ -23,11 +23,12 @@ export const LOAD_USER = user => {
 
 export const WATCH_USER = () => {
   return function(dispatch) {
-    fetch("http://192.168.1.169:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/")
+    fetch(
+      "http://192.168.1.169:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/"
+    )
       .then(response => response.json())
       .then(user => {
-          dispatch(LOAD_USER(user));
+        dispatch(LOAD_USER(user));
       });
-
   };
 };

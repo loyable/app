@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 //SVG Library
 import SVG from "react-native-remote-svg";
 
+import vars from "../../config/styles";
+
 class BackIcon extends Component {
   render() {
     return (
