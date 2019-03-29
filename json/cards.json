@@ -2,6 +2,7 @@
   "cards": [
     {
       "id": "62db33d8-bc6e-4864-b50f-281aab7c9893",
+      "design": "horizontal",
       "marked": 8,
       "settings": {
         "text": {
@@ -74,6 +75,7 @@
     },
     {
       "id": "fa21dd26-501e-4ce5-886c-59e97854df96",
+      "design": "horizontal",
       "marked": 5,
       "settings": {
         "text": {

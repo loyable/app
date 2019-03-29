@@ -180,7 +180,7 @@ class CardItem extends Component {
   getStyles(card) {
     return {
       card: {
-        marginHorizontal: this.props.multiple ? 5 : 0,
+        marginHorizontal: this.props.multiple ? 5 : 12,
         width: SCREEN_WIDTH - 24,
         flexDirection: card.settings.design === "vertical" ? "row" : "column", //row if vertical | column if horizontal
         backgroundColor: card.settings.style.backgroundColor
