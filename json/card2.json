@@ -1,0 +1,79 @@
+{
+  "id": "fa21dd26-501e-4ce5-886c-59e97854df96",
+  "design": "horizontal",
+  "marked": 5,
+  "settings": {
+    "text": {
+      "title": {
+        "value": "Spontini - Papiniano"
+      },
+      "address": {
+        "value": "Viale Papiniano, 23, 20123 Milano MI"
+      }
+    },
+    "style": {
+      "height": 270,
+      "backgroundColor": "#b40001",
+      "borderRadius": 10
+    },
+    "description": {
+      "value": "Lorem ipsum dolor sit amet"
+    },
+    "marks": {
+      "total": 15,
+      "rows": 3,
+      "rowSpacing": 10,
+      "style": {
+        "width": 50,
+        "height": 50,
+        "backgroundColor": "#fff",
+        "borderRadius": 25,
+        "padding": 2,
+        "shape": {
+          "type": "circle"
+        }
+      },
+      "mark": {
+        "image": {
+          "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+          "width": 35,
+          "height": 16
+        },
+        "style": {
+          "shape": {
+            "type": "circle"
+          },
+          "backgroundColor": "#b40001",
+          "borderWidth": 0,
+          "borderColor": "#fff"
+        }
+      }
+    }
+  },
+  "header": {
+    "logo": {
+      "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+      "width": 112,
+      "height": 52,
+      "position": "left"
+    },
+    "text1": {
+      "value": "Menu Pranzo",
+      "fontSize": 20,
+      "color": "#fff",
+      "textAlign": "right"
+    },
+    "text2": {
+      "value": "15 Pizze 1 Omaggio",
+      "fontSize": 16,
+      "color": "#fff",
+      "textAlign": "right"
+    }
+  },
+  "footer": {
+    "value": "Scadenza: 05/05/2019",
+    "fontSize": 14,
+    "color": "#fff",
+    "textAlign": "right"
+  }
+}

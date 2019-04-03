@@ -1,0 +1,83 @@
+{
+  "id": "4048ed6b-bcad-4e73-9852-1ba4c585acdb",
+  "phone": "+393391848457",
+  "merchants": [
+    {
+      "merchantID": "e61665bf-9d4b-478f-b82c-5db61efd84c1",
+      "cards": [
+        {
+          "id": "73484a86-e233-438f-a007-d2fd0a32a34a",
+          "designID": "62db33d8-bc6e-4864-b50f-281aab7c9893",
+          "marked": 5,
+          "history": [
+            {
+              "type": "add",
+              "value": "+1"
+            }
+          ]
+        },
+        {
+          "id": "cedda040-6bf8-468c-82c8-6e8e959bf031",
+          "designID": "62db33d8-bc6e-4864-b50f-281aab7c9893",
+          "marked": 5,
+          "history": [
+            {
+              "type": "add",
+              "value": "+1"
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "type": "completed",
+          "value": "+1"
+        }
+      ]
+    },
+    {
+      "merchantID": "74d1dfde-4219-42a5-bfa8-96b5d0822587",
+      "cards": [
+        {
+          "id": "870a8489-3303-4190-ab73-5bee8a591991",
+          "designID": "fa21dd26-501e-4ce5-886c-59e97854df96",
+          "marked": 5,
+          "history": [
+            {
+              "type": "add",
+              "value": "+1"
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "type": "completed",
+          "value": "+1"
+        }
+      ]
+    },
+    {
+      "merchantID": "2ada4f8d-0ef6-46f8-bee0-760e8d3a149b",
+      "cards": [
+        {
+          "id": "838e20fd-6119-4fd1-ac0a-ec759b708ce6",
+          "designID": "838e20fd-6119-4fd1-ac0a-ec759b708ce6",
+          "marked": 5,
+          "history": [
+            {
+              "type": "add",
+              "value": "+1"
+            }
+          ]
+        }
+      ],
+      "history": [
+        {
+          "type": "completed",
+          "value": "+1"
+        }
+      ]
+    }
+  ]
+}

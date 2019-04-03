@@ -17,6 +17,9 @@
           "height": 210,
           "backgroundColor": "#333"
         },
+        "description": {
+          "value": "Lorem ipsum dolor sit amet"
+        },
         "marks": {
           "total": 10,
           "rows": 2,

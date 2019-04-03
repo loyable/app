@@ -13,7 +13,7 @@ class CardGridItem extends Component {
     navigateTo: "Details"
   };
 
-  getStyles(card) {
+  getStyles(merchant) {
     return {
       container: {
         flex: 0.5,
@@ -23,10 +23,10 @@ class CardGridItem extends Component {
         marginRight: this.props.isLastOddItem
           ? vars.cardGrid.margin * 2 + 3
           : vars.cardGrid.margin,
-        backgroundColor: card.settings.style.backgroundColor,
+        backgroundColor: merchant.logo.backgroundColor,
         borderRadius: vars.cardGrid.style.borderRadius,
-        borderColor: card.settings.style.borderColor,
-        borderWidth: card.settings.style.borderWidth,
+        borderColor: merchant.logo.borderColor,
+        borderWidth: merchant.logo.borderWidth,
         height: vars.cardGrid.style.height,
         shadowColor: vars.cardGrid.style.shadow.color,
         shadowOffset: {
@@ -38,17 +38,15 @@ class CardGridItem extends Component {
         elevation: vars.cardGrid.style.elevation
       },
       logo: {
-        width: card.header.logo.width,
-        height: card.header.logo.height
+        width: merchant.logo.width,
+        height: merchant.logo.height
       }
     };
   }
   render() {
     const merchant = this.props.settings;
 
-    const card = merchant.cards[0].card;
-
-    const styles = StyleSheet.create(this.getStyles(card));
+    const styles = StyleSheet.create(this.getStyles(merchant.merchant));
 
     return (
       <TouchableWithoutFeedback
@@ -63,7 +61,7 @@ class CardGridItem extends Component {
           <Image
             style={styles.logo}
             source={{
-              uri: card.header.logo.src
+              uri: merchant.merchant.logo.src
             }}
           />
         </View>

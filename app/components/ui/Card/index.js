@@ -35,7 +35,7 @@ class Card extends Component {
     return (
       <FlatList
         data={merchant.cards}
-        horizontal={true}
+        horizontal={multiple}
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.id}

@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   StyleSheet,
   FlatList,
-  ActivityIndicator
+  ActivityIndicator,
+  RefreshControl
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -36,8 +37,8 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    WATCH_USER: () => {
-      dispatch(WATCH_USER());
+    WATCH_USER: callback => {
+      dispatch(WATCH_USER(callback));
     }
   };
 };
@@ -47,10 +48,18 @@ class CardsListScreen extends Component {
     super(props);
 
     this.state = {
-      isLoading: true
+      isLoading: true,
+      refreshing: false
     };
     props.WATCH_USER();
   }
+
+  onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.props.WATCH_USER(() => {
+      this.setState({ refreshing: false });
+    });
+  };
 
   getCards(user) {
     return (
@@ -77,7 +86,15 @@ class CardsListScreen extends Component {
           activeArray={[true, false]}
         />
 
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this.onRefresh}
+            />
+          }
+          contentContainerStyle={styles.container}
+        >
           {user.hasOwnProperty("user") && this.getCards(user)}
         </ScrollView>
       </SafeAreaView>

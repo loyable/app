@@ -1,0 +1,23 @@
+{
+  "address": {
+    "coordinate": {
+      "lat": 45.4580139,
+      "lng": 9.1703518
+    },
+    "value": "Viale Papiniano, 43, 20123 Milano MI"
+  },
+  "logo": {
+    "backgroundColor": "#b40001",
+    "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+    "width": 238,
+    "height": 110
+  },
+  "id": "74d1dfde-4219-42a5-bfa8-96b5d0822587",
+  "name": "Spontini - Papiniano",
+  "description": "Con l'apertura di Via Arona, 15 a Milano, la seconda in una settimana, Spontini arriva a 30 locali fra Italia e Estero. Il nuovo store è aperto dalle 8 con il servizio colazione.",
+  "cards": [
+    {
+      "id": "271cca4e-14e4-46c2-93c3-79ef70ee3284"
+    }
+  ]
+}

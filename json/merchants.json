@@ -19,5 +19,27 @@
     {
       "id": "62db33d8-bc6e-4864-b50f-281aab7c9893"
     }
-  ]
+  ],
+  "style": {
+    "title": {
+      "value": "MiNi Sushi",
+      "fontSize": 22,
+      "textAlign": "left",
+      "color": "#3c3c3c",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "lineHeight": 22,
+      "letterSpacing": 0
+    },
+    "address": {
+      "value": "Via Emilio Morosini, 5, 20135 Milano MI",
+      "fontSize": 16,
+      "textAlign": "left",
+      "color": "#8e8e8e",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "lineHeight": 16,
+      "letterSpacing": 0
+    }
+  }
 }

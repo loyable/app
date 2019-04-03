@@ -21,14 +21,15 @@ export const LOAD_USER = user => {
   };
 };
 
-export const WATCH_USER = () => {
+export const WATCH_USER = callback => {
   return function(dispatch) {
     fetch(
-      "http://dev.beloyal.it:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/"
+      "http://192.168.1.169:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/"
     )
       .then(response => response.json())
       .then(user => {
         dispatch(LOAD_USER(user));
+        if (callback) callback();
       });
   };
 };

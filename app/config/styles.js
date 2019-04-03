@@ -62,7 +62,7 @@ export default {
     infoContainer: {
       marginHorizontal: 12,
       marginTop: 10,
-      marginBottom: 0
+      marginBottom: 10
     },
     marks: {
       total: 10,
