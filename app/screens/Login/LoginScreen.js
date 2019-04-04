@@ -10,10 +10,27 @@ import {
   Platform
 } from "react-native";
 
+import { connect } from "react-redux";
+
 import vars from "../../config/styles";
 
-import PhoneInput from "react-native-phone-input";
+import PhoneInput from "../../components/react-native-phone-input";
 
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    WATCH_USER: () => {
+      dispatch(WATCH_USER());
+    }
+  };
+};
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -145,4 +162,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default LoginScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen);

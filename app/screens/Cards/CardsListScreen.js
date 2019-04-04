@@ -23,10 +23,6 @@ import Card from "../../components/ui/Card";
 
 import SearchBar from "../../components/ui/SearchBar";
 
-import TabNavigator from "../../config/routing/TabNavigator";
-
-import Header from "../../components/ui/Header";
-
 //map redux state to properties
 const mapStateToProps = state => {
   return {
