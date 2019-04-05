@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 
 import vars from "../../config/styles";
 
+import settings from "../../config/settings";
+
 import PhoneInput from "../../components/react-native-phone-input";
 
 //map redux state to properties
@@ -36,8 +38,7 @@ class LoginScreen extends Component {
     super(props);
     this.state = {
       number: "",
-      isCorrect: false,
-      confirmResult: null
+      isCorrect: false
     };
   }
 
@@ -52,6 +53,21 @@ class LoginScreen extends Component {
 
   resetNumber() {
     this.setState({ number: "", isCorrect: false });
+  }
+
+  getVerificationCode() {
+    const { number, isCorrect } = this.state;
+
+    if (isCorrect) {
+      fetch(`${settings.url.api}/auth/${number}`)
+        .then(res => res.json())
+        .then(data => {
+          this.props.navigation.navigate("VerifyLogin", {
+            number,
+            verificationHash: data.verificationHash
+          });
+        });
+    }
   }
 
   render() {
@@ -80,11 +96,7 @@ class LoginScreen extends Component {
             activeOpacity={0.8}
             style={styles.button}
             disabled={!this.state.isCorrect}
-            onPress={() =>
-              this.props.navigation.navigate("VerifyLogin", {
-                number: this.state.number
-              })
-            }
+            onPress={() => this.getVerificationCode()}
           >
             <Text style={styles.buttonText}>Continua</Text>
           </TouchableOpacity>

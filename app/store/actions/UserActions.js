@@ -1,5 +1,7 @@
 import { store } from "../../store";
 
+import settings from "../../config/settings";
+
 export const FILTER_MERCHANT = () => {
   return {
     type: "FILTER_CARDS",
@@ -21,11 +23,9 @@ export const LOAD_USER = user => {
   };
 };
 
-export const WATCH_USER = callback => {
+export const WATCH_USER = (id, callback) => {
   return function(dispatch) {
-    fetch(
-      "http://192.168.1.169:5000/user/4048ed6b-bcad-4e73-9852-1ba4c585acdb/"
-    )
+    fetch(`${settings.url.api}/user/${id}`)
       .then(response => response.json())
       .then(user => {
         dispatch(LOAD_USER(user));

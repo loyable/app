@@ -33,8 +33,8 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    WATCH_USER: callback => {
-      dispatch(WATCH_USER(callback));
+    WATCH_USER: (id, callback) => {
+      dispatch(WATCH_USER(id, callback));
     }
   };
 };
@@ -45,14 +45,18 @@ class CardsListScreen extends Component {
 
     this.state = {
       isLoading: true,
-      refreshing: false
+      refreshing: false,
+      id: this.props.navigation.getParam("id")
+        ? this.props.navigation.getParam("id")
+        : "4048ed6b-bcad-4e73-9852-1ba4c585acdb"
     };
-    props.WATCH_USER();
+
+    props.WATCH_USER(this.state.id);
   }
 
   onRefresh = () => {
     this.setState({ refreshing: true });
-    this.props.WATCH_USER(() => {
+    this.props.WATCH_USER(this.state.id, () => {
       this.setState({ refreshing: false });
     });
   };

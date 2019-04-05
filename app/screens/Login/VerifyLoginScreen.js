@@ -12,27 +12,45 @@ import {
 
 import vars from "../../config/styles";
 
+import settings from "../../config/settings";
+
 class VerifyLoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       number: this.props.navigation.getParam("number"),
-      verifyNumber: "",
+      verificationNumber: "",
       isComplete: false,
-      confirmResult: null
+      verificationHash: this.props.navigation.getParam("verificationHash")
     };
   }
 
-  verifyNumber(number) {
-    if (number.toString().length === 6) {
+  verifyNumber(verificationNumber) {
+    if (verificationNumber.toString().length === 6) {
       this.setState({
+        verificationNumber,
         isComplete: true
       });
     } else {
       this.setState({
+        verificationNumber,
         isComplete: false
       });
     }
+  }
+
+  verifyHash() {
+    const { number, verificationNumber } = this.state;
+
+    fetch(`${settings.url.api}/auth/${number}/verify/${verificationNumber}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.id !== "") {
+          this.props.navigation.navigate("Cards", {
+            id: data.id
+          });
+        }
+      });
   }
 
   render() {
@@ -54,6 +72,7 @@ class VerifyLoginScreen extends Component {
               style={styles.verifyInput}
               keyboardType="phone-pad"
               maxLength={6}
+              autoFocus={true}
               onChangeText={number => this.verifyNumber(number)}
             />
           </View>
@@ -62,7 +81,7 @@ class VerifyLoginScreen extends Component {
             activeOpacity={0.8}
             style={styles.button}
             disabled={!this.state.isComplete}
-            onPress={() => this.props.navigation.navigate("Cards")}
+            onPress={() => this.verifyHash()}
           >
             <Text style={styles.buttonText}>Verifica numero</Text>
           </TouchableOpacity>
