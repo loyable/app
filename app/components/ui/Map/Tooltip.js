@@ -14,30 +14,30 @@ import { Callout } from "react-native-maps";
   - tooltip.info
 
   - navigation
-  - card
+  - merchant
 */
 
 class Tooltip extends Component {
   render() {
     const styles = StyleSheet.create(this.getStyles());
 
-    const { card } = this.props;
+    const { merchant } = this.props;
 
     return (
       <Callout
         tooltip={true}
         onPress={() =>
           this.props.navigation.navigate("DetailsMapView", {
-            card,
+            merchant,
             navigateTo: "CardMapViewDetails"
           })
         }
       >
         <View style={styles.container}>
           <View>
-            <Text style={styles.title}>MiNi Sushi</Text>
+            <Text style={styles.title}>{merchant.merchant.name}</Text>
             <Text style={styles.description}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              {merchant.merchant.description}
             </Text>
           </View>
           <View style={styles.footer}>

@@ -21,9 +21,11 @@ import SearchBar from "../../components/ui/SearchBar";
 
 import MapView from "react-native-maps";
 
-import Tooltip from "./components/Tooltip";
+import Tooltip from "../../components/ui/Map/Tooltip";
 
-import LocationArrow from "./components/LocationArrow";
+import LocationArrow from "../../components/ui/Map/LocationArrow";
+
+import Marker from "../../components/ui/Map/Marker";
 
 //map redux state to properties
 const mapStateToProps = state => {
@@ -46,6 +48,14 @@ const LATITUDE_DELTA = 0.0922;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 
 class MapViewScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedMarkerIndex: undefined
+    };
+  }
+
   getInitialMapState() {
     let { latitude, longitude } = this.props.maps.location;
 
@@ -93,7 +103,7 @@ class MapViewScreen extends Component {
     );
   }
   render() {
-    const cards = this.props.cards.cardsFiltered;
+    const { user } = this.props.user;
     return (
       <SafeAreaView style={styles.pageContainer}>
         <SearchBar
@@ -121,32 +131,22 @@ class MapViewScreen extends Component {
             showsCompass={false}
             showsMyLocationButton={false}
           >
-            <MapView.Marker
-              coordinate={{
-                latitude: 45.428132,
-                longitude: 9.206932
-              }}
-            >
-              <View style={styles.marker} />
-            </MapView.Marker>
+            {user.user.merchants.map((merchant, index) => (
+              <MapView.Marker
+                key={`marker-${index}`}
+                coordinate={{
+                  latitude: merchant.merchant.address.coordinate.lat,
+                  longitude: merchant.merchant.address.coordinate.lng
+                }}
+              >
+                <Marker logo={merchant.merchant.logo} />
 
-            <MapView.Marker
-              coordinate={{
-                latitude: 45.456369,
-                longitude: 9.209053
-              }}
-            >
-              <View style={[styles.marker, styles.markerImageContainer]}>
-                <Image
-                  style={styles.markerImage}
-                  source={{
-                    uri:
-                      "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png"
-                  }}
+                <Tooltip
+                  merchant={merchant}
+                  navigation={this.props.navigation}
                 />
-              </View>
-              <Tooltip card={cards[0]} navigation={this.props.navigation} />
-            </MapView.Marker>
+              </MapView.Marker>
+            ))}
           </MapView>
         </View>
       </SafeAreaView>

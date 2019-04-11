@@ -7,13 +7,10 @@ import {
   Text,
   View,
   ActivityIndicator,
-  TouchableWithoutFeedback,
-  RefreshControl
+  TouchableWithoutFeedback
 } from "react-native";
 
 import { connect } from "react-redux";
-
-import { WATCH_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -32,29 +29,16 @@ const mapStateToProps = state => {
 
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
-  return {
-    WATCH_USER: callback => {
-      dispatch(WATCH_USER(callback));
-    }
-  };
+  return {};
 };
 
 class CardsGridScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: true,
-      refreshing: false
+      isLoading: true
     };
-    props.WATCH_USER();
   }
-
-  onRefresh = () => {
-    this.setState({ refreshing: true });
-    this.props.WATCH_USER(() => {
-      this.setState({ refreshing: false });
-    });
-  };
 
   isOdd(num) {
     if (num % 2 !== 0 && num !== 0) return true;
@@ -85,7 +69,7 @@ class CardsGridScreen extends Component {
   }
 
   render() {
-    const { user, userFiltered, filter } = this.props.user;
+    const { user, userFiltered } = this.props.user;
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
@@ -95,16 +79,8 @@ class CardsGridScreen extends Component {
           navigateTo="CardsList"
           activeArray={[false, true]}
         />
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.onRefresh}
-            />
-          }
-          contentContainerStyle={styles.container}
-        >
-          {user.hasOwnProperty("user") && this.getCards(user)}
+        <ScrollView contentContainerStyle={styles.container}>
+          {user.hasOwnProperty("user") && this.getCards(userFiltered)}
         </ScrollView>
       </SafeAreaView>
     );

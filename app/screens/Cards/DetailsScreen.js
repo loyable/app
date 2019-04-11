@@ -1,20 +1,47 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView, StyleSheet } from "react-native";
+import { Text, View, ScrollView, StyleSheet, FlatList } from "react-native";
 
 import MapView from "react-native-maps";
+
+import openMap from "react-native-open-maps";
 
 import Card from "../../components/ui/Card";
 
 import BackIcon from "../../components/icons/BackIcon";
 
+import Marker from "../../components/ui/Map/Marker";
+
 //global vars
 import vars from "../../config/styles";
-import CardAnalyticsCircle from "./CardAnalyticsCircle";
+
+import CardAnalyticsItem from "./CardAnalyticsItem";
+import CardHistoryItem from "./CardHistoryItem";
 
 class DetailsScreen extends Component {
+  getAnalytics(merchant) {
+    let added = 0,
+      completed = 0,
+      marked = 0;
+
+    merchant.cards.forEach(card => {
+      added++;
+      marked += card.marked;
+      if (card.marked === card.card.settings.marks.total) {
+        completed++;
+      }
+    });
+
+    return {
+      added,
+      completed,
+      marked
+    };
+  }
+
   render() {
     const merchant = this.props.navigation.getParam("merchant");
-    const card = merchant.cards[0].card;
+
+    const { added, completed, marked } = this.getAnalytics(merchant);
 
     const navigateTo = this.props.navigation.getParam("navigateTo");
     return (
@@ -27,6 +54,7 @@ class DetailsScreen extends Component {
             navigateTo={navigateTo}
           />
         </View>
+
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
             <Text style={styles.title}>{merchant.merchant.name}</Text>
@@ -40,10 +68,10 @@ class DetailsScreen extends Component {
           <MapView
             ref={map => (this.map = map)}
             initialRegion={{
-              latitude: 45.466797,
-              longitude: 9.190498,
-              latitudeDelta: 0.0522,
-              longitudeDelta: 0.0421
+              latitude: merchant.merchant.address.coordinate.lat,
+              longitude: merchant.merchant.address.coordinate.lng,
+              latitudeDelta: 0.01,
+              longitudeDelta: 0.01
             }}
             style={styles.map}
             showsUserLocation={true}
@@ -51,80 +79,73 @@ class DetailsScreen extends Component {
             showsCompass={false}
             showsMyLocationButton={false}
             scrollEnabled={false}
-          />
+            zoomEnabled={false}
+          >
+            <MapView.Marker
+              coordinate={{
+                latitude: merchant.merchant.address.coordinate.lat,
+                longitude: merchant.merchant.address.coordinate.lng
+              }}
+              onPress={() =>
+                openMap({
+                  latitude: merchant.merchant.address.coordinate.lat,
+                  longitude: merchant.merchant.address.coordinate.lng,
+                  query: merchant.merchant.address.value,
+                  zoom: 10
+                })
+              }
+            >
+              <Marker logo={merchant.merchant.logo} size={50} />
+            </MapView.Marker>
+          </MapView>
           <View style={styles.cardDetailsContainer}>
             <Text style={styles.cardAnalyticsTitle}>Dati storici</Text>
             <View style={styles.cardAnalyticsContainer}>
-              <View style={styles.cardAnalyticsItem}>
-                <CardAnalyticsCircle
-                  number={3}
-                  color="#fff"
-                  backgroundColor="#f00"
-                />
-                <Text style={styles.cardAnalyticsText}>Tessere</Text>
-                <Text style={styles.cardAnalyticsText}>Abbinate</Text>
-              </View>
-              <View style={styles.cardAnalyticsItem}>
-                <CardAnalyticsCircle
-                  number={23}
-                  color="#fff"
-                  backgroundColor="#FFC445"
-                />
-                <Text style={styles.cardAnalyticsText}>Bollini</Text>
-                <Text style={styles.cardAnalyticsText}>Raccolti</Text>
-              </View>
-              <View style={styles.cardAnalyticsItem}>
-                <CardAnalyticsCircle
-                  number={2}
-                  color="#fff"
-                  backgroundColor="#10E5E8"
-                />
-                <Text style={styles.cardAnalyticsText}>Tessere</Text>
-                <Text style={styles.cardAnalyticsText}>Completate</Text>
-              </View>
+              <CardAnalyticsItem
+                number={added}
+                color="#fff"
+                backgroundColor="#f00"
+                text={["Tessere", "Abbinate"]}
+              />
+              <CardAnalyticsItem
+                number={marked}
+                color="#fff"
+                backgroundColor="#FFC445"
+                text={["Bollini", "Raccolti"]}
+              />
+              <CardAnalyticsItem
+                number={completed}
+                color="#fff"
+                backgroundColor="#10E5E8"
+                text={["Tessere", "Completate"]}
+              />
             </View>
 
             {/* Cronologia */}
             <Text style={styles.cardHistoryTitle}>Cronologia</Text>
             <View style={styles.cardHistoryContainer}>
-              <View style={styles.cardHistoryItem}>
-                <View style={styles.cardHistoryIcon}>
-                  <CardAnalyticsCircle
-                    number="+1"
-                    size={35}
-                    fontSize={22}
-                    color="#fff"
-                    backgroundColor="#f00"
-                  />
-                </View>
-                <View style={styles.cardHistoryTextContainer}>
-                  <Text style={styles.cardHistoryText}>Tessera associata</Text>
-                </View>
-                <View style={styles.cardHistoryDateContainer}>
-                  <Text style={styles.cardHistoryDate}>12/01/2019 13:25</Text>
-                </View>
-              </View>
-              <View style={styles.cardHistoryItem}>
-                <View style={styles.cardHistoryIcon}>
-                  <CardAnalyticsCircle
-                    number="+1"
-                    size={35}
-                    fontSize={22}
-                    color="#fff"
-                    backgroundColor="#10E5E8"
-                  />
-                </View>
-                <View style={styles.cardHistoryTextContainer}>
-                  <Text style={styles.cardHistoryText}>Tessera completata</Text>
-                </View>
-                <View style={styles.cardHistoryDateContainer}>
-                  <Text style={styles.cardHistoryDate}>12/01/2019 13:25</Text>
-                </View>
-              </View>
+              {this.getHistory(merchant.history)}
             </View>
           </View>
         </View>
       </ScrollView>
+    );
+  }
+  getHistory(history) {
+    if (history.length === 0) {
+      return (
+        <View style={styles.noHistoryContainer}>
+          <Text style={styles.noHistoryText}>Nessun movimento</Text>
+        </View>
+      );
+    }
+
+    return (
+      <FlatList
+        data={history}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => <CardHistoryItem history={item} />}
+      />
     );
   }
 }
@@ -134,7 +155,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F4F4"
   },
   cardContainer: {
-    paddingVertical: 12
+    paddingBottom: 12
   },
   cardInfoContainer: {
     backgroundColor: "#fff",
@@ -172,15 +193,6 @@ const styles = StyleSheet.create({
     padding: 12,
     flexDirection: "row"
   },
-  cardAnalyticsItem: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  cardAnalyticsText: {
-    fontSize: 13,
-    fontFamily: vars.font.regular
-  },
   cardAnalyticsTitle: {
     fontFamily: vars.font.bold,
     fontSize: 20
@@ -192,28 +204,12 @@ const styles = StyleSheet.create({
   cardHistoryContainer: {
     padding: 12
   },
-  cardHistoryItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 5
+  noHistoryContainer: {
+    alignItems: "center"
   },
-  cardHistoryIcon: {},
-  cardHistoryTextContainer: {
-    marginLeft: 12
-  },
-  cardHistoryText: {
+  noHistoryText: {
     fontFamily: vars.font.regular,
-    fontSize: 18,
-    color: "#3c3c3c"
-  },
-  cardHistoryDateContainer: {
-    flex: 1
-  },
-  cardHistoryDate: {
-    fontFamily: vars.font.regular,
-    fontSize: 14,
-    color: "#7B7B7B",
-    textAlign: "right"
+    fontSize: 16
   }
 });
 

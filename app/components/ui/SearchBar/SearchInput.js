@@ -3,7 +3,7 @@ import { View, TextInput, StyleSheet } from "react-native";
 
 import { connect } from "react-redux";
 
-import { SET_FILTER, FILTER_CARDS } from "../../../store/actions";
+import { SET_FILTER, FILTER_MERCHANTS } from "../../../store/actions";
 
 import Icon from "react-native-vector-icons/FontAwesome5";
 
@@ -11,7 +11,7 @@ import vars from "../../../config/styles";
 
 const mapStateToProps = state => {
   return {
-    filter: state.cards.filter
+    ...state
   };
 };
 
@@ -20,22 +20,17 @@ const mapDispatchToProps = dispatch => {
     SET_FILTER: text => {
       dispatch(SET_FILTER(text));
     },
-    FILTER_CARDS: () => {
-      dispatch(FILTER_CARDS());
+    FILTER_MERCHANTS: () => {
+      dispatch(FILTER_MERCHANTS());
     }
   };
 };
 
 class SearchInput extends Component {
-  constructor(props) {
-    super(props);
-
-    console.log(props);
-  }
-
+  //Call redux action to filter user merchants
   onChangeText(text) {
     this.props.SET_FILTER(text);
-    this.props.FILTER_CARDS();
+    this.props.FILTER_MERCHANTS();
   }
 
   render() {
@@ -46,7 +41,7 @@ class SearchInput extends Component {
           style={styles.input}
           placeholder="Cerca"
           placeholderTextColor={vars.color.searchInputText}
-          value={this.props.filter}
+          value={this.props.user.filter}
           onChangeText={text => this.onChangeText(text)}
         />
       </View>

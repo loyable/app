@@ -59,10 +59,13 @@ export default {
       marginBottom: 10,
       marginRight: 10
     },
+    container: {
+      marginTop: 12,
+      marginBottom: 0
+    },
     infoContainer: {
       marginHorizontal: 12,
-      marginTop: 10,
-      marginBottom: 10
+      marginTop: 10
     },
     marks: {
       total: 10,

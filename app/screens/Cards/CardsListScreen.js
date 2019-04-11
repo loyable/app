@@ -13,7 +13,9 @@ import {
 
 import { connect } from "react-redux";
 
-import { WATCH_USER } from "../../store/actions";
+import Storage from "../../store/asyncstorage";
+
+import { SET_USER_ID, REQUEST_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -33,8 +35,11 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    WATCH_USER: (id, callback) => {
-      dispatch(WATCH_USER(id, callback));
+    SET_USER_ID: id => {
+      dispatch(SET_USER_ID(id));
+    },
+    REQUEST_USER: (id, callback) => {
+      dispatch(REQUEST_USER(id, callback));
     }
   };
 };
@@ -45,23 +50,31 @@ class CardsListScreen extends Component {
 
     this.state = {
       isLoading: true,
-      refreshing: false,
-      id: this.props.navigation.getParam("id")
-        ? this.props.navigation.getParam("id")
-        : "4048ed6b-bcad-4e73-9852-1ba4c585acdb"
+      refreshing: false
     };
+    props.SET_USER_ID("4048ed6b-bcad-4e73-9852-1ba4c585acdb");
+  }
 
-    props.WATCH_USER(this.state.id);
+  componentDidMount() {
+    this.props.REQUEST_USER(this.props.user.userID);
   }
 
   onRefresh = () => {
     this.setState({ refreshing: true });
-    this.props.WATCH_USER(this.state.id, () => {
+    this.props.REQUEST_USER(this.props.user.userID, () => {
       this.setState({ refreshing: false });
     });
   };
 
   getCards(user) {
+    if (user.user.merchants.length === 0) {
+      return (
+        <View style={styles.noCardsContainer}>
+          <Text style={styles.noCardsText}>Nessuna tessera</Text>
+        </View>
+      );
+    }
+
     return (
       <FlatList
         data={user.user.merchants}
@@ -95,7 +108,7 @@ class CardsListScreen extends Component {
           }
           contentContainerStyle={styles.container}
         >
-          {user.hasOwnProperty("user") && this.getCards(user)}
+          {user.hasOwnProperty("user") && this.getCards(userFiltered)}
         </ScrollView>
       </SafeAreaView>
     );
@@ -108,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4f4f4"
   },
   container: {
-    paddingTop: 12
+    flex: 1
   },
   loadingContainer: {
     flex: 1,

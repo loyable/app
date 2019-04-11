@@ -8,7 +8,8 @@ const initialState = {
     longitude: 9.190498,
     latitudeDelta: 0.0522,
     longitudeDelta: 0.0421
-  }
+  },
+  merchants: []
 };
 
 const MapsReducer = (state = initialState, action) => {
@@ -21,6 +22,13 @@ const MapsReducer = (state = initialState, action) => {
           longitude: action.payload.longitude
         }
       };
+    case "LOAD_MERCHANTS":
+      return {
+        ...state,
+        merchants: action.payload
+      };
+    case "GET_MERCHANTS":
+      return state.merchants;
     default:
       return state;
   }

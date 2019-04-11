@@ -1,4 +1,5 @@
 const initialState = {
+  userID: "",
   user: {},
   filter: "",
   userFiltered: {}
@@ -6,30 +7,49 @@ const initialState = {
 
 const UserReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "FILTER_MERCHANT":
-      userFiltered = state.cards.filter(card => {
-        if (
-          card.settings.text.title.value
-            .toLowerCase()
-            .indexOf(state.filter.toLowerCase()) > -1 ||
-          card.settings.text.address.value
-            .toLowerCase()
-            .indexOf(state.filter.toLowerCase()) > -1
-        ) {
-          return card;
-        }
-      });
+    case "SET_USER_ID":
       return {
         ...state,
-        userFiltered
+        userID: action.payload
       };
     case "SET_FILTER":
       return {
         ...state,
         filter: action.payload
       };
+    case "FILTER_MERCHANTS":
+      if (state.filter === "") {
+        return {
+          ...state,
+          userFiltered: state.user
+        };
+      }
+      merchantsFiltered = state.user.user.merchants.filter(merchant => {
+        if (
+          merchant.merchant.name
+            .toLowerCase()
+            .indexOf(state.filter.toLowerCase()) > -1 ||
+          merchant.merchant.address.value
+            .toLowerCase()
+            .indexOf(state.filter.toLowerCase()) > -1
+        ) {
+          return merchant;
+        }
+      });
+
+      userFiltered = {
+        ...state.user,
+        user: {
+          merchants: merchantsFiltered
+        }
+      };
+
+      return {
+        ...state,
+        userFiltered
+      };
     case "LOAD_USER":
-      return { ...state, user: action.payload };
+      return { ...state, user: action.payload, userFiltered: action.payload };
     default:
       return state;
   }

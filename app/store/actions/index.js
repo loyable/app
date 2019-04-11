@@ -1,14 +1,3 @@
-//CardsActions
-
-import {
-  FILTER_CARDS,
-  SET_FILTER2,
-  WATCH_CARDS,
-  GET_CARDS
-} from "./CardsActions";
-
-export { FILTER_CARDS, SET_FILTER2, WATCH_CARDS, GET_CARDS };
-
 //MapsActions
 import { SET_LOCATION } from "./MapsActions";
 
@@ -16,10 +5,19 @@ export { SET_LOCATION };
 
 //UserActions
 import {
-  FILTER_MERCHANT,
+  FILTER_MERCHANTS,
   SET_FILTER,
   LOAD_USER,
-  WATCH_USER
+  REQUEST_USER,
+  REQUEST_CARD,
+  SET_USER_ID
 } from "./UserActions";
 
-export { FILTER_MERCHANT, SET_FILTER, LOAD_USER, WATCH_USER };
+export {
+  FILTER_MERCHANTS,
+  SET_FILTER,
+  LOAD_USER,
+  REQUEST_USER,
+  REQUEST_CARD,
+  SET_USER_ID
+};

@@ -7,13 +7,33 @@ import {
   Text,
   Image,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
+
+import { connect } from "react-redux";
+
+import { SET_USER_ID } from "../../store/actions";
 
 import vars from "../../config/styles";
 
 import settings from "../../config/settings";
 
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_USER_ID: id => {
+      dispatch(SET_USER_ID(id));
+    }
+  };
+};
 class VerifyLoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -46,9 +66,8 @@ class VerifyLoginScreen extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.id !== "") {
-          this.props.navigation.navigate("Cards", {
-            id: data.id
-          });
+          this.props.SET_USER_ID(data.id);
+          this.props.navigation.navigate("CardsList");
         }
       });
   }
@@ -175,4 +194,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default VerifyLoginScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VerifyLoginScreen);

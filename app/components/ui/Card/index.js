@@ -29,9 +29,18 @@ class Card extends Component {
 
   getCards(merchant) {
     let multiple = true;
-    if (merchant.cards.length === 1) {
+    let length = 0;
+
+    merchant.cards.forEach(card => {
+      if (card.hidden !== true) {
+        length++;
+      }
+    });
+
+    if (length === 1) {
       multiple = false;
     }
+
     return (
       <FlatList
         data={merchant.cards}
@@ -39,13 +48,18 @@ class Card extends Component {
         pagingEnabled={true}
         showsHorizontalScrollIndicator={false}
         keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <CardItem
-            settings={item}
-            navigation={this.props.navigation}
-            multiple={multiple}
-          />
-        )}
+        renderItem={({ item }) => {
+          if (item.hidden === true) {
+            return;
+          }
+          return (
+            <CardItem
+              settings={item}
+              navigation={this.props.navigation}
+              multiple={multiple}
+            />
+          );
+        }}
         onEndReached={() => this.setState({ isLoading: false })}
       />
     );
@@ -57,7 +71,7 @@ class Card extends Component {
     const styles = StyleSheet.create(this.getStyles(merchant.merchant));
 
     return (
-      <View>
+      <View style={styles.container}>
         {this.getCards(merchant)}
 
         {this.props.showInfo && (
@@ -85,10 +99,13 @@ class Card extends Component {
 
   getStyles(merchant) {
     return {
+      container: {
+        marginTop: vars.card.container.marginTop,
+        marginBottom: vars.card.container.marginBottom
+      },
       infoContainer: {
         marginHorizontal: vars.card.infoContainer.marginHorizontal,
-        marginTop: vars.card.infoContainer.marginTop,
-        marginBottom: vars.card.infoContainer.marginBottom
+        marginTop: vars.card.infoContainer.marginTop
       },
       title: {
         fontSize: merchant.style.title.fontSize

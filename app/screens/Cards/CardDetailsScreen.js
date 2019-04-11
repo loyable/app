@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Text, ScrollView, View, StyleSheet } from "react-native";
+import { Text, ScrollView, View, StyleSheet, FlatList } from "react-native";
 
 import CardItem from "../../components/ui/Card/CardItem";
 
 //global vars
 import vars from "../../config/styles";
 
-import CardAnalyticsCircle from "./CardAnalyticsCircle";
+import CardHistoryItem from "./CardHistoryItem";
+import CardCircle from "./CardCircle";
 
 class CardDetailsScreen extends Component {
   render() {
@@ -31,7 +32,7 @@ class CardDetailsScreen extends Component {
             <Text style={styles.title}>{card.header.text1.value}</Text>
             <View style={styles.cardAnalyticsContainer}>
               <View style={styles.cardAnalyticsItem}>
-                <CardAnalyticsCircle
+                <CardCircle
                   number={marked}
                   color="#fff"
                   backgroundColor="#72E81F"
@@ -39,7 +40,7 @@ class CardDetailsScreen extends Component {
                 <Text style={styles.cardAnalyticsItemText}>bollini</Text>
               </View>
               <View style={styles.cardAnalyticsItem}>
-                <CardAnalyticsCircle
+                <CardCircle
                   number={remaining}
                   color="#fff"
                   backgroundColor="#C812FF"
@@ -56,44 +57,29 @@ class CardDetailsScreen extends Component {
             {/* Cronologia */}
             <Text style={styles.cardHistoryTitle}>Cronologia</Text>
             <View style={styles.cardHistoryContainer}>
-              <View style={styles.cardHistoryItem}>
-                <View style={styles.cardHistoryIcon}>
-                  <CardAnalyticsCircle
-                    number="+1"
-                    size={35}
-                    fontSize={22}
-                    color="#fff"
-                    backgroundColor="#FFC445"
-                  />
-                </View>
-                <View style={styles.cardHistoryTextContainer}>
-                  <Text style={styles.cardHistoryText}>Bollino aggiunto</Text>
-                </View>
-                <View style={styles.cardHistoryDateContainer}>
-                  <Text style={styles.cardHistoryDate}>04/01/2019 16:05</Text>
-                </View>
-              </View>
-              <View style={styles.cardHistoryItem}>
-                <View style={styles.cardHistoryIcon}>
-                  <CardAnalyticsCircle
-                    number="+2"
-                    size={35}
-                    fontSize={22}
-                    color="#fff"
-                    backgroundColor="#FFC445"
-                  />
-                </View>
-                <View style={styles.cardHistoryTextContainer}>
-                  <Text style={styles.cardHistoryText}>Bollini aggiunti</Text>
-                </View>
-                <View style={styles.cardHistoryDateContainer}>
-                  <Text style={styles.cardHistoryDate}>05/01/2019 14:05</Text>
-                </View>
-              </View>
+              {this.getHistory(item.history)}
             </View>
           </View>
         </View>
       </ScrollView>
+    );
+  }
+
+  getHistory(history) {
+    if (history.length === 0) {
+      return (
+        <View style={styles.noHistoryContainer}>
+          <Text style={styles.noHistoryText}>Nessun movimento</Text>
+        </View>
+      );
+    }
+
+    return (
+      <FlatList
+        data={history}
+        keyExtractor={item => item._id}
+        renderItem={({ item }) => <CardHistoryItem history={item} />}
+      />
     );
   }
 }

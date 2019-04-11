@@ -14,6 +14,14 @@ class CardGridItem extends Component {
   };
 
   getStyles(merchant) {
+    let width = 130,
+      height = 80;
+    if (merchant.logo.width >= merchant.logo.height) {
+      height = (width * merchant.logo.height) / merchant.logo.width;
+    } else {
+      width = (height * merchant.logo.width) / merchant.logo.height;
+    }
+
     return {
       container: {
         flex: 0.5,
@@ -38,8 +46,8 @@ class CardGridItem extends Component {
         elevation: vars.cardGrid.style.elevation
       },
       logo: {
-        width: merchant.logo.width,
-        height: merchant.logo.height
+        width: width,
+        height: height
       }
     };
   }
