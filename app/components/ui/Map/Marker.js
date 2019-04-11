@@ -4,7 +4,7 @@ import { Text, View, StyleSheet, Image, Animated } from "react-native";
 class Marker extends Component {
   static defaultProps = {
     selected: false,
-    size: 25
+    size: 30
   };
   render() {
     const { logo, selected } = this.props;

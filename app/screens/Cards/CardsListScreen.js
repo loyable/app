@@ -35,8 +35,9 @@ const mapStateToProps = state => {
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
-    SET_USER_ID: id => {
+    SET_USER_ID: (id, callback) => {
       dispatch(SET_USER_ID(id));
+      if (callback) callback(id);
     },
     REQUEST_USER: (id, callback) => {
       dispatch(REQUEST_USER(id, callback));
@@ -52,11 +53,10 @@ class CardsListScreen extends Component {
       isLoading: true,
       refreshing: false
     };
-    props.SET_USER_ID("4048ed6b-bcad-4e73-9852-1ba4c585acdb");
-  }
 
-  componentDidMount() {
-    this.props.REQUEST_USER(this.props.user.userID);
+    this.props.SET_USER_ID("4048ed6b-bcad-4e73-9852-1ba4c585acdb", id => {
+      this.props.REQUEST_USER(id);
+    });
   }
 
   onRefresh = () => {

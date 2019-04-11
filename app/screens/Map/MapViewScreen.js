@@ -103,7 +103,8 @@ class MapViewScreen extends Component {
     );
   }
   render() {
-    const { user } = this.props.user;
+    const { userFiltered } = this.props.user;
+    user = userFiltered;
     return (
       <SafeAreaView style={styles.pageContainer}>
         <SearchBar

@@ -115,15 +115,15 @@ class CardItem extends Component {
                   uri: card.header.logo.src
                 }}
               />
-
               {card.header.logo.verticalPosition !== "center" && (
                 <View style={styles.textContainer}>
                   <Text style={styles.text1}>{card.header.text1.value}</Text>
                   <Text style={styles.text2}>{card.header.text2.value}</Text>
                 </View>
               )}
-
-              <Text style={styles.footer}>{card.footer.value}</Text>
+              {card.footer.value !== "" && (
+                <Text style={styles.footer}>{card.footer.value}</Text>
+              )}
             </View>
             <View style={styles.rowContainer}>
               {this.createGrid(marked, card, styles)}
@@ -170,7 +170,9 @@ class CardItem extends Component {
             <View style={styles.rowContainer}>
               {this.createGrid(marked, card, styles)}
             </View>
-            <Text style={styles.footer}>{card.footer.value}</Text>
+            {card.footer.value !== "" && (
+              <Text style={styles.footer}>{card.footer.value}</Text>
+            )}
           </View>
         </TouchableWithoutFeedback>
       );
