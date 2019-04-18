@@ -1,19 +1,36 @@
 import { AsyncStorage } from "react-native";
+import md5 from "md5";
 
 class Storage {
-  setItem = async (key, value) => {
+  static setItem = async (key, value) => {
     try {
       await AsyncStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.log(error);
     }
   };
-  getItem = async key => {
+  static getItem = async key => {
     try {
       const value = await AsyncStorage.getItem(key);
       if (value !== null) {
-        return value;
+        return JSON.parse(value);
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  static removeItem = async key => {
+    try {
+      await AsyncStorage.removeItem(key);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  static verifyHash = async (key, hash) => {
+    try {
+      const result = await Storage.getItem(key);
+      return hash === md5(result);
     } catch (error) {
       console.log(error);
     }

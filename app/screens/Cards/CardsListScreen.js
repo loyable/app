@@ -8,7 +8,8 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  RefreshControl
+  RefreshControl,
+  AsyncStorage
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -54,8 +55,14 @@ class CardsListScreen extends Component {
       refreshing: false
     };
 
-    this.props.SET_USER_ID("4048ed6b-bcad-4e73-9852-1ba4c585acdb", id => {
-      this.props.REQUEST_USER(id);
+    Storage.getItem("userID").then(userID => {
+      if (userID) {
+        this.props.SET_USER_ID(userID, id => {
+          this.props.REQUEST_USER(id);
+        });
+      } else {
+        this.props.navigation.navigate("Login");
+      }
     });
   }
 
@@ -108,7 +115,13 @@ class CardsListScreen extends Component {
           }
           contentContainerStyle={styles.container}
         >
-          {user.hasOwnProperty("user") && this.getCards(userFiltered)}
+          {user.hasOwnProperty("user") ? (
+            this.getCards(userFiltered)
+          ) : (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     );

@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 
 import QRCode from "react-native-qrcode";
 
+import QRCodeScanner from "react-native-qrcode-scanner";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -25,7 +27,6 @@ class QRCodeScreen extends Component {
         <View style={styles.qrcode}>
           <QRCode value={userID} size={250} bgColor="black" fgColor="white" />
         </View>
-
         <Text style={styles.subtitle}>Il tuo identificativo:</Text>
         <Text style={styles.description}>{userID}</Text>
       </SafeAreaView>

@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
-import { Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 import PropTypes from "prop-types";
 
 import vars from "../../../config/styles";
+
+import Storage from "../../../store/asyncstorage";
 
 /* 
   PROPS:
@@ -19,7 +21,32 @@ class SidebarItem extends Component {
       <TouchableOpacity
         style={styles.sidebarContainer}
         onPress={() => {
-          this.props.navigation.navigate(this.props.link);
+          switch (this.props.link) {
+            case "Logout":
+              Alert.alert(
+                "Sei sicuro di voler fare il logout?",
+                "Dovrai rieffettuare la verifica SMS",
+                [
+                  {
+                    text: "Annulla",
+                    style: "cancel"
+                  },
+                  {
+                    text: "Logout",
+                    onPress: () => {
+                      Storage.removeItem("userID").then(() => {
+                        this.props.navigation.navigate("Login");
+                      });
+                    }
+                  }
+                ],
+                { cancelable: false }
+              );
+              break;
+            default:
+              this.props.navigation.navigate(this.props.link);
+              break;
+          }
         }}
       >
         <Text style={styles.sidebarItem}>{this.props.name}</Text>
@@ -34,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     backgroundColor: "#fff",
-    margin: 10
+    margin: 15
   },
   sidebarItem: {
     fontFamily: vars.font.regular,

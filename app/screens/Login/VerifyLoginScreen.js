@@ -19,6 +19,8 @@ import vars from "../../config/styles";
 
 import settings from "../../config/settings";
 
+import Storage from "../../store/asyncstorage";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -66,8 +68,12 @@ class VerifyLoginScreen extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.id !== "") {
-          this.props.SET_USER_ID(data.id);
-          this.props.navigation.navigate("CardsList");
+          Storage.setItem("userID", data.id)
+            .then(() => {
+              this.props.SET_USER_ID(data.id);
+              this.props.navigation.navigate("CardsList");
+            })
+            .catch(err => console.log(err));
         }
       });
   }

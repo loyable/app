@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import { FlatList } from "react-native";
+
 import { DrawerItems } from "react-navigation";
 
 import {
@@ -19,6 +21,36 @@ import SidebarItem from "./SidebarItem";
 
 class Sidebar extends Component {
   render() {
+    const sidebarItems = [
+      {
+        name: "Impostazioni",
+        link: ""
+      },
+      {
+        name: "Il mio account",
+        link: ""
+      },
+      {
+        name: "Cambia numero",
+        link: ""
+      },
+      {
+        name: "Istruzioni d'uso",
+        link: ""
+      },
+      {
+        name: "Contattaci",
+        link: ""
+      },
+      {
+        name: "Chi siamo",
+        link: ""
+      },
+      {
+        name: "Logout",
+        link: "Logout"
+      }
+    ];
     return (
       <ScrollView>
         <SafeAreaView
@@ -29,18 +61,24 @@ class Sidebar extends Component {
             <LogoIcon navigation={this.props.navigation} link="Cards" />
           </View>
 
-          <DrawerItems
-            itemStyle={styles.sidebarContainer}
-            labelStyle={styles.sidebarItem}
-            {...this.props}
-          />
-          {/* <SidebarItem
-            name="Home"
-            navigation={this.props.navigation}
-            link="Home"
-          /> */}
+          {this.getSidebarItems(sidebarItems)}
         </SafeAreaView>
       </ScrollView>
+    );
+  }
+  getSidebarItems(items) {
+    return (
+      <FlatList
+        data={items}
+        keyExtractor={item => item.name}
+        renderItem={({ item }) => (
+          <SidebarItem
+            name={item.name}
+            navigation={this.props.navigation}
+            link={item.link}
+          />
+        )}
+      />
     );
   }
 }

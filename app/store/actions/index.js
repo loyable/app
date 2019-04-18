@@ -1,7 +1,11 @@
 //MapsActions
-import { SET_LOCATION } from "./MapsActions";
+import {
+  SET_USER_LOCATION,
+  SET_MAP_LOCATION,
+  REQUEST_MERCHANTS
+} from "./MapsActions";
 
-export { SET_LOCATION };
+export { SET_USER_LOCATION, SET_MAP_LOCATION, REQUEST_MERCHANTS };
 
 //UserActions
 import {

@@ -1,25 +1,37 @@
 const initialState = {
-  currentLocation: {
+  userLocation: {
     latitude: 0,
     longitude: 0
   },
-  location: {
-    latitude: 45.466797,
-    longitude: 9.190498,
-    latitudeDelta: 0.0522,
-    longitudeDelta: 0.0421
+  mapLocation: {
+    latitude: 0,
+    longitude: 0,
+    latitudeDelta: 0,
+    longitudeDelta: 0
+  },
+  initialLocation: {
+    latitude: 42.444999,
+    longitude: 12.248431,
+    latitudeDelta: 14.308762,
+    longitudeDelta: 13.013736
   },
   merchants: []
 };
 
 const MapsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SET_LOCATION":
+    case "SET_USER_LOCATION":
       return {
         ...state,
-        currentLocation: {
-          latitude: action.payload.latitude,
-          longitude: action.payload.longitude
+        userLocation: {
+          ...action.payload
+        }
+      };
+    case "SET_MAP_LOCATION":
+      return {
+        ...state,
+        mapLocation: {
+          ...action.payload
         }
       };
     case "LOAD_MERCHANTS":

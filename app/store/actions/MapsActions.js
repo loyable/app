@@ -1,8 +1,15 @@
 import firebase from "../../config/firebase";
 
-export const SET_LOCATION = position => {
+export const SET_USER_LOCATION = position => {
   return {
-    type: "SET_LOCATION",
+    type: "SET_USER_LOCATION",
+    payload: position
+  };
+};
+
+export const SET_MAP_LOCATION = position => {
+  return {
+    type: "SET_MAP_LOCATION",
     payload: position
   };
 };

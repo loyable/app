@@ -10,6 +10,7 @@ export default createDrawerNavigator(
   {
     Home: { screen: StackNavigator }
   },
+
   {
     contentComponent: Sidebar
   }

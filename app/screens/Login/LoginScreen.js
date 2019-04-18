@@ -18,6 +18,8 @@ import settings from "../../config/settings";
 
 import PhoneInput from "../../components/react-native-phone-input";
 
+import Storage from "../../store/asyncstorage";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -27,11 +29,7 @@ const mapStateToProps = state => {
 
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
-  return {
-    WATCH_USER: () => {
-      dispatch(WATCH_USER());
-    }
-  };
+  return {};
 };
 class LoginScreen extends Component {
   constructor(props) {
@@ -40,6 +38,13 @@ class LoginScreen extends Component {
       number: "",
       isCorrect: false
     };
+
+    //verifica se l'utente è loggato
+    Storage.getItem("userID").then(userID => {
+      if (userID) {
+        this.props.navigation.navigate("DrawerNavigator");
+      }
+    });
   }
 
   verifyNumber(number) {

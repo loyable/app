@@ -11,9 +11,7 @@ import {
 
 import { connect } from "react-redux";
 
-import { store } from "../../store";
-
-import { SET_LOCATION } from "../../store/actions";
+import { SET_USER_LOCATION, SET_MAP_LOCATION } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -36,7 +34,14 @@ const mapStateToProps = state => {
 
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
-  return {};
+  return {
+    SET_USER_LOCATION: region => {
+      dispatch(SET_USER_LOCATION(region));
+    },
+    SET_MAP_LOCATION: region => {
+      dispatch(SET_MAP_LOCATION(region));
+    }
+  };
 };
 
 const { width, height } = Dimensions.get("window");
@@ -57,47 +62,38 @@ class MapViewScreen extends Component {
   }
 
   getInitialMapState() {
-    let { latitude, longitude } = this.props.maps.location;
+    return this.props.maps.initialLocation;
+  }
 
-    return {
-      latitude,
-      longitude,
+  getUserLocation() {
+    const location = {
+      ...this.props.maps.userLocation,
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA
     };
-  }
 
-  getCurrentLocation() {
-    const { latitude, longitude } = this.props.maps.currentLocation;
-
-    //se l'utente non ha abilitato la localizzazione
-    if (latitude === 0 && longitude === 0) {
-      return;
+    if (location.latitude === 0 && location.longitude === 0) {
+      return this.getInitialMapState();
     }
 
-    return {
-      latitude,
-      longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA
-    };
+    return location;
   }
 
-  setCurrentLocation() {
-    let location = this.getCurrentLocation();
-
+  setUserLocation() {
+    const location = this.getUserLocation();
+    console.log(this.map.props.region);
     if (location) {
-      this.map.animateToRegion(this.getCurrentLocation(), 1000);
+      this.map.animateToRegion(location, 1000);
     }
   }
 
   componentDidMount() {
-    navigator.geolocation.watchPosition(
+    navigator.geolocation.getCurrentPosition(
       position => {
-        store.dispatch(SET_LOCATION(position.coords));
+        this.props.SET_USER_LOCATION(position.coords);
       },
       error => {
-        console.log(error);
+        alert("Abilita la localizzazione!");
       },
       { enableHighAccuracy: false, timeout: 20000, maximumAge: 1000 }
     );
@@ -117,7 +113,7 @@ class MapViewScreen extends Component {
           <View style={styles.locationContainer}>
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => this.setCurrentLocation()}
+              onPress={() => this.setUserLocation()}
             >
               <LocationArrow />
             </TouchableOpacity>
@@ -125,8 +121,9 @@ class MapViewScreen extends Component {
           <MapView
             ref={map => (this.map = map)}
             initialRegion={this.getInitialMapState()}
-            region={this.getCurrentLocation()}
+            region={this.getUserLocation()}
             style={styles.map}
+            loadingEnabled={true}
             showsUserLocation={true}
             userLocationAnnotationTitle=""
             showsCompass={false}
