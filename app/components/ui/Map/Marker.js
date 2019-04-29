@@ -6,13 +6,14 @@ class Marker extends Component {
     selected: false,
     size: 30
   };
+
   render() {
     const { logo, selected } = this.props;
 
     const styles = StyleSheet.create(this.getStyles(logo));
 
     return (
-      <Animated.View style={styles.marker}>
+      <Animated.View style={[styles.marker]}>
         <Image
           style={styles.markerImage}
           source={{

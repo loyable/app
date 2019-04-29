@@ -15,13 +15,14 @@ import { Callout } from "react-native-maps";
 
   - navigation
   - merchant
+  - distance
 */
 
 class Tooltip extends Component {
   render() {
     const styles = StyleSheet.create(this.getStyles());
 
-    const { merchant } = this.props;
+    const { merchant, distance } = this.props;
 
     return (
       <Callout
@@ -41,7 +42,7 @@ class Tooltip extends Component {
             </Text>
           </View>
           <View style={styles.footer}>
-            <Text style={styles.distance}>3,7 km</Text>
+            <Text style={styles.distance}>{distance}</Text>
             <Text style={styles.info}>Info</Text>
           </View>
         </View>

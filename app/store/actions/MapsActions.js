@@ -1,5 +1,15 @@
 import firebase from "../../config/firebase";
 
+import settings from "../../config/settings";
+
+//Persist to state user data
+export const LOAD_MERCHANTS = merchants => {
+  return {
+    type: "LOAD_MERCHANTS",
+    payload: merchants
+  };
+};
+
 export const SET_USER_LOCATION = position => {
   return {
     type: "SET_USER_LOCATION",

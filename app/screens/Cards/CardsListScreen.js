@@ -55,6 +55,7 @@ class CardsListScreen extends Component {
       refreshing: false
     };
 
+    //Verifica il token utente in AsyncStorage
     Storage.getItem("userID").then(userID => {
       if (userID) {
         this.props.SET_USER_ID(userID, id => {

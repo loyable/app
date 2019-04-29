@@ -19,6 +19,7 @@ class MapListItem extends Component {
   }
   render() {
     const merchant = this.props.settings;
+    const { distance } = this.props;
 
     const styles = StyleSheet.create(this.getStyles(merchant));
 
@@ -46,7 +47,7 @@ class MapListItem extends Component {
               {merchant.merchant.description}
             </Text>
             <View style={styles.infoContainer}>
-              <Text style={styles.distance}>3,7 km</Text>
+              <Text style={styles.distance}>{distance}</Text>
               <Text style={styles.info}>Info</Text>
             </View>
           </View>

@@ -80,7 +80,13 @@ class CardsGridScreen extends Component {
           activeArray={[false, true]}
         />
         <ScrollView contentContainerStyle={styles.container}>
-          {user.hasOwnProperty("user") && this.getCards(userFiltered)}
+          {user.hasOwnProperty("user") ? (
+            this.getCards(userFiltered)
+          ) : (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     );
@@ -97,6 +103,11 @@ const styles = StyleSheet.create({
   containerText: {
     fontSize: vars.fontSize.title,
     fontFamily: vars.font.regular
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   noCardsContainer: {
     flex: 1,

@@ -6,7 +6,8 @@ import {
   Text,
   View,
   Image,
-  FlatList
+  FlatList,
+  ActivityIndicator
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -18,6 +19,8 @@ import vars from "../../config/styles";
 import SearchBar from "../../components/ui/SearchBar";
 
 import MapListItem from "../../components/ui/Map/MapListItem";
+
+import MapViewScreen from "./MapViewScreen";
 
 //map redux state to properties
 const mapStateToProps = state => {
@@ -43,7 +46,13 @@ class MapListScreen extends Component {
           activeArray={[false, true]}
         />
         <ScrollView contentContainerStyle={styles.container}>
-          {this.getMerchants(merchants)}
+          {user.hasOwnProperty("user") ? (
+            this.getMerchants(merchants)
+          ) : (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color="#000" />
+            </View>
+          )}
         </ScrollView>
       </SafeAreaView>
     );
@@ -54,7 +63,16 @@ class MapListScreen extends Component {
         data={merchants}
         keyExtractor={item => item.merchantID}
         renderItem={({ item }) => (
-          <MapListItem settings={item} navigation={this.props.navigation} />
+          <MapListItem
+            settings={item}
+            navigation={this.props.navigation}
+            distance={MapViewScreen.distanceBetweenTwoCoords(
+              item.merchant.address.coordinate.lat,
+              item.merchant.address.coordinate.lng,
+              this.props.maps.userLocation.latitude,
+              this.props.maps.userLocation.longitude
+            )}
+          />
         )}
       />
     );
@@ -72,6 +90,11 @@ const styles = StyleSheet.create({
   containerText: {
     fontSize: vars.fontSize.title,
     fontFamily: vars.font.regular
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 
