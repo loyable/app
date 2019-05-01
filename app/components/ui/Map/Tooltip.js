@@ -43,7 +43,6 @@ class Tooltip extends Component {
           </View>
           <View style={styles.footer}>
             <Text style={styles.distance}>{distance}</Text>
-            <Text style={styles.info}>Info</Text>
           </View>
         </View>
       </Callout>
@@ -85,11 +84,6 @@ class Tooltip extends Component {
         fontSize: 10,
         color: "#8e8e8e",
         fontFamily: vars.font.regular
-      },
-      info: {
-        color: "#0070F5",
-        fontSize: 12,
-        fontFamily: vars.font.bold
       }
     };
   }

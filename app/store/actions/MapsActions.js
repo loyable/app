@@ -1,5 +1,3 @@
-import firebase from "../../config/firebase";
-
 import settings from "../../config/settings";
 
 //Persist to state user data

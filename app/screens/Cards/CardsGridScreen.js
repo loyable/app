@@ -95,10 +95,12 @@ class CardsGridScreen extends Component {
 
 const styles = StyleSheet.create({
   cardViewContainer: {
-    flex: 1
+    flex: 1,
+    backgroundColor: "#f4f4f4"
   },
   container: {
-    padding: vars.cardGrid.padding
+    padding: vars.cardGrid.padding,
+    flex: 1
   },
   containerText: {
     fontSize: vars.fontSize.title,

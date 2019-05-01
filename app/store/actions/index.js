@@ -14,7 +14,8 @@ import {
   LOAD_USER,
   REQUEST_USER,
   REQUEST_CARD,
-  SET_USER_ID
+  SET_USER_ID,
+  WATCH_USER
 } from "./UserActions";
 
 export {
@@ -23,5 +24,6 @@ export {
   LOAD_USER,
   REQUEST_USER,
   REQUEST_CARD,
-  SET_USER_ID
+  SET_USER_ID,
+  WATCH_USER
 };

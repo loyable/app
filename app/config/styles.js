@@ -52,7 +52,7 @@ export default {
   },
   header: {
     paddingHorizontal: 20,
-    paddingLeftBackArrow: 10
+    paddingLeftBackArrow: 20
   },
   card: {
     logo: {

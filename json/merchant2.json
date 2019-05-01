@@ -1,10 +1,10 @@
 {
   "address": {
-    "coordinate": {
-      "lat": 45.4580139,
-      "lng": 9.1703518
-    },
-    "value": "Viale Papiniano, 43, 20123 Milano MI"
+    "value": "Viale Papiniano, 43, 20123 Milano MI",
+    "location": {
+      "type": "Point",
+      "coordinates": [45.4580139, 9.1703518]
+    }
   },
   "logo": {
     "backgroundColor": "#b40001",

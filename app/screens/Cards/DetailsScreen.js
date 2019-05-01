@@ -11,6 +11,8 @@ import BackIcon from "../../components/icons/BackIcon";
 
 import Marker from "../../components/ui/Map/Marker";
 
+import Header from "../../components/ui/Header";
+
 //global vars
 import vars from "../../config/styles";
 
@@ -68,8 +70,8 @@ class DetailsScreen extends Component {
           <MapView
             ref={map => (this.map = map)}
             initialRegion={{
-              latitude: merchant.merchant.address.coordinate.lat,
-              longitude: merchant.merchant.address.coordinate.lng,
+              latitude: merchant.merchant.address.location.coordinates[0],
+              longitude: merchant.merchant.address.location.coordinates[1],
               latitudeDelta: 0.01,
               longitudeDelta: 0.01
             }}
@@ -83,13 +85,13 @@ class DetailsScreen extends Component {
           >
             <MapView.Marker
               coordinate={{
-                latitude: merchant.merchant.address.coordinate.lat,
-                longitude: merchant.merchant.address.coordinate.lng
+                latitude: merchant.merchant.address.location.coordinates[0],
+                longitude: merchant.merchant.address.location.coordinates[1]
               }}
               onPress={() =>
                 openMap({
-                  latitude: merchant.merchant.address.coordinate.lat,
-                  longitude: merchant.merchant.address.coordinate.lng,
+                  latitude: merchant.merchant.address.location.coordinates[0],
+                  longitude: merchant.merchant.address.location.coordinates[1],
                   query: merchant.merchant.address.value,
                   zoom: 10
                 })

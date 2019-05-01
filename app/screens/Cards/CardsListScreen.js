@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 
 import Storage from "../../store/asyncstorage";
 
-import { SET_USER_ID, REQUEST_USER } from "../../store/actions";
+import { SET_USER_ID, REQUEST_USER, WATCH_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
@@ -42,6 +42,9 @@ const mapDispatchToProps = dispatch => {
     },
     REQUEST_USER: (id, callback) => {
       dispatch(REQUEST_USER(id, callback));
+    },
+    WATCH_USER: (id, callback) => {
+      dispatch(WATCH_USER(id, callback));
     }
   };
 };
@@ -59,7 +62,9 @@ class CardsListScreen extends Component {
     Storage.getItem("userID").then(userID => {
       if (userID) {
         this.props.SET_USER_ID(userID, id => {
-          this.props.REQUEST_USER(id);
+          this.props.REQUEST_USER(id, () => {
+            this.props.WATCH_USER(id);
+          });
         });
       } else {
         this.props.navigation.navigate("Login");

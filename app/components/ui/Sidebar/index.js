@@ -24,27 +24,23 @@ class Sidebar extends Component {
     const sidebarItems = [
       {
         name: "Impostazioni",
-        link: ""
+        link: "Settings"
       },
       {
         name: "Il mio account",
-        link: ""
+        link: "Account"
       },
       {
         name: "Cambia numero",
-        link: ""
+        link: "ChangeNumber"
       },
       {
         name: "Istruzioni d'uso",
-        link: ""
+        link: "Instructions"
       },
       {
         name: "Contattaci",
-        link: ""
-      },
-      {
-        name: "Chi siamo",
-        link: ""
+        link: "Contact"
       },
       {
         name: "Logout",

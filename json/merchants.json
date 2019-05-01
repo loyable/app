@@ -3,9 +3,9 @@
   "name": "MiNi Sushi",
   "address": {
     "value": "Via Emilio Morosini, 5, 20135 Milano MI",
-    "coordinate": {
-      "lat": 45.4563687,
-      "lng": 9.2090525
+    "location": {
+      "type": "Point",
+      "coordinates": [45.4563687, 9.2090525]
     }
   },
   "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, blanditiis. Nesciunt, aperiam suscipit? Corrupti quam minima sequi voluptate, vitae neque?",

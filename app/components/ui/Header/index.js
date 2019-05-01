@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, View, StyleSheet } from "react-native";
+import { Text, SafeAreaView, View, StyleSheet, Animated } from "react-native";
 
 //Import Icons
 import LogoIcon from "../../icons/LogoIcon";
@@ -11,7 +11,7 @@ import vars from "../../../config/styles";
 /*
   PROPS:
   - backArrow: boolean (show the back arrow)
-  - bottomShadow: boolean (show the bottom shadow)
+  - showBottomShadow: boolean (show the bottom shadow)
 */
 
 class Header extends Component {

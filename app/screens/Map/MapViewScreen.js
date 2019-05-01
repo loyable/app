@@ -7,6 +7,7 @@ import {
   Text,
   Dimensions,
   TouchableOpacity,
+  ActivityIndicator,
   Alert
 } from "react-native";
 
@@ -113,7 +114,7 @@ class MapViewScreen extends Component {
 
   setUserLocation() {
     const location = this.getUserLocation();
-    if (location) {
+    if (location && this.props.user.userFiltered.hasOwnProperty("user")) {
       this.map.animateToRegion(location, 1000);
     }
   }
@@ -179,8 +180,8 @@ class MapViewScreen extends Component {
                 <MapView.Marker
                   key={`marker-${index}`}
                   coordinate={{
-                    latitude: merchant.merchant.address.coordinate.lat,
-                    longitude: merchant.merchant.address.coordinate.lng
+                    latitude: merchant.merchant.address.location.coordinates[0],
+                    longitude: merchant.merchant.address.location.coordinates[1]
                   }}
                 >
                   <Marker logo={merchant.merchant.logo} />
@@ -189,8 +190,8 @@ class MapViewScreen extends Component {
                     merchant={merchant}
                     navigation={this.props.navigation}
                     distance={MapViewScreen.distanceBetweenTwoCoords(
-                      merchant.merchant.address.coordinate.lat,
-                      merchant.merchant.address.coordinate.lng,
+                      merchant.merchant.address.location.coordinates[0],
+                      merchant.merchant.address.location.coordinates[1],
                       this.props.maps.userLocation.latitude,
                       this.props.maps.userLocation.longitude
                     )}

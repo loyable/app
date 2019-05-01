@@ -2,6 +2,8 @@ import { store } from "../../store";
 
 import settings from "../../config/settings";
 
+import io from "socket.io-client";
+
 //Filter merchants
 export const FILTER_MERCHANTS = filter => {
   return {
@@ -34,6 +36,18 @@ export const SET_FILTER = text => {
   };
 };
 
+//Watch user changes from API
+export const WATCH_USER = (id, callback) => {
+  return function(dispatch) {
+    const socket = io(`${settings.url.watch}`, { query: `id=${id}` });
+
+    socket.on("change", () => {
+      console.log("change");
+      dispatch(REQUEST_USER(id, callback));
+    });
+  };
+};
+
 //Fetch user from API
 export const REQUEST_USER = (id, callback) => {
   return function(dispatch) {
@@ -42,6 +56,11 @@ export const REQUEST_USER = (id, callback) => {
       .then(user => {
         dispatch(LOAD_USER(user));
         if (callback) callback();
+      })
+      .catch(err => {
+        setTimeout(() => {
+          dispatch(REQUEST_USER(id));
+        }, 2000);
       });
   };
 };

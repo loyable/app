@@ -37,7 +37,9 @@ class CardDetailsScreen extends Component {
                   color="#fff"
                   backgroundColor="#72E81F"
                 />
-                <Text style={styles.cardAnalyticsItemText}>bollini</Text>
+                <Text style={styles.cardAnalyticsItemText}>
+                  {marked !== 1 ? "bollini" : "bollino"}
+                </Text>
               </View>
               <View style={styles.cardAnalyticsItem}>
                 <CardCircle
@@ -45,7 +47,9 @@ class CardDetailsScreen extends Component {
                   color="#fff"
                   backgroundColor="#C812FF"
                 />
-                <Text style={styles.cardAnalyticsItemText}>mancanti</Text>
+                <Text style={styles.cardAnalyticsItemText}>
+                  {remaining !== 1 ? "mancanti" : "mancante"}
+                </Text>
               </View>
             </View>
             <Text style={styles.descriptionTitle}>Descrizione</Text>

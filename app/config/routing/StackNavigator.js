@@ -7,6 +7,10 @@ import TabNavigator from "./TabNavigator";
 
 import QRCodeScreen from "../../screens/QRCodeScreen";
 import SettingsScreen from "../../screens/SettingsScreen";
+import AccountScreen from "../../screens/AccountScreen";
+import ChangeNumberScreen from "../../screens/ChangeNumberScreen";
+import InstructionsScreen from "../../screens/InstructionsScreen";
+import ContactScreen from "../../screens/ContactScreen";
 
 import Header from "../../components/ui/Header";
 
@@ -27,7 +31,74 @@ export default createStackNavigator(
       }
     },
     Settings: {
-      screen: SettingsScreen
+      screen: SettingsScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
+        };
+      }
+    },
+    Account: {
+      screen: AccountScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
+        };
+      }
+    },
+    ChangeNumber: {
+      screen: ChangeNumberScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
+        };
+      }
+    },
+    Instructions: {
+      screen: InstructionsScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
+        };
+      }
+    },
+    Contact: {
+      screen: ContactScreen,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: (
+            <Header
+              backArrow={true}
+              navigation={navigation}
+              showBottomShadow={true}
+            />
+          )
+        };
+      }
     }
   },
   {

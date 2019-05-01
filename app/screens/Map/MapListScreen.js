@@ -36,7 +36,11 @@ const mapDispatchToProps = dispatch => {
 
 class MapListScreen extends Component {
   render() {
-    const merchants = this.props.user.userFiltered.user.merchants;
+    const { userFiltered } = this.props.user;
+    user = userFiltered;
+    if (user) {
+      const merchants = user.merchants;
+    }
     return (
       <SafeAreaView style={styles.mapContainer}>
         <SearchBar
@@ -67,8 +71,8 @@ class MapListScreen extends Component {
             settings={item}
             navigation={this.props.navigation}
             distance={MapViewScreen.distanceBetweenTwoCoords(
-              item.merchant.address.coordinate.lat,
-              item.merchant.address.coordinate.lng,
+              item.merchant.address.location.coordinates[0],
+              item.merchant.address.location.coordinates[1],
               this.props.maps.userLocation.latitude,
               this.props.maps.userLocation.longitude
             )}

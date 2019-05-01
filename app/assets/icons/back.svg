@@ -5,7 +5,7 @@
         <line id="Line_2" data-name="Line 2" x2="10" y2="10" transform="translate(384.5 277.5)" fill="none" stroke="#1681ff" stroke-linecap="round" stroke-width="3"/>
         <line id="Line_3" data-name="Line 3" x2="10" y2="10" transform="translate(394.5 287.5) rotate(90)" fill="none" stroke="#1681ff" stroke-linecap="round" stroke-width="3"/>
       </g>
-      <text id="Indietro-3" data-name="Indietro" transform="translate(71 92)" fill="#0070f5" font-size="17" font-family="CircularStd-Book" font-weight="500" letter-spacing="-0.02em"><tspan x="-29.367" y="0">Indietro</tspan></text>
+      <!-- <text id="Indietro-3" data-name="Indietro" transform="translate(71 92)" fill="#0070f5" font-size="17" font-family="CircularStd-Book" font-weight="500" letter-spacing="-0.02em"><tspan x="-29.367" y="0">Indietro</tspan></text> -->
     </g>
   </g>
 </svg>

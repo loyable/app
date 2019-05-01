@@ -48,7 +48,6 @@ class MapListItem extends Component {
             </Text>
             <View style={styles.infoContainer}>
               <Text style={styles.distance}>{distance}</Text>
-              <Text style={styles.info}>Info</Text>
             </View>
           </View>
         </View>
@@ -117,11 +116,6 @@ class MapListItem extends Component {
       distance: {
         color: vars.color.description,
         fontFamily: vars.font.regular,
-        fontSize: 16
-      },
-      info: {
-        color: "#0070F5",
-        fontFamily: vars.font.bold,
         fontSize: 16
       }
     };
