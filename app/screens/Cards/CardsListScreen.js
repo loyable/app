@@ -89,14 +89,22 @@ class CardsListScreen extends Component {
     }
 
     return (
-      <FlatList
-        data={user.user.merchants}
-        keyExtractor={item => item.merchantID}
-        renderItem={({ item }) => (
-          <Card settings={item} navigation={this.props.navigation} />
-        )}
-        onEndReached={() => this.setState({ isLoading: false })}
-      />
+      <ScrollView contentOffset={{ x: 0, y: 50 }}>
+        <SearchBar
+          page="cards"
+          navigation={this.props.navigation}
+          navigateTo="CardsGrid"
+          activeArray={[true, false]}
+        />
+        <FlatList
+          data={user.user.merchants}
+          keyExtractor={item => item.merchantID}
+          renderItem={({ item }) => (
+            <Card settings={item} navigation={this.props.navigation} />
+          )}
+          onEndReached={() => this.setState({ isLoading: false })}
+        />
+      </ScrollView>
     );
   }
 
@@ -105,13 +113,6 @@ class CardsListScreen extends Component {
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
-        <SearchBar
-          page="cards"
-          navigation={this.props.navigation}
-          navigateTo="CardsGrid"
-          activeArray={[true, false]}
-        />
-
         <ScrollView
           refreshControl={
             <RefreshControl

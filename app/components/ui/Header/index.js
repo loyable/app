@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, View, StyleSheet, Animated } from "react-native";
+import { Text, SafeAreaView, View, StyleSheet } from "react-native";
 
 //Import Icons
 import LogoIcon from "../../icons/LogoIcon";
@@ -21,7 +21,33 @@ class Header extends Component {
   };
 
   render() {
-    const styles = StyleSheet.create({
+    const styles = StyleSheet.create(this.getStyles());
+
+    const { navigation } = this.props;
+    return (
+      <SafeAreaView style={styles.headerContainer}>
+        <View style={styles.header}>
+          {this.props.backArrow ? (
+            <View style={styles.backArrow}>
+              <BackIcon navigation={navigation} />
+            </View>
+          ) : (
+            <View style={styles.hamburger}>
+              <HamburgerIcon navigation={navigation} />
+            </View>
+          )}
+          <View style={styles.logo}>
+            <LogoIcon navigation={navigation} link="Cards" />
+          </View>
+          <View style={styles.qrcode}>
+            <QRCodeIcon navigation={navigation} />
+          </View>
+        </View>
+      </SafeAreaView>
+    );
+  }
+  getStyles() {
+    return {
       header: {
         height: vars.headerStyle.height,
         backgroundColor: vars.headerStyle.backgroundColor,
@@ -55,30 +81,7 @@ class Header extends Component {
         flex: 1,
         alignItems: "flex-end"
       }
-    });
-
-    const { navigation } = this.props;
-    return (
-      <SafeAreaView style={styles.headerContainer}>
-        <View style={styles.header}>
-          {this.props.backArrow ? (
-            <View style={styles.backArrow}>
-              <BackIcon navigation={navigation} />
-            </View>
-          ) : (
-            <View style={styles.hamburger}>
-              <HamburgerIcon navigation={navigation} />
-            </View>
-          )}
-          <View style={styles.logo}>
-            <LogoIcon navigation={navigation} link="Cards" />
-          </View>
-          <View style={styles.qrcode}>
-            <QRCodeIcon navigation={navigation} />
-          </View>
-        </View>
-      </SafeAreaView>
-    );
+    };
   }
 }
 

@@ -12,7 +12,7 @@ import {
 
 import vars from "../../../config/styles";
 
-import Box from "./Box";
+import SVG from "react-native-remote-svg";
 
 import CardItem from "./CardItem";
 
@@ -85,11 +85,17 @@ class Card extends Component {
             }}
           >
             <View style={styles.infoContainer}>
-              <Text style={styles.title}>{merchant.merchant.name}</Text>
+              <View>
+                <Text style={styles.title}>{merchant.merchant.name}</Text>
 
-              <Text style={styles.address}>
-                {merchant.merchant.address.value}
-              </Text>
+                <Text style={styles.address}>
+                  {merchant.merchant.address.value}
+                </Text>
+              </View>
+              <SVG
+                style={styles.infoIcon}
+                source={require("../../../assets/icons/info.svg")}
+              />
             </View>
           </TouchableWithoutFeedback>
         )}
@@ -104,8 +110,25 @@ class Card extends Component {
         marginBottom: vars.card.container.marginBottom
       },
       infoContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         marginHorizontal: vars.card.infoContainer.marginHorizontal,
-        marginTop: vars.card.infoContainer.marginTop
+        marginTop: vars.card.infoContainer.marginTop,
+        paddingTop: vars.card.infoContainer.paddingTop,
+        paddingBottom: vars.card.infoContainer.paddingBottom,
+        paddingLeft: vars.card.infoContainer.paddingLeft,
+        paddingRight: vars.card.infoContainer.paddingRight,
+        borderRadius: vars.card.infoContainer.borderRadius,
+        backgroundColor: vars.card.infoContainer.backgroundColor,
+        zIndex: -1,
+        shadowOffset: {
+          width: vars.card.infoContainer.shadow.offset.width,
+          height: vars.card.infoContainer.shadow.offset.height
+        },
+        shadowColor: vars.card.infoContainer.shadow.color,
+        shadowOpacity: vars.card.infoContainer.shadow.opacity,
+        shadowRadius: vars.card.infoContainer.shadow.radius
       },
       title: {
         fontSize: merchant.style.title.fontSize

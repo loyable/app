@@ -23,16 +23,8 @@ class Sidebar extends Component {
   render() {
     const sidebarItems = [
       {
-        name: "Impostazioni",
-        link: "Settings"
-      },
-      {
         name: "Il mio account",
         link: "Account"
-      },
-      {
-        name: "Cambia numero",
-        link: "ChangeNumber"
       },
       {
         name: "Istruzioni d'uso",

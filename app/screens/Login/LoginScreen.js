@@ -20,6 +20,8 @@ import PhoneInput from "../../components/react-native-phone-input";
 
 import Storage from "../../store/asyncstorage";
 
+import SVG from "react-native-remote-svg";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -79,10 +81,9 @@ class LoginScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image
-            source={require("../../assets/img/logo.png")}
+          <SVG
             style={styles.logo}
-            resizeMode="contain"
+            source={require("../../assets/icons/logo.svg")}
           />
         </View>
         <View>
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 13,
     padding: 12,
-    backgroundColor: vars.color.primary,
+    backgroundColor: vars.color.secondary,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 3 },

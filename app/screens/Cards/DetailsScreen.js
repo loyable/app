@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#F4F4F4"
   },
   cardContainer: {
-    paddingBottom: 12
+    paddingTop: 12
   },
   cardInfoContainer: {
     backgroundColor: "#fff",
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontFamily: vars.font.bold,
+    fontFamily: vars.font.regular,
     color: vars.color.title
   },
   description: {

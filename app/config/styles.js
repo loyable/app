@@ -5,8 +5,8 @@ export default {
   },
   color: {
     background: "#fff",
-    primary: "#6812FF",
-    secondary: "#77E81F",
+    primary: "#FF0D05",
+    secondary: "#9E0D05",
     title: "#3C3C3C",
     subtitle: "#696969",
     description: "#8E8E8E",
@@ -16,8 +16,8 @@ export default {
     sidebarItem: "#696969",
     sidebarContainer: "#fff",
     searchInputText: "#7b7b7b",
-    searchInputBackground: "#f4f4f4",
-    switchInactiveBackground: "#f4f4f4",
+    searchInputBackground: "#fff",
+    switchInactiveBackground: "#fff",
     switchInactiveIcon: "#9a9a9a",
     switchActiveBackground: "#0070f5",
     switchActiveIcon: "#fff",
@@ -60,12 +60,27 @@ export default {
       marginRight: 10
     },
     container: {
-      marginTop: 12,
-      marginBottom: 0
+      marginTop: 0,
+      marginBottom: 12
     },
     infoContainer: {
       marginHorizontal: 12,
-      marginTop: 10
+      marginTop: -15,
+      paddingTop: 25,
+      paddingBottom: 10,
+      paddingLeft: 10,
+      paddingRight: 15,
+      borderRadius: 10,
+      backgroundColor: "#fff",
+      shadow: {
+        color: "#333",
+        offset: {
+          width: 0,
+          height: 0
+        },
+        opacity: 0.1,
+        radius: 4
+      }
     },
     marks: {
       total: 10,

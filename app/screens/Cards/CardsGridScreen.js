@@ -48,23 +48,39 @@ class CardsGridScreen extends Component {
   getCards(user) {
     let lastItem;
     if (this.isOdd(user.user.merchants.length))
-      lastItem = user.user.merchants - 1;
+      lastItem = user.user.merchants.length - 1;
 
+    if (user.user.merchants.length === 0) {
+      return (
+        <View style={styles.noCardsContainer}>
+          <Text style={styles.noCardsText}>Nessuna tessera</Text>
+        </View>
+      );
+    }
     return (
-      <FlatList
-        data={user.user.merchants}
-        keyExtractor={item => item.merchantID}
-        renderItem={({ item, index }) => (
-          <Card
-            settings={item}
-            navigation={this.props.navigation}
-            navigateTo="DetailsGrid"
-            isLastOddItem={index === lastItem}
-          />
-        )}
-        numColumns={2}
-        onEndReached={() => this.setState({ isLoading: false })}
-      />
+      <ScrollView contentOffset={{ x: 0, y: 55 }}>
+        <SearchBar
+          page="cards"
+          navigation={this.props.navigation}
+          navigateTo="CardsList"
+          activeArray={[false, true]}
+        />
+        <FlatList
+          style={styles.cardsContainer}
+          data={user.user.merchants}
+          keyExtractor={item => item.merchantID}
+          renderItem={({ item, index }) => (
+            <Card
+              settings={item}
+              navigation={this.props.navigation}
+              navigateTo="DetailsGrid"
+              isLastOddItem={index === lastItem}
+            />
+          )}
+          numColumns={2}
+          onEndReached={() => this.setState({ isLoading: false })}
+        />
+      </ScrollView>
     );
   }
 
@@ -73,12 +89,6 @@ class CardsGridScreen extends Component {
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
-        <SearchBar
-          page="cards"
-          navigation={this.props.navigation}
-          navigateTo="CardsList"
-          activeArray={[false, true]}
-        />
         <ScrollView contentContainerStyle={styles.container}>
           {user.hasOwnProperty("user") ? (
             this.getCards(userFiltered)
@@ -99,8 +109,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#f4f4f4"
   },
   container: {
-    padding: vars.cardGrid.padding,
     flex: 1
+  },
+  cardsContainer: {
+    paddingHorizontal: vars.cardGrid.padding
   },
   containerText: {
     fontSize: vars.fontSize.title,

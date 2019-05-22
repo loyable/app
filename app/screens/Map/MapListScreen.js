@@ -38,20 +38,12 @@ class MapListScreen extends Component {
   render() {
     const { userFiltered } = this.props.user;
     user = userFiltered;
-    if (user) {
-      const merchants = user.merchants;
-    }
+
     return (
       <SafeAreaView style={styles.mapContainer}>
-        <SearchBar
-          page="map"
-          navigation={this.props.navigation}
-          navigateTo="MapView"
-          activeArray={[false, true]}
-        />
         <ScrollView contentContainerStyle={styles.container}>
           {user.hasOwnProperty("user") ? (
-            this.getMerchants(merchants)
+            this.getMerchants(user.user.merchants)
           ) : (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color="#000" />
@@ -63,22 +55,31 @@ class MapListScreen extends Component {
   }
   getMerchants(merchants) {
     return (
-      <FlatList
-        data={merchants}
-        keyExtractor={item => item.merchantID}
-        renderItem={({ item }) => (
-          <MapListItem
-            settings={item}
-            navigation={this.props.navigation}
-            distance={MapViewScreen.distanceBetweenTwoCoords(
-              item.merchant.address.location.coordinates[0],
-              item.merchant.address.location.coordinates[1],
-              this.props.maps.userLocation.latitude,
-              this.props.maps.userLocation.longitude
-            )}
-          />
-        )}
-      />
+      <ScrollView contentOffset={{ x: 0, y: 50 }}>
+        <SearchBar
+          page="map"
+          navigation={this.props.navigation}
+          navigateTo="MapView"
+          activeArray={[false, true]}
+        />
+
+        <FlatList
+          data={merchants}
+          keyExtractor={item => item.merchantID}
+          renderItem={({ item }) => (
+            <MapListItem
+              settings={item}
+              navigation={this.props.navigation}
+              distance={MapViewScreen.distanceBetweenTwoCoords(
+                item.merchant.address.location.coordinates[0],
+                item.merchant.address.location.coordinates[1],
+                this.props.maps.userLocation.latitude,
+                this.props.maps.userLocation.longitude
+              )}
+            />
+          )}
+        />
+      </ScrollView>
     );
   }
 }

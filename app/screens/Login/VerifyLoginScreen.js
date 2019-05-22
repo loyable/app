@@ -21,6 +21,8 @@ import settings from "../../config/settings";
 
 import Storage from "../../store/asyncstorage";
 
+import SVG from "react-native-remote-svg";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -43,6 +45,7 @@ class VerifyLoginScreen extends Component {
       number: this.props.navigation.getParam("number"),
       verificationNumber: "",
       isComplete: false,
+      verificationError: false,
       verificationHash: this.props.navigation.getParam("verificationHash")
     };
   }
@@ -68,12 +71,16 @@ class VerifyLoginScreen extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.id !== "") {
+          this.setState({ verificationError: false });
+
           Storage.setItem("userID", data.id)
             .then(() => {
               this.props.SET_USER_ID(data.id);
               this.props.navigation.navigate("CardsList");
             })
             .catch(err => console.log(err));
+        } else {
+          this.setState({ verificationError: true });
         }
       });
   }
@@ -82,10 +89,9 @@ class VerifyLoginScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
-          <Image
-            source={require("../../assets/img/logo.png")}
+          <SVG
             style={styles.logo}
-            resizeMode="contain"
+            source={require("../../assets/icons/logo.svg")}
           />
         </View>
         <View>

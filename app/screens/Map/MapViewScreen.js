@@ -150,13 +150,16 @@ class MapViewScreen extends Component {
     user = userFiltered;
     return (
       <SafeAreaView style={styles.pageContainer}>
-        <SearchBar
-          page="map"
-          navigation={this.props.navigation}
-          navigateTo="MapList"
-          activeArray={[true, false]}
-        />
         <View style={styles.mapContainer}>
+          <View style={styles.searchContainer}>
+            <SearchBar
+              page="map"
+              shadow={true}
+              navigation={this.props.navigation}
+              navigateTo="MapList"
+              activeArray={[true, false]}
+            />
+          </View>
           <View style={styles.locationContainer}>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -249,9 +252,16 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     position: "absolute",
-    top: 10,
+    top: 65,
     right: 10,
     zIndex: 1
+  },
+  searchContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    zIndex: 1,
+    width: SCREEN_WIDTH
   },
   loadingContainer: {
     flex: 1,

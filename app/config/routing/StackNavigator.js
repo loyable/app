@@ -76,13 +76,7 @@ export default createStackNavigator(
       screen: InstructionsScreen,
       navigationOptions: ({ navigation }) => {
         return {
-          header: (
-            <Header
-              backArrow={true}
-              navigation={navigation}
-              showBottomShadow={true}
-            />
-          )
+          header: null
         };
       }
     },
@@ -106,7 +100,7 @@ export default createStackNavigator(
     headerLayoutPreset: "center",
     defaultNavigationOptions: ({ navigation }) => {
       return {
-        header: <Header navigation={navigation} />
+        header: <Header navigation={navigation} showBottomShadow={true} />
       };
     }
   }
