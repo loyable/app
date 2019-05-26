@@ -11,11 +11,13 @@ import SearchSwitchItem from "./SearchSwitchItem";
   - navigation: the navigation object
   - activeArray: array of 2 boolean values
   - navigateTo: screen name to navigate to
+  - search: if true display search
 */
 
 class SearchBar extends Component {
   static defaultProps = {
-    activeArray: [true, false]
+    activeArray: [true, false],
+    search: true
   };
   render() {
     const iconLeft = this.props.page === "cards" ? "bars" : "map";
@@ -25,7 +27,8 @@ class SearchBar extends Component {
 
     return (
       <View style={styles.searchBarContainer}>
-        <SearchInput />
+        {this.props.search && <SearchInput />}
+
         <View style={styles.switchContainer}>
           <SearchSwitchItem
             active={this.props.activeArray[0]}
@@ -59,7 +62,7 @@ class SearchBar extends Component {
         elevation: 1,
         backgroundColor: "transparent",
         zIndex: 1,
-        justifyContent: "center",
+        justifyContent: this.props.search ? "center" : "flex-end",
         flexDirection: "row",
         padding: 12
       },

@@ -1,0 +1,314 @@
+[
+  {
+    "settings": {
+      "marks": {
+        "mark": {
+          "image": {
+            "width": 38,
+            "height": 11,
+            "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png"
+          },
+          "style": {
+            "shape": { "type": "round", "value": 12 },
+            "backgroundColor": "#000",
+            "borderWidth": 0,
+            "borderColor": "#fff"
+          }
+        },
+        "style": {
+          "shape": { "type": "round", "value": 12 },
+          "backgroundColor": "#fff",
+          "padding": 2,
+          "borderWidth": 0,
+          "borderColor": "#fff",
+          "width": 50,
+          "height": 50
+        },
+        "rows": 2,
+        "total": 10,
+        "rowSpacing": 15
+      },
+      "style": {
+        "backgroundColor": "#333",
+        "borderWidth": 0,
+        "borderColor": "#fff",
+        "height": 210,
+        "borderRadius": 10
+      },
+      "description": { "value": "Lorem ipsum dolor sit amet" },
+      "design": "horizontal"
+    },
+    "header": {
+      "logo": {
+        "verticalPosition": "top",
+        "width": 112,
+        "height": 35,
+        "position": "left",
+        "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+        "marginBottom": 0,
+        "marginLeft": 0
+      },
+      "text1": {
+        "color": "#fff",
+        "fontSize": 20,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "Tessera Pranzo",
+        "lineHeight": 20,
+        "letterSpacing": 0
+      },
+      "text2": {
+        "color": "#fff",
+        "fontSize": 16,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "Ogni 10 Pranzi 1 Omaggio!",
+        "lineHeight": 16,
+        "letterSpacing": 0
+      }
+    },
+    "footer": {
+      "color": "#fff",
+      "fontSize": 14,
+      "textAlign": "right",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "value": "N.B. Non valido nei giorni festivi",
+      "lineHeight": 14,
+      "letterSpacing": 0
+    },
+    "id": "62db33d8-bc6e-4864-b50f-281aab7c9893",
+    "_id": "5c9e1ec25918590a0d984ebf",
+    "__v": 0
+  },
+  {
+    "settings": {
+      "marks": {
+        "mark": {
+          "image": {
+            "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+            "width": 35,
+            "height": 16
+          },
+          "style": {
+            "shape": { "type": "circle", "value": 0 },
+            "backgroundColor": "#b40001",
+            "borderWidth": 0,
+            "borderColor": "#fff"
+          }
+        },
+        "style": {
+          "shape": { "type": "circle", "value": 0 },
+          "backgroundColor": "#fff",
+          "padding": 2,
+          "borderWidth": 0,
+          "borderColor": "#fff",
+          "width": 50,
+          "height": 50
+        },
+        "total": 15,
+        "rows": 3,
+        "rowSpacing": 10
+      },
+      "style": {
+        "backgroundColor": "#b40001",
+        "borderWidth": 0,
+        "borderColor": "#fff",
+        "height": 270,
+        "borderRadius": 10
+      },
+      "description": { "value": "Lorem ipsum dolor sit amet" },
+      "design": "horizontal"
+    },
+    "header": {
+      "logo": {
+        "verticalPosition": "top",
+        "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+        "width": 112,
+        "height": 52,
+        "position": "left"
+      },
+      "text1": {
+        "color": "#fff",
+        "fontSize": 20,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "Menu Pranzo"
+      },
+      "text2": {
+        "color": "#fff",
+        "fontSize": 16,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "15 Pizze 1 Omaggio"
+      }
+    },
+    "footer": {
+      "color": "#fff",
+      "fontSize": 14,
+      "textAlign": "right",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "value": "Scadenza: 05/05/2019"
+    },
+    "id": "fa21dd26-501e-4ce5-886c-59e97854df96",
+    "_id": "5c9e57273c16e7212e283f62",
+    "__v": 0
+  },
+  {
+    "settings": {
+      "marks": {
+        "mark": {
+          "image": {
+            "src": "https://i.ibb.co/TMvyHMR/34700129-1724565410946147-970679518182244352-o-1.jpg",
+            "width": 30,
+            "height": 35
+          },
+          "style": {
+            "shape": { "type": "circle", "value": 0 },
+            "backgroundColor": "rgb(130,152,149)",
+            "borderWidth": 0,
+            "borderColor": "#fff"
+          }
+        },
+        "style": {
+          "shape": { "type": "circle", "value": 0 },
+          "backgroundColor": "#fff",
+          "padding": 2,
+          "borderWidth": 0,
+          "borderColor": "#fff",
+          "width": 50,
+          "height": 50
+        },
+        "total": 12,
+        "rows": 4,
+        "rowSpacing": 10
+      },
+      "style": {
+        "backgroundColor": "rgb(130,152,149)",
+        "borderWidth": 0,
+        "borderColor": "#fff",
+        "height": 260,
+        "borderRadius": 10
+      },
+      "description": { "value": "Lorem ipsum dolor sit amet" },
+      "design": "vertical"
+    },
+    "header": {
+      "logo": {
+        "verticalPosition": "top",
+        "src": "https://i.ibb.co/TMvyHMR/34700129-1724565410946147-970679518182244352-o-1.jpg",
+        "width": 112,
+        "height": 185,
+        "position": "center"
+      },
+      "text1": {
+        "color": "#fff",
+        "fontSize": 20,
+        "textAlign": "center",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": ""
+      },
+      "text2": {
+        "color": "#fff",
+        "fontSize": 0,
+        "textAlign": "center",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": ""
+      }
+    },
+    "footer": {
+      "color": "#fff",
+      "fontSize": 20,
+      "textAlign": "center",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "value": "Tessera Kebab"
+    },
+    "id": "838e20fd-6119-4fd1-ac0a-ec759b708ce6",
+    "_id": "5ca509a1d5b0876c4b12f50b",
+    "__v": 0
+  },
+  {
+    "settings": {
+      "marks": {
+        "mark": {
+          "image": {
+            "src": "https://i.ibb.co/J23Pnwf/logoilfornodegliamici.png",
+            "width": 35,
+            "height": 18
+          },
+          "style": {
+            "shape": { "type": "round", "value": 5 },
+            "backgroundColor": "rgb(45,32,12)",
+            "borderWidth": 0,
+            "borderColor": "#fff"
+          }
+        },
+        "style": {
+          "shape": { "type": "round", "value": 5 },
+          "backgroundColor": "#fff",
+          "padding": 2,
+          "borderWidth": 0,
+          "borderColor": "#fff",
+          "width": 50,
+          "height": 50
+        },
+        "total": 20,
+        "rows": 4,
+        "rowSpacing": 8
+      },
+      "style": {
+        "backgroundColor": "rgb(48,32,8)",
+        "borderWidth": 0,
+        "borderColor": "#fff",
+        "height": 340,
+        "borderRadius": 10
+      },
+      "description": { "value": "Lorem ipsum dolor sit amet" },
+      "design": "horizontal"
+    },
+    "header": {
+      "logo": {
+        "verticalPosition": "top",
+        "src": "https://i.ibb.co/J23Pnwf/logoilfornodegliamici.png",
+        "width": 160,
+        "height": 83,
+        "position": "left"
+      },
+      "text1": {
+        "color": "#fff",
+        "fontSize": 25,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "20% di sconto!"
+      },
+      "text2": {
+        "color": "#fff",
+        "fontSize": 22,
+        "textAlign": "right",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "value": "Ogni 10 bollini"
+      }
+    },
+    "footer": {
+      "color": "#fff",
+      "fontSize": 14,
+      "textAlign": "right",
+      "fontStyle": "normal",
+      "fontWeight": "normal",
+      "value": ""
+    },
+    "id": "a71a14c0-2881-4868-8790-6e70d6e9a27c",
+    "_id": "5cafb3c32455cf1b831d8823",
+    "__v": 0
+  }
+]

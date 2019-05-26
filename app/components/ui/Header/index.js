@@ -14,20 +14,36 @@ import vars from "../../../config/styles";
   - showBottomShadow: boolean (show the bottom shadow)
 */
 
+export function changeHeaderState(params) {
+  this.setState({ ...params });
+}
+
 class Header extends Component {
   static defaultProps = {
     backArrow: false,
     showBottomShadow: false
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      backArrow: props.backArrow,
+      navigation: props.navigation,
+      showBottomShadow: props.showBottomShadow
+    };
+
+    changeHeaderState = changeHeaderState.bind(this);
+  }
+
   render() {
     const styles = StyleSheet.create(this.getStyles());
 
-    const { navigation } = this.props;
+    const { navigation } = this.state;
     return (
       <SafeAreaView style={styles.headerContainer}>
         <View style={styles.header}>
-          {this.props.backArrow ? (
+          {this.state.backArrow ? (
             <View style={styles.backArrow}>
               <BackIcon navigation={navigation} />
             </View>
@@ -54,13 +70,13 @@ class Header extends Component {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        shadowColor: this.props.showBottomShadow ? "#000" : undefined,
+        shadowColor: this.state.showBottomShadow ? "#000" : undefined,
         shadowOffset: {
           width: 0,
-          height: this.props.showBottomShadow ? 3 : 0
+          height: this.state.showBottomShadow ? 3 : 0
         },
-        shadowOpacity: this.props.showBottomShadow ? 0.1 : 0,
-        shadowRadius: this.props.showBottomShadow ? 2 : 0
+        shadowOpacity: this.state.showBottomShadow ? 0.1 : 0,
+        shadowRadius: this.state.showBottomShadow ? 2 : 0
       },
       headerContainer: {
         backgroundColor: "#fff"

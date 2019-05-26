@@ -30,18 +30,35 @@ class AccountScreen extends Component {
     return (
       <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
         <View style={styles.group}>
-          <Text style={styles.label}>ID account</Text>
-          <Text style={styles.text}>{user.id}</Text>
+          <View>
+            <Text style={styles.label}>ID account</Text>
+            <Text style={styles.text}>{user.id}</Text>
+          </View>
         </View>
         <View style={styles.group}>
-          <Text style={styles.label}>Numero di telefono</Text>
-          <Text style={styles.text}>{user.phone}</Text>
+          <View>
+            <Text style={styles.label}>Numero di telefono</Text>
+            <Text style={styles.text}>{user.phone}</Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                this.props.navigation.navigate("ChangeNumber");
+              }}
+              activeOpacity={0.8}
+              style={styles.changeNumberButton}
+            >
+              <Text style={styles.changeNumberButtonText}>Cambia</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.group}>
-          <Text style={styles.label}>Data registrazione</Text>
-          <Text style={styles.text}>07/05/2019 14:01</Text>
+          <View>
+            <Text style={styles.label}>Data registrazione</Text>
+            <Text style={styles.text}>07/05/2019 14:01</Text>
+          </View>
         </View>
-        <View style={{ marginBottom: 10 }}>
+        {/* <View style={{ marginBottom: 10 }}>
           <Text style={styles.title}>Dati personali</Text>
           <Text style={styles.description}>
             Completa il tuo account con le tue informazioni personali per
@@ -78,7 +95,7 @@ class AccountScreen extends Component {
         </View>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Salva</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ScrollView>
     );
   }
@@ -89,6 +106,10 @@ const styles = StyleSheet.create({
     padding: 15
   },
   group: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 20,
     paddingBottom: 15,
     borderBottomWidth: 1,
@@ -133,6 +154,17 @@ const styles = StyleSheet.create({
   buttonText: {
     fontFamily: vars.font.regular,
     fontSize: 21,
+    color: "#fff"
+  },
+  changeNumberButton: {
+    paddingVertical: 3,
+    paddingHorizontal: 12,
+    backgroundColor: "#1681FF",
+    borderRadius: 4
+  },
+  changeNumberButtonText: {
+    fontFamily: vars.font.regular,
+    fontSize: 18,
     color: "#fff"
   }
 });

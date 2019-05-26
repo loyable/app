@@ -16,7 +16,8 @@ import { connect } from "react-redux";
 import {
   SET_USER_LOCATION,
   SET_MAP_LOCATION,
-  REQUEST_MERCHANTS
+  REQUEST_MERCHANTS,
+  LOAD_MERCHANTS
 } from "../../store/actions";
 
 import vars from "../../config/styles";
@@ -50,6 +51,9 @@ const mapDispatchToProps = dispatch => {
     },
     REQUEST_MERCHANTS: callback => {
       dispatch(REQUEST_MERCHANTS(callback));
+    },
+    LOAD_MERCHANTS: merchants => {
+      dispatch(LOAD_MERCHANTS(merchants));
     }
   };
 };
@@ -122,6 +126,14 @@ class MapViewScreen extends Component {
   componentDidMount() {
     this.props.REQUEST_MERCHANTS();
 
+    this.props.navigation.addListener("didFocus", () => {
+      //Metodo che cambia l'Header
+      changeHeaderState({
+        backArrow: false,
+        navigation: this.props.navigation
+      });
+    });
+
     navigator.geolocation.getCurrentPosition(
       position => {
         this.props.SET_USER_LOCATION(position.coords, () =>
@@ -148,18 +160,43 @@ class MapViewScreen extends Component {
   render() {
     const { userFiltered } = this.props.user;
     user = userFiltered;
+
+    let merchants = [],
+      merchantsMarkers = [];
+
+    //Se l'utente è presente nello store
+    if (user.hasOwnProperty("user")) {
+      merchants = user.user.merchants;
+    }
+
+    //Se l'utente ha scaricato la lista dei marker
+    if (this.props.maps.merchants.length !== 0) {
+      merchantsMarkers = this.props.maps.merchants;
+
+      //Loop sull'array degli esercenti associati all'utente
+      for (let i = 0; i < merchantsMarkers.length; i++) {
+        merchants.filter(item => {
+          if (merchantsMarkers[i].id === item.merchant.id) {
+            merchantsMarkers[i] = item;
+          }
+        });
+      }
+      merchants = merchantsMarkers;
+    }
+
     return (
       <SafeAreaView style={styles.pageContainer}>
         <View style={styles.mapContainer}>
-          <View style={styles.searchContainer}>
+          {/* <View style={styles.searchContainer}>
             <SearchBar
               page="map"
               shadow={true}
               navigation={this.props.navigation}
               navigateTo="MapList"
               activeArray={[true, false]}
+              search={false}
             />
-          </View>
+          </View> */}
           <View style={styles.locationContainer}>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -179,28 +216,56 @@ class MapViewScreen extends Component {
               showsCompass={false}
               showsMyLocationButton={false}
             >
-              {user.user.merchants.map((merchant, index) => (
-                <MapView.Marker
-                  key={`marker-${index}`}
-                  coordinate={{
-                    latitude: merchant.merchant.address.location.coordinates[0],
-                    longitude: merchant.merchant.address.location.coordinates[1]
-                  }}
-                >
-                  <Marker logo={merchant.merchant.logo} />
+              {merchants.map((merchant, index) => {
+                if (merchant.hasOwnProperty("merchant")) {
+                  return (
+                    <MapView.Marker
+                      key={`marker-${index}`}
+                      coordinate={{
+                        latitude:
+                          merchant.merchant.address.location.coordinates[0],
+                        longitude:
+                          merchant.merchant.address.location.coordinates[1]
+                      }}
+                    >
+                      <Marker logo={merchant.merchant.logo} />
 
-                  <Tooltip
-                    merchant={merchant}
-                    navigation={this.props.navigation}
-                    distance={MapViewScreen.distanceBetweenTwoCoords(
-                      merchant.merchant.address.location.coordinates[0],
-                      merchant.merchant.address.location.coordinates[1],
-                      this.props.maps.userLocation.latitude,
-                      this.props.maps.userLocation.longitude
-                    )}
-                  />
-                </MapView.Marker>
-              ))}
+                      <Tooltip
+                        merchant={merchant}
+                        navigation={this.props.navigation}
+                        distance={MapViewScreen.distanceBetweenTwoCoords(
+                          merchant.merchant.address.location.coordinates[0],
+                          merchant.merchant.address.location.coordinates[1],
+                          this.props.maps.userLocation.latitude,
+                          this.props.maps.userLocation.longitude
+                        )}
+                      />
+                    </MapView.Marker>
+                  );
+                } else {
+                  return (
+                    <MapView.Marker
+                      key={`marker-${index}`}
+                      coordinate={{
+                        latitude: merchant.address.location.coordinates[0],
+                        longitude: merchant.address.location.coordinates[1]
+                      }}
+                    >
+                      <Marker />
+                      <Tooltip
+                        merchant={merchant}
+                        navigation={this.props.navigation}
+                        distance={MapViewScreen.distanceBetweenTwoCoords(
+                          merchant.address.location.coordinates[0],
+                          merchant.address.location.coordinates[1],
+                          this.props.maps.userLocation.latitude,
+                          this.props.maps.userLocation.longitude
+                        )}
+                      />
+                    </MapView.Marker>
+                  );
+                }
+              })}
             </MapView>
           ) : (
             <View style={styles.loadingContainer}>
@@ -223,37 +288,10 @@ const styles = StyleSheet.create({
   map: {
     flex: 1
   },
-  marker: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 3,
-    borderColor: "#fff",
-    backgroundColor: "#7cc639",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3
-    },
-    shadowRadius: 6,
-    shadowOpacity: 0.1
-  },
-  markerImageContainer: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: "#343434",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  markerImage: {
-    width: 40,
-    height: 12
-  },
   locationContainer: {
     position: "absolute",
-    top: 65,
-    right: 10,
+    top: 12,
+    right: 12,
     zIndex: 1
   },
   searchContainer: {

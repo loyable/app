@@ -1,0 +1,162 @@
+[
+  {
+    "address": {
+      "location": { "type": "Point", "coordinates": [45.4563687, 9.2090525] },
+      "value": "Via Emilio Morosini, 5, 20135 Milano MI"
+    },
+    "logo": {
+      "backgroundColor": "#333",
+      "src": "http://www.minisushi.it/wp-content/uploads/2016/06/minilogo.png",
+      "width": 140,
+      "height": 45
+    },
+    "style": {
+      "address": {
+        "fontSize": 16,
+        "textAlign": "left",
+        "color": "#8e8e8e",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "lineHeight": 16,
+        "letterSpacing": 0
+      },
+      "title": {
+        "fontSize": 22,
+        "textAlign": "left",
+        "color": "#3c3c3c",
+        "fontStyle": "normal",
+        "fontWeight": "normal",
+        "lineHeight": 22,
+        "letterSpacing": 0
+      }
+    },
+    "_id": "5c9e1d645918590a0d984ebc",
+    "id": "e61665bf-9d4b-478f-b82c-5db61efd84c1",
+    "name": "MiNi Sushi",
+    "description": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Est, blanditiis. Nesciunt, aperiam suscipit? Corrupti quam minima sequi voluptate, vitae neque?",
+    "cards": [
+      {
+        "_id": "5c9e1d645918590a0d984ebd",
+        "id": "62db33d8-bc6e-4864-b50f-281aab7c9893"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": {
+      "location": { "type": "Point", "coordinates": [45.4580139, 9.1703518] },
+      "value": "Viale Papiniano, 43, 20123 Milano MI"
+    },
+    "logo": {
+      "backgroundColor": "#b40001",
+      "src": "http://www.pizzeriaspontini.it//graphic/headLogo.png",
+      "width": 130,
+      "height": 60
+    },
+    "style": {
+      "address": {
+        "fontSize": 16,
+        "textAlign": "left",
+        "color": "#8e8e8e",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      },
+      "title": {
+        "fontSize": 22,
+        "textAlign": "left",
+        "color": "#3c3c3c",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      }
+    },
+    "_id": "5c9e54ff3c16e7212e283f60",
+    "id": "74d1dfde-4219-42a5-bfa8-96b5d0822587",
+    "name": "Spontini - Papiniano",
+    "description": "Con l'apertura di Via Arona, 15 a Milano, la seconda in una settimana, Spontini arriva a 30 locali fra Italia e Estero. Il nuovo store è aperto dalle 8 con il servizio colazione.",
+    "cards": [
+      {
+        "_id": "5c9e54ff3c16e7212e283f61",
+        "id": "271cca4e-14e4-46c2-93c3-79ef70ee3284"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": {
+      "location": { "type": "Point", "coordinates": [45.4621344, 9.2197342] },
+      "value": "Corso Ventidue Marzo, 38, 20135 Milano MI"
+    },
+    "logo": {
+      "backgroundColor": "#fff",
+      "src": "https://i.ibb.co/vDMMtKz/logo-SZ-colori.png",
+      "width": 640,
+      "height": 467
+    },
+    "style": {
+      "address": {
+        "fontSize": 16,
+        "textAlign": "left",
+        "color": "#8e8e8e",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      },
+      "title": {
+        "fontSize": 22,
+        "textAlign": "left",
+        "color": "#3c3c3c",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      }
+    },
+    "_id": "5ca50a59d5b0876c4b12f50c",
+    "id": "2ada4f8d-0ef6-46f8-bee0-760e8d3a149b",
+    "name": "Star Zagros Kebabbar",
+    "description": "Lorem ipsum dolor sit amet",
+    "cards": [
+      {
+        "_id": "5ca50a59d5b0876c4b12f50d",
+        "id": "838e20fd-6119-4fd1-ac0a-ec759b708ce6"
+      }
+    ],
+    "__v": 0
+  },
+  {
+    "address": {
+      "location": { "type": "Point", "coordinates": [41.9008794, 12.4950295] },
+      "value": "Via Firenze, 51/52, 00184 Roma RM"
+    },
+    "logo": {
+      "backgroundColor": "rgb(45,32,12)",
+      "src": "https://i.ibb.co/J23Pnwf/logoilfornodegliamici.png",
+      "width": 640,
+      "height": 333
+    },
+    "style": {
+      "address": {
+        "fontSize": 16,
+        "textAlign": "left",
+        "color": "#8e8e8e",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      },
+      "title": {
+        "fontSize": 22,
+        "textAlign": "left",
+        "color": "#3c3c3c",
+        "fontStyle": "normal",
+        "fontWeight": "normal"
+      }
+    },
+    "_id": "5cafb3902455cf1b831d8821",
+    "id": "d2b8ec22-fd1b-477e-b514-e14a2fe399b9",
+    "name": "Il Forno degli Amici",
+    "description": "Non c’è ne lievito madre qui, tantomeno il lievito di birra, abbiamo catturato i lieviti selvaggi e li abbiamo fatti lavorare nel nostro pane, profumo, forma e sapore....",
+    "cards": [
+      {
+        "_id": "5cafb3902455cf1b831d8822",
+        "id": "a71a14c0-2881-4868-8790-6e70d6e9a27c"
+      }
+    ],
+    "__v": 0
+  }
+]

@@ -7,6 +7,13 @@ import VerifyLoginScreen from "./app/screens/Login/VerifyLoginScreen";
 
 import DrawerNavigator from "./app/config/routing/DrawerNavigator";
 
+//Remove yellow warnings
+console.ignoredYellowBox = ["Remote debugger"];
+import { YellowBox } from "react-native";
+YellowBox.ignoreWarnings([
+  "Unrecognized WebSocket connection option(s) `agent`, `perMessageDeflate`, `pfx`, `key`, `passphrase`, `cert`, `ca`, `ciphers`, `rejectUnauthorized`. Did you mean to put these under `headers`?"
+]);
+
 const AppNavigator = createSwitchNavigator(
   {
     Login: {
@@ -20,7 +27,7 @@ const AppNavigator = createSwitchNavigator(
     }
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "DrawerNavigator"
   }
 );
 

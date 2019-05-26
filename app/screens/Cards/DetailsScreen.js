@@ -7,11 +7,9 @@ import openMap from "react-native-open-maps";
 
 import Card from "../../components/ui/Card";
 
-import BackIcon from "../../components/icons/BackIcon";
-
 import Marker from "../../components/ui/Map/Marker";
 
-import Header from "../../components/ui/Header";
+import { changeHeaderState } from "../../components/ui/Header";
 
 //global vars
 import vars from "../../config/styles";
@@ -25,13 +23,15 @@ class DetailsScreen extends Component {
       completed = 0,
       marked = 0;
 
-    merchant.cards.forEach(card => {
-      added++;
-      marked += card.marked;
-      if (card.marked === card.card.settings.marks.total) {
-        completed++;
-      }
-    });
+    if (merchant.hasOwnProperty("merchant")) {
+      merchant.cards.forEach(card => {
+        added++;
+        marked += card.marked;
+        if (card.marked === card.card.settings.marks.total) {
+          completed++;
+        }
+      });
+    }
 
     return {
       added,
@@ -40,23 +40,49 @@ class DetailsScreen extends Component {
     };
   }
 
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      //Metodo che cambia l'Header
+      changeHeaderState({
+        backArrow: true,
+        navigation: this.props.navigation
+      });
+    });
+  }
+
   render() {
-    const merchant = this.props.navigation.getParam("merchant");
+    //Ricevo l'oggetto merchantObject
+    const merchantObject = this.props.navigation.getParam("merchant");
 
-    const { added, completed, marked } = this.getAnalytics(merchant);
+    //Inizializzo la variabile merchant
+    let merchant = merchantObject;
 
+    //Se l'utente NON ha associata la tessera
+    if (!merchantObject.hasOwnProperty("merchant")) {
+      merchant = { merchant: merchantObject };
+    }
+
+    //Calcolo delle statistiche
+    const { added, completed, marked } = this.getAnalytics(merchantObject);
+
+    //Nome dello screen a cui navigare
     const navigateTo = this.props.navigation.getParam("navigateTo");
+
     return (
       <ScrollView style={styles.container}>
-        <View style={styles.cardContainer}>
-          <Card
-            settings={merchant}
-            showInfo={false}
-            navigation={this.props.navigation}
-            navigateTo={navigateTo}
-          />
-        </View>
-
+        {/* //Se l'utente NON ha associata la tessera */}
+        {merchantObject.hasOwnProperty("merchant") ? (
+          <View style={styles.cardContainer}>
+            <Card
+              settings={merchant}
+              showInfo={false}
+              navigation={this.props.navigation}
+              navigateTo={navigateTo}
+            />
+          </View>
+        ) : (
+          <View style={styles.cardContainer} />
+        )}
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
             <Text style={styles.title}>{merchant.merchant.name}</Text>
@@ -122,18 +148,24 @@ class DetailsScreen extends Component {
                 text={["Tessere", "Completate"]}
               />
             </View>
+            <Text style={styles.cardHistoryTitle}>Cronologia</Text>
 
             {/* Cronologia */}
-            <Text style={styles.cardHistoryTitle}>Cronologia</Text>
             <View style={styles.cardHistoryContainer}>
-              {this.getHistory(merchant.history)}
+              {this.getHistory(merchant)}
             </View>
           </View>
         </View>
       </ScrollView>
     );
   }
-  getHistory(history) {
+  getHistory(merchant) {
+    let history = [];
+    if (merchant.hasOwnProperty("history")) {
+      history = merchant.history;
+    }
+
+    //Se l'utente NON ha associato l'esercente
     if (history.length === 0) {
       return (
         <View style={styles.noHistoryContainer}>
@@ -144,7 +176,7 @@ class DetailsScreen extends Component {
 
     return (
       <FlatList
-        data={history}
+        data={merchant.history}
         keyExtractor={item => item._id}
         renderItem={({ item }) => <CardHistoryItem history={item} />}
       />

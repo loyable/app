@@ -24,29 +24,53 @@ class Tooltip extends Component {
 
     const { merchant, distance } = this.props;
 
-    return (
-      <Callout
-        tooltip={true}
-        onPress={() =>
-          this.props.navigation.navigate("DetailsMapView", {
-            merchant,
-            navigateTo: "CardMapViewDetails"
-          })
-        }
-      >
-        <View style={styles.container}>
-          <View>
-            <Text style={styles.title}>{merchant.merchant.name}</Text>
-            <Text style={styles.description}>
-              {merchant.merchant.description}
-            </Text>
+    if (merchant.hasOwnProperty("merchant")) {
+      return (
+        <Callout
+          tooltip={true}
+          onPress={() =>
+            this.props.navigation.navigate("DetailsMapView", {
+              merchant,
+              navigateTo: "CardMapViewDetails"
+            })
+          }
+        >
+          <View style={styles.container}>
+            <View>
+              <Text style={styles.title}>{merchant.merchant.name}</Text>
+              <Text style={styles.description}>
+                {merchant.merchant.description}
+              </Text>
+            </View>
+            <View style={styles.footer}>
+              <Text style={styles.distance}>{distance}</Text>
+            </View>
           </View>
-          <View style={styles.footer}>
-            <Text style={styles.distance}>{distance}</Text>
+        </Callout>
+      );
+    } else {
+      return (
+        <Callout
+          tooltip={true}
+          onPress={() =>
+            this.props.navigation.navigate("DetailsMapView", {
+              merchant,
+              navigateTo: "CardMapViewDetails"
+            })
+          }
+        >
+          <View style={styles.container}>
+            <View>
+              <Text style={styles.title}>{merchant.name}</Text>
+              <Text style={styles.description}>{merchant.description}</Text>
+            </View>
+            <View style={styles.footer}>
+              <Text style={styles.distance}>{distance}</Text>
+            </View>
           </View>
-        </View>
-      </Callout>
-    );
+        </Callout>
+      );
+    }
   }
 
   getStyles() {

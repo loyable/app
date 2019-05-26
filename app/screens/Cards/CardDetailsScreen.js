@@ -9,7 +9,17 @@ import vars from "../../config/styles";
 import CardHistoryItem from "./CardHistoryItem";
 import CardCircle from "./CardCircle";
 
+import { changeHeaderState } from "../../components/ui/Header";
 class CardDetailsScreen extends Component {
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      //Metodo che cambia l'Header
+      changeHeaderState({
+        backArrow: true,
+        navigation: this.props.navigation
+      });
+    });
+  }
   render() {
     const item = this.props.navigation.getParam("item");
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, Button } from "react-native";
 
-class AccountScreen extends Component {
+class ChangeNumberScreen extends Component {
   render() {
     return (
       <View
@@ -18,4 +18,4 @@ class AccountScreen extends Component {
   }
 }
 
-export default AccountScreen;
+export default ChangeNumberScreen;

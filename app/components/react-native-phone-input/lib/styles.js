@@ -11,7 +11,8 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderWidth: 2,
     borderColor: "#e5e5e5",
-    padding: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     borderRadius: 10,
     marginTop: 10
   },
@@ -46,7 +47,7 @@ export default StyleSheet.create({
     backgroundColor: "#cecece"
   },
   text: {
-    height: 30,
+    height: 40,
     padding: 0,
     fontSize: 36,
     color: "#525252",

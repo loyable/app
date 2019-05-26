@@ -26,32 +26,32 @@ const MapViewDetailsStack = createStackNavigator(
   }
 );
 
-const MapListDetailsStack = createStackNavigator(
-  {
-    MapList: {
-      screen: MapListScreen
-    },
-    DetailsMapList: {
-      screen: DetailsScreen
-    },
-    CardMapListDetails: {
-      screen: CardDetailsScreen
-    }
-  },
-  {
-    initialRouteName: "MapList",
-    headerMode: "none"
-  }
-);
+// const MapListDetailsStack = createStackNavigator(
+//   {
+//     MapList: {
+//       screen: MapListScreen
+//     },
+//     DetailsMapList: {
+//       screen: DetailsScreen
+//     },
+//     CardMapListDetails: {
+//       screen: CardDetailsScreen
+//     }
+//   },
+//   {
+//     initialRouteName: "MapList",
+//     headerMode: "none"
+//   }
+// );
 
 export default createSwitchNavigator(
   {
     MapView: {
       screen: MapViewDetailsStack
-    },
-    MapList: {
-      screen: MapListDetailsStack
     }
+    // MapList: {
+    //   screen: MapListDetailsStack
+    // }
   },
   {
     headerMode: "none",

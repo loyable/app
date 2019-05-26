@@ -26,6 +26,7 @@ import Card from "../../components/ui/Card";
 
 import SearchBar from "../../components/ui/SearchBar";
 
+import { changeHeaderState } from "../../components/ui/Header";
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -106,6 +107,15 @@ class CardsListScreen extends Component {
         />
       </ScrollView>
     );
+  }
+  componentDidMount() {
+    this.props.navigation.addListener("didFocus", () => {
+      //Metodo che cambia l'Header
+      changeHeaderState({
+        backArrow: false,
+        navigation: this.props.navigation
+      });
+    });
   }
 
   render() {

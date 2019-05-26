@@ -4,7 +4,7 @@ import { AppRegistry } from "react-native";
 
 import App from "./App";
 
-import { name as beloyal } from "./app.json";
+import { name } from "./app.json";
 
 import { store } from "./app/store";
 
@@ -23,4 +23,4 @@ class Root extends Component {
   }
 }
 
-AppRegistry.registerComponent(beloyal, () => Root);
+AppRegistry.registerComponent(name, () => Root);

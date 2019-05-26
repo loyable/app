@@ -3,13 +3,9 @@ import vars from "../config/styles";
 
 import { Text, View, SafeAreaView, StyleSheet } from "react-native";
 
-import uuid from "uuid/v4";
-
 import { connect } from "react-redux";
 
 import QRCode from "react-native-qrcode";
-
-import QRCodeScanner from "react-native-qrcode-scanner";
 
 //map redux state to properties
 const mapStateToProps = state => {

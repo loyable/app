@@ -20,7 +20,12 @@ import vars from "../styles";
 export default createStackNavigator(
   {
     AppTab: {
-      screen: TabNavigator
+      screen: TabNavigator,
+      navigationOptions: ({ navigation }) => {
+        return {
+          header: <Header navigation={navigation} showBottomShadow={true} />
+        };
+      }
     },
     QRCode: {
       screen: QRCodeScreen,
@@ -98,6 +103,7 @@ export default createStackNavigator(
   {
     headerTransitionPreset: "uikit",
     headerLayoutPreset: "center",
+    headerMode: "screen",
     defaultNavigationOptions: ({ navigation }) => {
       return {
         header: <Header navigation={navigation} showBottomShadow={true} />
