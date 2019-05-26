@@ -3,8 +3,6 @@ import {
   StyleSheet,
   SafeAreaView,
   View,
-  Image,
-  Text,
   Dimensions,
   TouchableOpacity,
   ActivityIndicator,
@@ -22,8 +20,6 @@ import {
 
 import vars from "../../config/styles";
 
-import SearchBar from "../../components/ui/SearchBar";
-
 import MapView from "react-native-maps";
 
 import Tooltip from "../../components/ui/Map/Tooltip";
@@ -31,6 +27,8 @@ import Tooltip from "../../components/ui/Map/Tooltip";
 import LocationArrow from "../../components/ui/Map/LocationArrow";
 
 import Marker from "../../components/ui/Map/Marker";
+
+import { changeHeaderState } from "../../components/ui/Header";
 
 //map redux state to properties
 const mapStateToProps = state => {
