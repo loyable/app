@@ -7,8 +7,6 @@ import CardsGridScreen from "./CardsGridScreen";
 import DetailsScreen from "./DetailsScreen";
 import CardDetailsScreen from "./CardDetailsScreen";
 
-import Header from "../../components/ui/Header";
-
 const CardDetailsStack = createStackNavigator(
   {
     CardsList: {

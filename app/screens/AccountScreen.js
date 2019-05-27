@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -25,79 +26,113 @@ const mapDispatchToProps = dispatch => {
   return {};
 };
 class AccountScreen extends Component {
+  parseDate(time) {
+    const date = new Date(time);
+
+    function addLeadingZero(num) {
+      return ("0" + num).slice(-2);
+    }
+
+    const day = addLeadingZero(date.getDay());
+    const month = addLeadingZero(date.getMonth() + 1);
+    const year = addLeadingZero(date.getFullYear());
+    const hours = addLeadingZero(date.getHours());
+    const minutes = addLeadingZero(date.getMinutes());
+
+    const dateString = `${day}/${month}/${year} ${hours}:${minutes}`;
+
+    return dateString;
+  }
+
   render() {
-    const { user } = this.props.user.user;
-    return (
-      <ScrollView style={{ flex: 1 }} contentContainerStyle={styles.container}>
-        <View style={styles.group}>
-          <View>
-            <Text style={styles.label}>ID account</Text>
-            <Text style={styles.text}>{user.id}</Text>
+    const user = this.props.user.user;
+
+    if (user.hasOwnProperty("user")) {
+      return (
+        <ScrollView
+          style={{ flex: 1 }}
+          contentContainerStyle={styles.container}
+        >
+          <View style={styles.group}>
+            <View>
+              <Text style={styles.label}>ID account</Text>
+              <Text style={styles.text}>{user.user.id}</Text>
+            </View>
           </View>
-        </View>
-        <View style={styles.group}>
-          <View>
-            <Text style={styles.label}>Numero di telefono</Text>
-            <Text style={styles.text}>{user.phone}</Text>
+          <View style={styles.group}>
+            <View>
+              <Text style={styles.label}>Numero di telefono</Text>
+              <Text style={styles.text}>{user.user.phone}</Text>
+            </View>
+            <View>
+              <TouchableOpacity
+                onPress={() => {
+                  this.props.navigation.navigate("ChangeNumber", {
+                    user: user.user
+                  });
+                }}
+                activeOpacity={0.8}
+                style={styles.changeNumberButton}
+              >
+                <Text style={styles.changeNumberButtonText}>Cambia</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-          <View>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.navigate("ChangeNumber");
-              }}
-              activeOpacity={0.8}
-              style={styles.changeNumberButton}
-            >
-              <Text style={styles.changeNumberButtonText}>Cambia</Text>
-            </TouchableOpacity>
+          <View style={styles.group}>
+            <View>
+              <Text style={styles.label}>Data registrazione</Text>
+              <Text style={styles.text}>
+                {this.parseDate(user.user.created)}
+              </Text>
+            </View>
           </View>
+          {/* <View style={{ marginBottom: 10 }}>
+      <Text style={styles.title}>Dati personali</Text>
+      <Text style={styles.description}>
+        Completa il tuo account con le tue informazioni personali per
+        ricevere offerte e promozioni!
+      </Text>
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Nome</Text>
+      <TextInput value="Riccardo" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Cognome</Text>
+      <TextInput value="Sacco" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Email</Text>
+      <TextInput value="rickybag99@gmail.com" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Sesso</Text>
+      <TextInput value="Maschio" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Data di nascita</Text>
+      <TextInput value="10/03/1999" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Città</Text>
+      <TextInput value="Milano" style={styles.text} />
+    </View>
+    <View style={styles.groupInput}>
+      <Text style={styles.label}>Indirizzo</Text>
+      <TextInput value="Via Gastone Da Foix 2" style={styles.text} />
+    </View>
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>Salva</Text>
+    </TouchableOpacity> */}
+        </ScrollView>
+      );
+    } else {
+      return (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#000" />
         </View>
-        <View style={styles.group}>
-          <View>
-            <Text style={styles.label}>Data registrazione</Text>
-            <Text style={styles.text}>07/05/2019 14:01</Text>
-          </View>
-        </View>
-        {/* <View style={{ marginBottom: 10 }}>
-          <Text style={styles.title}>Dati personali</Text>
-          <Text style={styles.description}>
-            Completa il tuo account con le tue informazioni personali per
-            ricevere offerte e promozioni!
-          </Text>
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Nome</Text>
-          <TextInput value="Riccardo" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Cognome</Text>
-          <TextInput value="Sacco" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Email</Text>
-          <TextInput value="rickybag99@gmail.com" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Sesso</Text>
-          <TextInput value="Maschio" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Data di nascita</Text>
-          <TextInput value="10/03/1999" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Città</Text>
-          <TextInput value="Milano" style={styles.text} />
-        </View>
-        <View style={styles.groupInput}>
-          <Text style={styles.label}>Indirizzo</Text>
-          <TextInput value="Via Gastone Da Foix 2" style={styles.text} />
-        </View>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Salva</Text>
-        </TouchableOpacity> */}
-      </ScrollView>
-    );
+      );
+    }
   }
 }
 
@@ -166,6 +201,11 @@ const styles = StyleSheet.create({
     fontFamily: vars.font.regular,
     fontSize: 18,
     color: "#fff"
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   }
 });
 

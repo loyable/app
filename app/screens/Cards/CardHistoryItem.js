@@ -22,7 +22,7 @@ class CardHistoryItem extends Component {
     }
 
     const day = addLeadingZero(date.getDay());
-    const month = addLeadingZero(date.getMonth());
+    const month = addLeadingZero(date.getMonth() + 1);
     const year = addLeadingZero(date.getFullYear());
     const hours = addLeadingZero(date.getHours());
     const minutes = addLeadingZero(date.getMinutes());
