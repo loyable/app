@@ -30,10 +30,10 @@ class Sidebar extends Component {
         name: "Istruzioni d'uso",
         link: "Instructions"
       },
-      {
-        name: "Contattaci",
-        link: "Contact"
-      },
+      // {
+      //   name: "Contattaci",
+      //   link: "Contact"
+      // },
       {
         name: "Logout",
         link: "Logout"

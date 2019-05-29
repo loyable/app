@@ -41,6 +41,7 @@ class SearchInput extends Component {
           style={styles.input}
           placeholder="Cerca"
           placeholderTextColor={vars.color.searchInputText}
+          autoCorrect={false}
           value={this.props.user.filter}
           onChangeText={text => this.onChangeText(text)}
         />

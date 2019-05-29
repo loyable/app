@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import PropTypes from "prop-types";
 
 import vars from "../../../config/styles";
@@ -38,14 +38,16 @@ class SearchSwitchItem extends Component {
     });
 
     return (
-      <View style={styles.switchContainer}>
-        <Icon
-          name={this.props.icon}
-          solid
-          size={18}
-          style={styles.switchIcon}
-        />
-      </View>
+      <TouchableWithoutFeedback onPress={() => this.props.onPress()}>
+        <View style={styles.switchContainer}>
+          <Icon
+            name={this.props.icon}
+            solid
+            size={18}
+            style={styles.switchIcon}
+          />
+        </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

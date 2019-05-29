@@ -31,11 +31,13 @@ class SearchBar extends Component {
             active={this.props.activeArray[0]}
             icon={iconLeft}
             align="left"
+            onPress={this.props.onPress}
           />
           <SearchSwitchItem
             active={this.props.activeArray[1]}
             icon={iconRight}
             align="right"
+            onPress={this.props.onPress}
           />
         </View>
       </View>

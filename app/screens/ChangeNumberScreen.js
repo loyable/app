@@ -6,7 +6,8 @@ import {
   StyleSheet,
   ScrollView,
   TextInput,
-  Dimensions
+  Dimensions,
+  ActivityIndicator
 } from "react-native";
 
 import vars from "../config/styles";
@@ -25,12 +26,15 @@ class ChangeNumberScreen extends Component {
 
     this.state = {
       newNumber: "",
+      alreadyRegistered: false,
       isCorrect: false,
       verificationNumber: "",
+      verificationError: false,
       isComplete: false,
       step1: false,
       step2: false,
-      step3: false
+      step3: false,
+      isLoading: false
     };
   }
 
@@ -40,25 +44,37 @@ class ChangeNumberScreen extends Component {
 
   //Step 1
   getVerificationCode(phone) {
+    this.setState({ isLoading: true });
+
     fetch(`${settings.url.api}/auth/${phone}`)
       .then(res => res.json())
       .then(data => {
-        if (data.verificationHash) {
-          this.setState({ step1: true });
+        if (data.success) {
+          this.setState({ step1: true, isLoading: false });
+          this.scrollToStep(2);
+          this.verifyInput.focus();
         }
       });
-    this.scrollToStep(2);
   }
 
   //Step 2
   verifyHash(phone) {
+    this.setState({ isLoading: true });
+
     const { verificationNumber } = this.state;
+
     fetch(`${settings.url.api}/auth/${phone}/verify/${verificationNumber}`)
       .then(res => res.json())
       .then(data => {
         if (data.id !== "") {
-          this.setState({ step2: true });
+          this.setState({
+            step2: true,
+            isLoading: false,
+            verificationError: false
+          });
           this.scrollToStep(3);
+        } else {
+          this.setState({ verificationError: true });
         }
       });
   }
@@ -95,6 +111,8 @@ class ChangeNumberScreen extends Component {
 
   //Step 3
   changeNumber(phone) {
+    this.setState({ isLoading: true });
+
     const { newNumber, verificationNumber } = this.state;
 
     fetch(
@@ -104,8 +122,14 @@ class ChangeNumberScreen extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        if (data.id !== "") {
-          this.setState({ step3: true });
+        if (data.hasOwnProperty("error")) {
+          this.setState({ alreadyRegistered: true });
+        } else {
+          this.setState({
+            step3: true,
+            isLoading: false,
+            alreadyRegistered: false
+          });
           Storage.removeItem("userID").then(() => {
             this.props.navigation.navigate("Login");
           });
@@ -118,7 +142,7 @@ class ChangeNumberScreen extends Component {
 
     const styles = StyleSheet.create(this.getStyles());
     return (
-      <View>
+      <View style={{ flex: 1 }}>
         <View style={styles.container}>
           <Text style={styles.title}>Cambia numero</Text>
           <Text style={styles.subtitle}>
@@ -163,15 +187,23 @@ class ChangeNumberScreen extends Component {
           {/* Step 2 */}
           <View style={styles.step}>
             <Text style={styles.stepTitle}>Step 2</Text>
-            <Text style={styles.stepSubtitle}>
-              Inserisci il codice di conferma
-            </Text>
+            {this.state.verificationError ? (
+              <Text style={[styles.stepSubtitle, { color: "red" }]}>
+                Codice errato! Riprova
+              </Text>
+            ) : (
+              <Text style={styles.stepSubtitle}>
+                Inserisci il codice di conferma
+              </Text>
+            )}
             <View style={styles.verifyInputContainer}>
               <TextInput
+                ref={ref => {
+                  this.verifyInput = ref;
+                }}
                 style={styles.verifyInput}
                 keyboardType="phone-pad"
                 maxLength={6}
-                autoFocus={true}
                 onChangeText={verificationNumber =>
                   this.verifyVerificationNumber(verificationNumber)
                 }
@@ -189,9 +221,15 @@ class ChangeNumberScreen extends Component {
           {/* Step 3 */}
           <View style={styles.step}>
             <Text style={styles.stepTitle}>Step 3</Text>
-            <Text style={styles.stepSubtitle}>
-              Inserisci il tuo nuovo numero
-            </Text>
+            {this.state.alreadyRegistered ? (
+              <Text style={[styles.stepSubtitle, { color: "red" }]}>
+                Numero già esistente, riprova!
+              </Text>
+            ) : (
+              <Text style={styles.stepSubtitle}>
+                Inserisci il tuo nuovo numero
+              </Text>
+            )}
             <View style={styles.verifyInputContainer}>
               <PhoneInput
                 ref={ref => {
@@ -216,6 +254,11 @@ class ChangeNumberScreen extends Component {
           N.B. Completando il processo verrai disconnesso dall’account e non
           potrai più accedere utilizzando il vecchio numero!
         </Text>
+        {this.state.isLoading && (
+          <View style={styles.loading}>
+            <ActivityIndicator size="large" color="black" />
+          </View>
+        )}
       </View>
     );
   }
@@ -241,6 +284,7 @@ class ChangeNumberScreen extends Component {
       },
       step: {
         width,
+        height: 200,
         padding: 12,
         justifyContent: "space-between"
       },
@@ -256,7 +300,7 @@ class ChangeNumberScreen extends Component {
       },
       stepInfo: {
         fontFamily: vars.font.bold,
-        fontSize: 15,
+        fontSize: 18,
         color: vars.color.primary,
         marginVertical: 20,
         padding: 12
@@ -297,6 +341,16 @@ class ChangeNumberScreen extends Component {
       },
       verifyInputContainer: {
         alignItems: "center"
+      },
+      loading: {
+        position: "absolute",
+        backgroundColor: "rgba(0,0,0,0.1)",
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: "center",
+        justifyContent: "center"
       }
     };
   }

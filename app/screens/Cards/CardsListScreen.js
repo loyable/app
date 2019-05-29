@@ -111,7 +111,8 @@ class CardsListScreen extends Component {
         contentContainerStyle={user.user.merchants.length === 0 && { flex: 1 }}
         contentOffset={{ x: 0, y: 50 }}
       >
-        <TouchableWithoutFeedback
+        <SearchBar
+          activeArray={activeArray}
           onPress={() => {
             if (this.state.page === "list") {
               this.setState({ page: "grid" });
@@ -119,9 +120,7 @@ class CardsListScreen extends Component {
               this.setState({ page: "list" });
             }
           }}
-        >
-          <SearchBar activeArray={activeArray} />
-        </TouchableWithoutFeedback>
+        />
         {user.user.merchants.length === 0 ? (
           <View style={styles.noCardsContainer}>
             <Text style={styles.noCardsText}>Nessuna tessera</Text>
