@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  Image,
-  ScrollView,
-  SafeAreaView,
   StyleSheet,
   FlatList,
   TouchableWithoutFeedback

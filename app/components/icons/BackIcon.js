@@ -20,7 +20,7 @@ class BackIcon extends Component {
   componentDidMount() {
     Animated.timing(this.state.opacity, {
       toValue: 1,
-      duration: 1000
+      duration: 500
     }).start();
   }
   render() {

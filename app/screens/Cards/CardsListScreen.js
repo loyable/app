@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  Image,
   ScrollView,
   SafeAreaView,
   StyleSheet,
   FlatList,
   ActivityIndicator,
   RefreshControl,
-  AsyncStorage
+  TouchableWithoutFeedback
 } from "react-native";
 
 import { connect } from "react-redux";
@@ -24,9 +23,12 @@ import settings from "../../config/settings";
 
 import Card from "../../components/ui/Card";
 
+import CardGrid from "../../components/ui/Card/CardGridItem";
+
 import SearchBar from "../../components/ui/SearchBar";
 
 import { changeHeaderState } from "../../components/ui/Header";
+
 //map redux state to properties
 const mapStateToProps = state => {
   return {
@@ -56,7 +58,8 @@ class CardsListScreen extends Component {
 
     this.state = {
       isLoading: true,
-      refreshing: false
+      refreshing: false,
+      page: "list"
     };
 
     //Verifica il token utente in AsyncStorage
@@ -80,31 +83,78 @@ class CardsListScreen extends Component {
     });
   };
 
+  isOdd(num) {
+    if (num % 2 !== 0 && num !== 0) return true;
+    else return false;
+  }
+
   getCards(user) {
-    if (user.user.merchants.length === 0) {
-      return (
-        <View style={styles.noCardsContainer}>
-          <Text style={styles.noCardsText}>Nessuna tessera</Text>
-        </View>
-      );
+    let lastItem;
+    if (this.isOdd(user.user.merchants.length))
+      lastItem = user.user.merchants.length - 1;
+
+    let activeArray;
+
+    switch (this.state.page) {
+      case "list":
+        activeArray = [true, false];
+        break;
+      case "grid":
+        activeArray = [false, true];
+        break;
+      default:
+        activeArray = [true, false];
     }
 
     return (
-      <ScrollView contentOffset={{ x: 0, y: 50 }}>
-        <SearchBar
-          page="cards"
-          navigation={this.props.navigation}
-          navigateTo="CardsGrid"
-          activeArray={[true, false]}
-        />
-        <FlatList
-          data={user.user.merchants}
-          keyExtractor={item => item.merchantID}
-          renderItem={({ item }) => (
-            <Card settings={item} navigation={this.props.navigation} />
-          )}
-          onEndReached={() => this.setState({ isLoading: false })}
-        />
+      <ScrollView
+        contentContainerStyle={user.user.merchants.length === 0 && { flex: 1 }}
+        contentOffset={{ x: 0, y: 50 }}
+      >
+        <TouchableWithoutFeedback
+          onPress={() => {
+            if (this.state.page === "list") {
+              this.setState({ page: "grid" });
+            } else {
+              this.setState({ page: "list" });
+            }
+          }}
+        >
+          <SearchBar activeArray={activeArray} />
+        </TouchableWithoutFeedback>
+        {user.user.merchants.length === 0 ? (
+          <View style={styles.noCardsContainer}>
+            <Text style={styles.noCardsText}>Nessuna tessera</Text>
+          </View>
+        ) : this.state.page === "list" ? (
+          //List view
+          <FlatList
+            key={this.state.page}
+            data={user.user.merchants}
+            keyExtractor={item => item.merchantID}
+            renderItem={({ item }) => (
+              <Card settings={item} navigation={this.props.navigation} />
+            )}
+            onEndReached={() => this.setState({ isLoading: false })}
+          />
+        ) : (
+          //Grid view
+          <FlatList
+            key={this.state.page}
+            style={styles.cardsContainer}
+            data={user.user.merchants}
+            keyExtractor={item => item.merchantID}
+            renderItem={({ item, index }) => (
+              <CardGrid
+                settings={item}
+                navigation={this.props.navigation}
+                isLastOddItem={index === lastItem}
+              />
+            )}
+            numColumns={2}
+            onEndReached={() => this.setState({ isLoading: false })}
+          />
+        )}
       </ScrollView>
     );
   }

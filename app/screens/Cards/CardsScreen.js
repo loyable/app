@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-
-import { createSwitchNavigator, createStackNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 
 import CardsListScreen from "./CardsListScreen";
-import CardsGridScreen from "./CardsGridScreen";
 import DetailsScreen from "./DetailsScreen";
 import CardDetailsScreen from "./CardDetailsScreen";
 
-const CardDetailsStack = createStackNavigator(
+export default (CardDetailsStack = createStackNavigator(
   {
     CardsList: {
       screen: CardsListScreen
@@ -23,37 +20,4 @@ const CardDetailsStack = createStackNavigator(
     initialRouteName: "CardsList",
     headerMode: "none"
   }
-);
-
-const CardGridDetailsStack = createStackNavigator(
-  {
-    CardsGrid: {
-      screen: CardsGridScreen
-    },
-    DetailsGrid: {
-      screen: DetailsScreen
-    },
-    CardGridDetails: {
-      screen: CardDetailsScreen
-    }
-  },
-  {
-    initialRouteName: "CardsGrid",
-    headerMode: "none"
-  }
-);
-
-export default createSwitchNavigator(
-  {
-    CardsList: {
-      screen: CardDetailsStack
-    },
-    CardsGrid: {
-      screen: CardGridDetailsStack
-    }
-  },
-  {
-    headerMode: "none",
-    initialRouteName: "CardsList"
-  }
-);
+));

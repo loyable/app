@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { TouchableOpacity, Platform, StyleSheet, Animated } from "react-native";
+import { TouchableOpacity, StyleSheet, Animated } from "react-native";
 
 import PropTypes from "prop-types";
 

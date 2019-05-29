@@ -6,11 +6,8 @@ import SearchSwitchItem from "./SearchSwitchItem";
 
 /*
   PROPS:
-  - page: cards or map
   - shadow: boolean
-  - navigation: the navigation object
   - activeArray: array of 2 boolean values
-  - navigateTo: screen name to navigate to
   - search: if true display search
 */
 
@@ -20,8 +17,8 @@ class SearchBar extends Component {
     search: true
   };
   render() {
-    const iconLeft = this.props.page === "cards" ? "bars" : "map";
-    const iconRight = this.props.page === "cards" ? "table" : "list-ul";
+    const iconLeft = "bars";
+    const iconRight = "table";
 
     const styles = StyleSheet.create(this.getStyles());
 
@@ -34,15 +31,11 @@ class SearchBar extends Component {
             active={this.props.activeArray[0]}
             icon={iconLeft}
             align="left"
-            navigation={this.props.navigation}
-            navigateTo={this.props.navigateTo}
           />
           <SearchSwitchItem
             active={this.props.activeArray[1]}
             icon={iconRight}
             align="right"
-            navigation={this.props.navigation}
-            navigateTo={this.props.navigateTo}
           />
         </View>
       </View>

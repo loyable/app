@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 
 import vars from "../../../config/styles";
@@ -38,18 +38,14 @@ class SearchSwitchItem extends Component {
     });
 
     return (
-      <TouchableOpacity
-        style={styles.switchContainer}
-        activeOpacity={0.8}
-        onPress={() => this.props.navigation.navigate(this.props.navigateTo)}
-      >
+      <View style={styles.switchContainer}>
         <Icon
           name={this.props.icon}
           solid
           size={18}
           style={styles.switchIcon}
         />
-      </TouchableOpacity>
+      </View>
     );
   }
 }

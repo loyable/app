@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, SafeAreaView, View, StyleSheet } from "react-native";
+import { SafeAreaView, View, StyleSheet } from "react-native";
 
 //Import Icons
 import LogoIcon from "../../icons/LogoIcon";

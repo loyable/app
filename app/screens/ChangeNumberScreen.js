@@ -15,7 +15,9 @@ import settings from "../config/settings";
 
 import PhoneInput from "../components/react-native-phone-input";
 
-const { width, height } = Dimensions.get("window");
+const { width } = Dimensions.get("window");
+
+import Storage from "../store/asyncstorage";
 
 class ChangeNumberScreen extends Component {
   constructor(props) {
@@ -104,7 +106,9 @@ class ChangeNumberScreen extends Component {
       .then(data => {
         if (data.id !== "") {
           this.setState({ step3: true });
-          this.scrollToStep(1);
+          Storage.removeItem("userID").then(() => {
+            this.props.navigation.navigate("Login");
+          });
         }
       });
   }
@@ -114,8 +118,8 @@ class ChangeNumberScreen extends Component {
 
     const styles = StyleSheet.create(this.getStyles());
     return (
-      <View style={styles.container}>
-        <View style={{ padding: 12 }}>
+      <View>
+        <View style={styles.container}>
           <Text style={styles.title}>Cambia numero</Text>
           <Text style={styles.subtitle}>
             Per cambiare il numero di telefono associato al tuo account
@@ -126,15 +130,13 @@ class ChangeNumberScreen extends Component {
             login con il nuovo numero.
           </Text>
           <Text style={[styles.subtitle, styles.bold]}>
-            N.B. Se non hai più accesso al tuo attuale numero di telefono
-            contattaci
+            Se non hai più accesso al tuo attuale numero di telefono contattaci
           </Text>
         </View>
         <ScrollView
           ref={ref => {
             this.steps = ref;
           }}
-          style={{ flex: 1 }}
           horizontal={true}
           scrollEnabled={false}
           pagingEnabled={true}
@@ -142,10 +144,13 @@ class ChangeNumberScreen extends Component {
         >
           {/* Step 1 */}
           <View style={styles.step}>
-            <Text style={styles.stepTitle}>Step 1</Text>
-            <Text style={styles.stepSubtitle}>
-              Il tuo attuale numero di telefono
-            </Text>
+            <View>
+              <Text style={styles.stepTitle}>Step 1</Text>
+              <Text style={styles.stepSubtitle}>
+                Il tuo attuale numero di telefono
+              </Text>
+            </View>
+
             <Text style={styles.phone}>{user.phone}</Text>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -205,20 +210,19 @@ class ChangeNumberScreen extends Component {
             >
               <Text style={styles.buttonText}>Termina</Text>
             </TouchableOpacity>
-            <Text style={styles.stepInfo}>
-              N.B. Completando il processo verrai disconnesso dall’account e non
-              potrai più accedere utilizzando il vecchio numero!
-            </Text>
           </View>
         </ScrollView>
+        <Text style={styles.stepInfo}>
+          N.B. Completando il processo verrai disconnesso dall’account e non
+          potrai più accedere utilizzando il vecchio numero!
+        </Text>
       </View>
     );
   }
   getStyles() {
     return {
       container: {
-        flex: 1,
-        justifyContent: "space-around"
+        padding: 12
       },
       bold: {
         fontFamily: vars.font.bold,
@@ -237,7 +241,8 @@ class ChangeNumberScreen extends Component {
       },
       step: {
         width,
-        padding: 12
+        padding: 12,
+        justifyContent: "space-between"
       },
       stepTitle: {
         fontFamily: vars.font.bold,
@@ -253,7 +258,8 @@ class ChangeNumberScreen extends Component {
         fontFamily: vars.font.bold,
         fontSize: 15,
         color: vars.color.primary,
-        marginVertical: 20
+        marginVertical: 20,
+        padding: 12
       },
       phone: {
         fontFamily: vars.font.regular,
@@ -286,11 +292,11 @@ class ChangeNumberScreen extends Component {
         padding: 5,
         color: "#525252",
         textAlign: "center",
-        width: 150
+        width: 150,
+        marginTop: 10
       },
       verifyInputContainer: {
-        alignItems: "center",
-        marginTop: 10
+        alignItems: "center"
       }
     };
   }

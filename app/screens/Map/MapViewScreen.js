@@ -156,8 +156,7 @@ class MapViewScreen extends Component {
   }
 
   render() {
-    const { userFiltered } = this.props.user;
-    user = userFiltered;
+    const { user } = this.props.user;
 
     let merchants = [],
       merchantsMarkers = [];
