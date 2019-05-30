@@ -110,6 +110,12 @@ class CardsListScreen extends Component {
       <ScrollView
         contentContainerStyle={user.user.merchants.length === 0 && { flex: 1 }}
         contentOffset={{ x: 0, y: 50 }}
+        refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this.onRefresh}
+          />
+        }
       >
         <SearchBar
           activeArray={activeArray}
@@ -172,15 +178,7 @@ class CardsListScreen extends Component {
 
     return (
       <SafeAreaView style={styles.cardViewContainer}>
-        <ScrollView
-          refreshControl={
-            <RefreshControl
-              refreshing={this.state.refreshing}
-              onRefresh={this.onRefresh}
-            />
-          }
-          contentContainerStyle={styles.container}
-        >
+        <ScrollView contentContainerStyle={styles.container}>
           {user.hasOwnProperty("user") ? (
             this.getCards(userFiltered)
           ) : (

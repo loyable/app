@@ -76,7 +76,8 @@ class Header extends Component {
           height: this.state.showBottomShadow ? 3 : 0
         },
         shadowOpacity: this.state.showBottomShadow ? 0.1 : 0,
-        shadowRadius: this.state.showBottomShadow ? 2 : 0
+        shadowRadius: this.state.showBottomShadow ? 2 : 0,
+        elevation: this.state.showBottomShadow ? 1 : 0
       },
       headerContainer: {
         backgroundColor: "#fff"
