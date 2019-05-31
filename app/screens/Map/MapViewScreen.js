@@ -47,8 +47,8 @@ const mapDispatchToProps = dispatch => {
     SET_MAP_LOCATION: region => {
       dispatch(SET_MAP_LOCATION(region));
     },
-    REQUEST_MERCHANTS: callback => {
-      dispatch(REQUEST_MERCHANTS(callback));
+    REQUEST_MERCHANTS: (userID, callback) => {
+      dispatch(REQUEST_MERCHANTS(userID, callback));
     },
     LOAD_MERCHANTS: merchants => {
       dispatch(LOAD_MERCHANTS(merchants));
@@ -122,7 +122,7 @@ class MapViewScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.REQUEST_MERCHANTS();
+    this.props.REQUEST_MERCHANTS(this.props.user.userID);
 
     this.props.navigation.addListener("didFocus", () => {
       //Metodo che cambia l'Header

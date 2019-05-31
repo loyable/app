@@ -1,5 +1,5 @@
 const initialState = {
-  userID: "",
+  userID: {},
   user: {},
   filter: "",
   userFiltered: {}

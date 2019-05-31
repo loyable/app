@@ -50,11 +50,13 @@ class LoginScreen extends Component {
       //Phone number
       number: "",
       isCorrect: false,
+      error: false,
       //Verification number
       verificationNumber: "",
       isComplete: false,
       verificationError: false,
-      isLoading: false
+      isLoading: false,
+      expired: false
     };
 
     //verifica se l'utente è loggato
@@ -89,9 +91,15 @@ class LoginScreen extends Component {
         .then(res => res.json())
         .then(data => {
           if (data.success === true) {
-            this.setState({ isLoading: false });
+            this.setState({ isLoading: false, error: false });
             this.scrollToStep(2);
             this.verifyInput.focus();
+          } else if (data.expired === false) {
+            this.setState({ isLoading: false, error: false });
+            this.scrollToStep(2);
+            this.verifyInput.focus();
+          } else {
+            this.setState({ error: true });
           }
         });
     }
@@ -122,17 +130,22 @@ class LoginScreen extends Component {
       .then(res => res.json())
       .then(data => {
         if (data.id !== "") {
-          Storage.setItem("userID", data.id)
+          Storage.setItem("userID", data)
             .then(() => {
-              this.props.SET_USER_ID(data.id);
+              this.props.SET_USER_ID(data);
               this.props.navigation.navigate("CardsList");
             })
             .catch(err => console.log(err));
-        } else {
+        } else if (data.id === "") {
           // Set error message & clear input
           this.setState({ verificationError: true, isLoading: false });
           this.verifyInput.clear();
           this.verifyInput.focus();
+        } else if (data.expired) {
+          // Back to phone input
+          this.setState({ isLoading: false });
+          this.verifyInput.clear();
+          this.scrollToStep(1);
         }
       });
   }

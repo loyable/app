@@ -49,9 +49,17 @@ export const WATCH_USER = (id, callback) => {
 };
 
 //Fetch user from API
-export const REQUEST_USER = (id, callback) => {
+export const REQUEST_USER = (userID, callback) => {
   return function(dispatch) {
-    fetch(`${settings.url.api}/users/${id}`)
+    const { id, token } = userID;
+
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`
+    });
+
+    fetch(`${settings.url.api}/users/${id}`, {
+      headers
+    })
       .then(response => response.json())
       .then(user => {
         dispatch(LOAD_USER(user));

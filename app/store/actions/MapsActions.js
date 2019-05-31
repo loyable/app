@@ -22,9 +22,16 @@ export const SET_MAP_LOCATION = position => {
   };
 };
 
-export const REQUEST_MERCHANTS = callback => {
+export const REQUEST_MERCHANTS = (userID, callback) => {
   return function(dispatch) {
-    fetch(`${settings.url.api}/merchants`)
+    const { id, token } = userID;
+
+    const headers = new Headers({
+      Authorization: `Bearer ${token}`
+    });
+    fetch(`${settings.url.api}/${id}/merchants`, {
+      headers
+    })
       .then(response => response.json())
       .then(merchants => {
         dispatch(LOAD_MERCHANTS(merchants));

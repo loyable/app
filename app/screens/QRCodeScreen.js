@@ -16,12 +16,12 @@ const mapStateToProps = state => {
 
 class QRCodeScreen extends Component {
   render() {
-    const { userID } = this.props.user;
+    const { id } = this.props.user.userID;
     return (
       <SafeAreaView style={styles.container}>
         <Text style={styles.title}>Mostra il codice QR</Text>
         <View style={styles.qrcode}>
-          <QRCode value={userID} size={250} bgColor="black" fgColor="white" />
+          <QRCode value={id} size={250} bgColor="black" fgColor="white" />
         </View>
       </SafeAreaView>
     );

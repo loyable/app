@@ -53,6 +53,12 @@ class ChangeNumberScreen extends Component {
           this.setState({ step1: true, isLoading: false });
           this.scrollToStep(2);
           this.verifyInput.focus();
+        } else if (data.expired === false) {
+          this.setState({ step1: true, isLoading: false });
+          this.scrollToStep(2);
+          this.verifyInput.focus();
+        } else {
+          this.setState({ step1: false, isLoading: false });
         }
       });
   }
@@ -122,9 +128,7 @@ class ChangeNumberScreen extends Component {
     )
       .then(res => res.json())
       .then(data => {
-        if (data.hasOwnProperty("error")) {
-          this.setState({ alreadyRegistered: true });
-        } else {
+        if (data.success) {
           this.setState({
             step3: true,
             isLoading: false,
@@ -133,6 +137,18 @@ class ChangeNumberScreen extends Component {
           Storage.removeItem("userID").then(() => {
             this.props.navigation.navigate("Login");
           });
+        } else if (data.success === false) {
+          this.setState({ alreadyRegistered: true });
+        } else if (data.expired) {
+          this.setState({
+            step1: false,
+            step2: false,
+            step3: false,
+            isLoading: false
+          });
+          this.scrollToStep(1);
+        } else {
+          this.setState({ error: true });
         }
       });
   }
