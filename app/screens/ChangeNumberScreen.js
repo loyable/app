@@ -118,7 +118,7 @@ class ChangeNumberScreen extends Component {
     fetch(
       `${
         settings.url.api
-      }/auth/${phone}/change/${verificationNumber}/new/${newNumber}`
+      }/auth/${phone}/change/${verificationNumber}/${newNumber}`
     )
       .then(res => res.json())
       .then(data => {

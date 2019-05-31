@@ -51,7 +51,7 @@ export const WATCH_USER = (id, callback) => {
 //Fetch user from API
 export const REQUEST_USER = (id, callback) => {
   return function(dispatch) {
-    fetch(`${settings.url.api}/user/${id}`)
+    fetch(`${settings.url.api}/users/${id}`)
       .then(response => response.json())
       .then(user => {
         dispatch(LOAD_USER(user));
@@ -68,7 +68,7 @@ export const REQUEST_USER = (id, callback) => {
 //Fetch card from API
 export const REQUEST_CARD = (id, callback) => {
   return function(dispatch) {
-    fetch(`${settings.url.api}/card/${id}`)
+    fetch(`${settings.url.api}/cards/${id}`)
       .then(response => response.json())
       .then(card => {
         if (callback) callback();
