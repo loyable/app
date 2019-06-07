@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Text, View, ScrollView, StyleSheet, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  ScrollView,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  Linking
+} from "react-native";
 
 import MapView from "react-native-maps";
 
@@ -10,6 +18,8 @@ import Card from "../../components/ui/Card";
 import Marker from "../../components/ui/Map/Marker";
 
 import { changeHeaderState } from "../../components/ui/Header";
+
+import SVG from "react-native-remote-svg";
 
 //global vars
 import vars from "../../config/styles";
@@ -93,6 +103,54 @@ class DetailsScreen extends Component {
               {merchant.merchant.address.value}
             </Text>
           </View>
+          {merchant.merchant.hasOwnProperty("details") && (
+            <View style={styles.merchantDetailsContainer}>
+              {merchant.merchant.details.hasOwnProperty("phone") && (
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  style={styles.merchantDetails}
+                  onPress={() =>
+                    Linking.openURL(`tel:${merchant.merchant.details.phone}`)
+                  }
+                >
+                  <SVG source={require("../../assets/icons/chiama.svg")} />
+                  <Text style={styles.merchantDetailsText}>Chiama</Text>
+                </TouchableOpacity>
+              )}
+              {(merchant.merchant.details.hasOwnProperty("phone") ||
+                merchant.merchant.details.hasOwnProperty("website")) && (
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  style={styles.merchantDetails}
+                  onPress={() =>
+                    openMap({
+                      latitude:
+                        merchant.merchant.address.location.coordinates[0],
+                      longitude:
+                        merchant.merchant.address.location.coordinates[1],
+                      query: merchant.merchant.address.value,
+                      zoom: 10
+                    })
+                  }
+                >
+                  <SVG source={require("../../assets/icons/indicazioni.svg")} />
+                  <Text style={styles.merchantDetailsText}>Indicazioni</Text>
+                </TouchableOpacity>
+              )}
+              {merchant.merchant.details.hasOwnProperty("website") && (
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  style={styles.merchantDetails}
+                  onPress={() =>
+                    Linking.openURL(merchant.merchant.details.website)
+                  }
+                >
+                  <SVG source={require("../../assets/icons/sitoweb.svg")} />
+                  <Text style={styles.merchantDetailsText}>Sito Web</Text>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
           <MapView
             ref={map => (this.map = map)}
             initialRegion={{
@@ -126,6 +184,7 @@ class DetailsScreen extends Component {
               <Marker logo={merchant.merchant.logo} size={50} />
             </MapView.Marker>
           </MapView>
+
           <View style={styles.cardDetailsContainer}>
             <Text style={styles.cardAnalyticsTitle}>Dati storici</Text>
             <View style={styles.cardAnalyticsContainer}>
@@ -244,6 +303,20 @@ const styles = StyleSheet.create({
   noHistoryText: {
     fontFamily: vars.font.regular,
     fontSize: 16
+  },
+  merchantDetailsContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginBottom: 12
+  },
+  merchantDetails: {
+    alignItems: "center"
+  },
+  merchantDetailsText: {
+    fontFamily: vars.font.bold,
+    fontSize: 16,
+    color: "#007AFF"
   }
 });
 

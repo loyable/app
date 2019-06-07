@@ -27,10 +27,20 @@ class Storage {
     }
   };
 
-  static verifyHash = async (key, hash) => {
+  static updateItem = async (key, payload) => {
     try {
       const result = await Storage.getItem(key);
-      return hash === md5(result);
+      if (result) {
+        if (result.hash === md5(payload.user.toString())) {
+          return payload;
+        } else {
+          const userUpdated = await AsyncStorage.setItem(
+            key,
+            JSON.stringify(payload)
+          );
+          return userUpdated;
+        }
+      }
     } catch (error) {
       console.log(error);
     }

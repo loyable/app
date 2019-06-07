@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="46.365" height="46.365" viewBox="0 0 46.365 46.365">
+  <g id="Chiama" transform="translate(-30 -494)">
+    <path id="phone-solid" d="M19.968.986,15.757.014a.978.978,0,0,0-1.113.563L12.7,5.112a.969.969,0,0,0,.279,1.134l2.454,2.008a15.006,15.006,0,0,1-7.175,7.175L6.25,12.975A.971.971,0,0,0,5.116,12.7L.581,14.639a.983.983,0,0,0-.567,1.118l.972,4.211a.971.971,0,0,0,.947.753A18.786,18.786,0,0,0,20.721,1.933.971.971,0,0,0,19.968.986Z" transform="translate(63.721 506.779) rotate(90)" fill="#007aff"/>
+    <g id="Ellipse_19" data-name="Ellipse 19" transform="translate(30 494)" fill="none" stroke="#007aff" stroke-width="2">
+      <circle cx="23.182" cy="23.182" r="23.182" stroke="none"/>
+      <circle cx="23.182" cy="23.182" r="22.182" fill="none"/>
+    </g>
+  </g>
+</svg>

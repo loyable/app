@@ -2,6 +2,8 @@ import { store } from "../../store";
 
 import settings from "../../config/settings";
 
+import Storage from "../asyncstorage";
+
 import io from "socket.io-client";
 
 //Filter merchants
@@ -37,13 +39,12 @@ export const SET_FILTER = text => {
 };
 
 //Watch user changes from API
-export const WATCH_USER = (id, callback) => {
+export const WATCH_USER = (userID, callback) => {
   return function(dispatch) {
-    const socket = io(`${settings.url.watch}`, { query: `id=${id}` });
+    const socket = io(`${settings.url.watch}`, { query: `id=${userID.id}` });
 
     socket.on("change", () => {
-      console.log("change");
-      dispatch(REQUEST_USER(id, callback));
+      dispatch(REQUEST_USER(userID, callback));
     });
   };
 };
@@ -63,6 +64,7 @@ export const REQUEST_USER = (userID, callback) => {
       .then(response => response.json())
       .then(user => {
         dispatch(LOAD_USER(user));
+        Storage.updateItem("user", user);
         if (callback) callback();
       })
       .catch(err => {

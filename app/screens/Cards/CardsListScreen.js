@@ -67,7 +67,7 @@ class CardsListScreen extends Component {
       if (userID) {
         this.props.SET_USER_ID(userID, data => {
           this.props.REQUEST_USER(data, () => {
-            this.props.WATCH_USER(data.id);
+            this.props.WATCH_USER(data);
           });
         });
       } else {

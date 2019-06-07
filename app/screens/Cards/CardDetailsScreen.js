@@ -39,7 +39,9 @@ class CardDetailsScreen extends Component {
         </View>
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
-            <Text style={styles.title}>{card.header.text1.value}</Text>
+            {card.settings.hasOwnProperty("name") && (
+              <Text style={styles.title}>{card.settings.name}</Text>
+            )}
             <View style={styles.cardAnalyticsContainer}>
               <View style={styles.cardAnalyticsItem}>
                 <CardCircle
