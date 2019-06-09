@@ -17,6 +17,8 @@ import { connect } from "react-redux";
 
 import QRCode from "react-native-qrcode";
 
+import Utils from "../config/utils";
+
 //SVG Library
 import SVG from "react-native-remote-svg";
 
@@ -62,8 +64,10 @@ class QRCodeScreen extends Component {
   render() {
     const { id } = this.props.user.userID;
     const { user } = this.props.user;
-    let referralCode;
-    if (user.hasOwnProperty("user")) {
+    let referralCode = "";
+
+    //Access user.user.details.referral.code
+    if (Utils.getNestedObject(user, ["user", "details", "referral", "code"])) {
       referralCode = user.user.details.referral.code;
     }
 
@@ -73,26 +77,30 @@ class QRCodeScreen extends Component {
         <View style={styles.qrcode}>
           <QRCode value={id} size={250} bgColor="black" fgColor="white" />
         </View>
-        <View style={styles.referralContainer}>
-          <View style={styles.referralTitleContainer}>
-            <Text style={styles.referralTitle}>Il tuo codice invito</Text>
-            <TouchableOpacity onPress={() => this.openModal()}>
-              <SVG
-                source={require("../assets/icons/question-circle-regular.svg")}
-              />
+        {referralCode !== "" && (
+          <View style={styles.referralContainer}>
+            <View style={styles.referralTitleContainer}>
+              <Text style={styles.referralTitle}>Il tuo codice invito</Text>
+              <TouchableOpacity onPress={() => this.openModal()}>
+                <SVG
+                  source={require("../assets/icons/question-circle-regular.svg")}
+                />
+              </TouchableOpacity>
+            </View>
+            <Text style={styles.referralCode}>{referralCode}</Text>
+            <TouchableOpacity
+              onPress={() => this.share(referralCode)}
+              activeOpacity={0.8}
+            >
+              <View style={styles.referralButton}>
+                <Text style={styles.referralButtonText}>Condividi</Text>
+                <SVG
+                  source={require("../assets/icons/share-square-solid.svg")}
+                />
+              </View>
             </TouchableOpacity>
           </View>
-          <Text style={styles.referralCode}>{referralCode}</Text>
-          <TouchableOpacity
-            onPress={() => this.share(referralCode)}
-            activeOpacity={0.8}
-          >
-            <View style={styles.referralButton}>
-              <Text style={styles.referralButtonText}>Condividi</Text>
-              <SVG source={require("../assets/icons/share-square-solid.svg")} />
-            </View>
-          </TouchableOpacity>
-        </View>
+        )}
         <TouchableWithoutFeedback
           onPress={() => {
             this.closeModal();

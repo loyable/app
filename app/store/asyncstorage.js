@@ -26,25 +26,6 @@ class Storage {
       console.log(error);
     }
   };
-
-  static updateItem = async (key, payload) => {
-    try {
-      const result = await Storage.getItem(key);
-      if (result) {
-        if (result.hash === md5(payload.user.toString())) {
-          return payload;
-        } else {
-          const userUpdated = await AsyncStorage.setItem(
-            key,
-            JSON.stringify(payload)
-          );
-          return userUpdated;
-        }
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 }
 
 export default Storage;

@@ -29,10 +29,10 @@ export const REQUEST_MERCHANTS = (userID, callback) => {
     const headers = new Headers({
       Authorization: `Bearer ${token}`
     });
-    fetch(`${settings.url.api}/${id}/merchants`, {
+    fetch(`${settings.url.api}/users/${id}/merchants`, {
       headers
     })
-      .then(response => response.json())
+      .then(res => res.json())
       .then(merchants => {
         dispatch(LOAD_MERCHANTS(merchants));
         if (callback) callback();

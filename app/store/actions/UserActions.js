@@ -4,6 +4,8 @@ import settings from "../../config/settings";
 
 import Storage from "../asyncstorage";
 
+import md5 from "md5";
+
 import io from "socket.io-client";
 
 //Filter merchants
@@ -54,35 +56,76 @@ export const REQUEST_USER = (userID, callback) => {
   return function(dispatch) {
     const { id, token } = userID;
 
+    const state = store.getState(),
+      userState = state.user.user;
+
     const headers = new Headers({
       Authorization: `Bearer ${token}`
     });
 
-    fetch(`${settings.url.api}/users/${id}`, {
-      headers
-    })
-      .then(response => response.json())
-      .then(user => {
-        dispatch(LOAD_USER(user));
-        Storage.updateItem("user", user);
-        if (callback) callback();
-      })
-      .catch(err => {
-        setTimeout(() => {
-          dispatch(REQUEST_USER(id));
-        }, 2000);
-      });
+    //Fetch user from Storage
+    Storage.getItem("user").then(userStorage => {
+      if (userStorage) {
+        if (JSON.stringify(userStorage) !== JSON.stringify(userState)) {
+          dispatch(LOAD_USER(userStorage));
+        }
+        fetch(`${settings.url.api}/users/${id}`, {
+          headers
+        })
+          .then(res => res.json())
+          .then(user => {
+            if (user.hasOwnProperty("user")) {
+              Storage.setItem("user", user).then(() => {
+                dispatch(LOAD_USER(user));
+                if (callback) callback();
+              });
+            }
+          })
+          .catch(() => {
+            setTimeout(() => dispatch(REQUEST_USER(userID)), 2000);
+          });
+      } else {
+        fetch(`${settings.url.api}/users/${id}`, {
+          headers
+        })
+          .then(res => res.json())
+          .then(user => {
+            if (user.hasOwnProperty("user")) {
+              Storage.setItem("user", user).then(() => {
+                dispatch(LOAD_USER(user));
+                if (callback) callback();
+              });
+            }
+          })
+          .catch(() => {
+            setTimeout(() => dispatch(REQUEST_USER(userID)), 2000);
+          });
+      }
+    });
   };
 };
 
-//Fetch card from API
-export const REQUEST_CARD = (id, callback) => {
+//Patch device info to API
+export const SET_DEVICE = (userID, device, callback) => {
+  const { id, token } = userID;
+
+  const headers = new Headers({
+    Authorization: `Bearer ${token}`,
+    Accept: "application/json",
+    "Content-Type": "application/json"
+  });
+
   return function(dispatch) {
-    fetch(`${settings.url.api}/cards/${id}`)
-      .then(response => response.json())
-      .then(card => {
-        if (callback) callback();
-        return card;
+    fetch(`${settings.url.api}/users/${id}/device`, {
+      method: "PATCH",
+      headers,
+      body: JSON.stringify(device)
+    })
+      .then(res => res.json())
+      .then(user => {
+        if (user.hasOwnProperty("user")) {
+          if (callback) callback();
+        }
       });
   };
 };
