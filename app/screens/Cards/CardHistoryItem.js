@@ -3,6 +3,8 @@ import { Text, View, StyleSheet } from "react-native";
 
 import vars from "../../config/styles";
 
+import Utils from "../../config/utils";
+
 import CardCircle from "./CardCircle";
 
 /*
@@ -14,24 +16,6 @@ import CardCircle from "./CardCircle";
 */
 
 class CardHistoryItem extends Component {
-  parseDate(time) {
-    const date = new Date(time);
-
-    function addLeadingZero(num) {
-      return ("0" + num).slice(-2);
-    }
-
-    const day = addLeadingZero(date.getDay());
-    const month = addLeadingZero(date.getMonth() + 1);
-    const year = addLeadingZero(date.getFullYear());
-    const hours = addLeadingZero(date.getHours());
-    const minutes = addLeadingZero(date.getMinutes());
-
-    const dateString = `${day}/${month}/${year} ${hours}:${minutes}`;
-
-    return dateString;
-  }
-
   render() {
     const { value, time, type } = this.props.history;
     let color, backgroundColor, text;
@@ -45,19 +29,22 @@ class CardHistoryItem extends Component {
       case "added":
         color = "#fff";
         backgroundColor = "#F00";
-        text = "Tessera associata";
+        text = "Tessera abbinata";
         break;
       case "add":
         (color = "#fff"), (backgroundColor = "#72E81F");
-        if (value !== "+1") {
-          text = "Bollini aggiunti";
-        } else {
-          text = "Bollino aggiunto";
+        switch (value) {
+          case "+1":
+            text = "Bollino aggiunto";
+            break;
+          default:
+            text = "Bollini aggiunti";
+            break;
         }
         break;
     }
 
-    const dateString = this.parseDate(time);
+    const dateString = Utils.parseDate(time);
 
     return (
       <View style={styles.cardHistoryItem}>

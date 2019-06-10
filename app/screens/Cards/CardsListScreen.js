@@ -19,8 +19,6 @@ import { SET_USER_ID, REQUEST_USER, WATCH_USER } from "../../store/actions";
 
 import vars from "../../config/styles";
 
-import settings from "../../config/settings";
-
 import Card from "../../components/ui/Card";
 
 import CardGrid from "../../components/ui/Card/CardGridItem";

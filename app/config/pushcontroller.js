@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PushNotification from "react-native-push-notification";
 
+import { AppState } from "react-native";
+
 import { connect } from "react-redux";
 
 import { SET_DEVICE } from "../store/actions";
@@ -22,21 +24,32 @@ const mapDispatchToProps = dispatch => {
 };
 class PushController extends Component {
   componentDidMount() {
-    const { userID } = this.props.user;
-
-    PushNotification.configure({
-      onRegister: device => {
-        this.props.SET_DEVICE(userID, device, () => {
-          console.log("Device:", device);
-        });
-      },
-      onNotification: notification => {
-        console.log("Notification:", notification);
-      }
-    });
+    AppState.addEventListener("change", this.handleAppStateChange);
   }
 
+  componentWillUnmount() {
+    AppState.removeEventListener("change", this.handleAppStateChange);
+  }
+
+  handleAppStateChange = appState => {
+    if (appState === "active") {
+      PushNotification.cancelAllLocalNotifications();
+    }
+  };
+
   render() {
+    const { userID } = this.props.user;
+
+    if (userID.hasOwnProperty("id")) {
+      PushNotification.configure({
+        onRegister: device => {
+          this.props.SET_DEVICE(userID, device);
+        },
+        onNotification: notification => {
+          console.log("Notification:", notification);
+        }
+      });
+    }
     return null;
   }
 }

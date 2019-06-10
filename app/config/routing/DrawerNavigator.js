@@ -1,6 +1,4 @@
-import React, { Component } from "react";
-
-import { createDrawerNavigator, DrawerItems } from "react-navigation";
+import { createDrawerNavigator } from "react-navigation";
 
 import StackNavigator from "./StackNavigator";
 

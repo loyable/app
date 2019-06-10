@@ -14,9 +14,6 @@ import ContactScreen from "../../screens/ContactScreen";
 
 import Header from "../../components/ui/Header";
 
-//Global Vars
-import vars from "../styles";
-
 export default createStackNavigator(
   {
     AppTab: {
@@ -79,7 +76,7 @@ export default createStackNavigator(
     },
     Instructions: {
       screen: InstructionsScreen,
-      navigationOptions: ({ navigation }) => {
+      navigationOptions: () => {
         return {
           header: null
         };

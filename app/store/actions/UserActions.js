@@ -8,6 +8,8 @@ import md5 from "md5";
 
 import io from "socket.io-client";
 
+import axios from "axios";
+
 //Filter merchants
 export const FILTER_MERCHANTS = filter => {
   return {
@@ -32,11 +34,27 @@ export const SET_USER_ID = userID => {
   };
 };
 
-//Persist to state user data
+//Set cards filter
 export const SET_FILTER = text => {
   return {
     type: "SET_FILTER",
     payload: text
+  };
+};
+
+//Persist to state user data
+export const SET_ACTIVE_MERCHANT = merchant => {
+  return {
+    type: "SET_ACTIVE_MERCHANT",
+    payload: merchant
+  };
+};
+
+//Persist to state user data
+export const SET_ACTIVE_CARD = card => {
+  return {
+    type: "SET_ACTIVE_CARD",
+    payload: card
   };
 };
 
@@ -109,23 +127,20 @@ export const REQUEST_USER = (userID, callback) => {
 export const SET_DEVICE = (userID, device, callback) => {
   const { id, token } = userID;
 
-  const headers = new Headers({
-    Authorization: `Bearer ${token}`,
-    Accept: "application/json",
-    "Content-Type": "application/json"
-  });
-
   return function(dispatch) {
-    fetch(`${settings.url.api}/users/${id}/device`, {
-      method: "PATCH",
-      headers,
-      body: JSON.stringify(device)
-    })
-      .then(res => res.json())
-      .then(user => {
-        if (user.hasOwnProperty("user")) {
-          if (callback) callback();
-        }
-      });
+    fetch(
+      `${settings.url.api}/users/${id}/device`,
+      {
+        os: device.os,
+        token: device.token
+      },
+      {
+        headers: { Authorization: "Bearer " + token }
+      }
+    ).then(res => {
+      if (res.data.hasOwnProperty("id")) {
+        if (callback) callback();
+      }
+    });
   };
 };

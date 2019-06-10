@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 
-import { TouchableOpacity, Platform, StyleSheet } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 
 import PropTypes from "prop-types";
-
-import vars from "../../config/styles";
 
 //SVG Library
 import SVG from "react-native-remote-svg";

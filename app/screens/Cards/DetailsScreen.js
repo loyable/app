@@ -9,6 +9,8 @@ import {
   Linking
 } from "react-native";
 
+import { connect } from "react-redux";
+
 import MapView from "react-native-maps";
 
 import openMap from "react-native-open-maps";
@@ -26,6 +28,22 @@ import vars from "../../config/styles";
 
 import CardAnalyticsItem from "./CardAnalyticsItem";
 import CardHistoryItem from "./CardHistoryItem";
+
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_ACTIVE_MERCHANT: merchant => {
+      dispatch(SET_ACTIVE_MERCHANT(merchant));
+    }
+  };
+};
 
 class DetailsScreen extends Component {
   getAnalytics(merchant) {
@@ -62,7 +80,7 @@ class DetailsScreen extends Component {
 
   render() {
     //Ricevo l'oggetto merchantObject
-    const merchantObject = this.props.navigation.getParam("merchant");
+    const merchantObject = this.props.user.activeMerchant;
 
     //Inizializzo la variabile merchant
     let merchant = merchantObject;
@@ -320,4 +338,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default DetailsScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DetailsScreen);

@@ -11,6 +11,10 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 
+import { connect } from "react-redux";
+
+import { SET_ACTIVE_CARD } from "../../../store/actions";
+
 import vars from "../../../config/styles";
 
 import Box from "./Box";
@@ -23,6 +27,23 @@ const SCREEN_WIDTH = Dimensions.get("window").width;
   - showInfo: boolean (not showing title and address) for details screens
   - multiple: boolean to adjust margins
 */
+
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_ACTIVE_CARD: (card, callback) => {
+      dispatch(SET_ACTIVE_CARD(card));
+      if (callback) callback();
+    }
+  };
+};
 
 class CardItem extends Component {
   static defaultProps = {
@@ -95,9 +116,9 @@ class CardItem extends Component {
         <TouchableWithoutFeedback
           onPress={() => {
             if (this.props.navigateTo !== "none") {
-              this.props.navigation.navigate(this.props.navigateTo, {
-                item
-              });
+              this.props.SET_ACTIVE_CARD(item, () =>
+                this.props.navigation.navigate(this.props.navigateTo)
+              );
             }
           }}
         >
@@ -136,9 +157,9 @@ class CardItem extends Component {
         <TouchableWithoutFeedback
           onPress={() => {
             if (this.props.navigateTo !== "none") {
-              this.props.navigation.navigate(this.props.navigateTo, {
-                item
-              });
+              this.props.SET_ACTIVE_CARD(item, () =>
+                this.props.navigation.navigate(this.props.navigateTo)
+              );
             }
           }}
         >
@@ -355,4 +376,7 @@ class CardItem extends Component {
   }
 }
 
-export default CardItem;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardItem);

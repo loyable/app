@@ -41,14 +41,15 @@ class HamburgerIcon extends Component {
   }
 }
 
-HamburgerIcon.propTypes = {
-  navigation: PropTypes.object.isRequired
-};
-
 const styles = StyleSheet.create({
   icon: {
     width: 30,
     height: 25
   }
 });
+
+HamburgerIcon.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
+
 export default HamburgerIcon;

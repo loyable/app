@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Text, ScrollView, View, StyleSheet, FlatList } from "react-native";
 
+import { connect } from "react-redux";
+
 import CardItem from "../../components/ui/Card/CardItem";
 
 //global vars
@@ -10,6 +12,20 @@ import CardHistoryItem from "./CardHistoryItem";
 import CardCircle from "./CardCircle";
 
 import { changeHeaderState } from "../../components/ui/Header";
+import { makeEmptyAggregatedTestResult } from "@jest/test-result";
+
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {};
+};
+
 class CardDetailsScreen extends Component {
   componentDidMount() {
     this.props.navigation.addListener("didFocus", () => {
@@ -21,7 +37,7 @@ class CardDetailsScreen extends Component {
     });
   }
   render() {
-    const item = this.props.navigation.getParam("item");
+    const item = this.props.user.activeCard;
 
     const card = item.card;
 
@@ -57,7 +73,7 @@ class CardDetailsScreen extends Component {
                 <CardCircle
                   number={remaining}
                   color="#fff"
-                  backgroundColor="#C812FF"
+                  backgroundColor="#FF0D05"
                 />
                 <Text style={styles.cardAnalyticsItemText}>
                   {remaining !== 1 ? "mancanti" : "mancante"}
@@ -121,7 +137,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    fontFamily: vars.font.bold,
+    fontFamily: vars.font.regular,
     color: vars.color.title
   },
   description: {
@@ -190,4 +206,7 @@ const styles = StyleSheet.create({
     textAlign: "right"
   }
 });
-export default CardDetailsScreen;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardDetailsScreen);

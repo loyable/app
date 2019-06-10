@@ -7,6 +7,10 @@ import {
   TouchableWithoutFeedback
 } from "react-native";
 
+import { connect } from "react-redux";
+
+import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
+
 import vars from "../../../config/styles";
 
 import SVG from "react-native-remote-svg";
@@ -18,6 +22,23 @@ import CardItem from "./CardItem";
   - settings: object
   - showInfo: boolean (not showing title and address) for details screens
 */
+
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_ACTIVE_MERCHANT: (merchant, callback) => {
+      dispatch(SET_ACTIVE_MERCHANT(merchant));
+      if (callback) callback();
+    }
+  };
+};
 
 class Card extends Component {
   static defaultProps = {
@@ -75,9 +96,9 @@ class Card extends Component {
           <TouchableWithoutFeedback
             onPress={() => {
               if (this.props.navigateTo !== "none") {
-                this.props.navigation.navigate("Details", {
-                  merchant
-                });
+                this.props.SET_ACTIVE_MERCHANT(merchant, () =>
+                  this.props.navigation.navigate("Details")
+                );
               }
             }}
           >
@@ -187,4 +208,7 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Card);

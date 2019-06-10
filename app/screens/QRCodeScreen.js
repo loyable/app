@@ -44,7 +44,7 @@ class QRCodeScreen extends Component {
   share(referralCode) {
     Share.share({
       title: "Loyable",
-      message: `Codice invito Loyable: ${referralCode}. Guadagna un bollino omaggio al primo acquisto!`
+      message: `Scarica Loyable! L'app che digitalizza le tessere fedeltà a bollini! Guadagna un bollino gratis inserendo dopo la registrazione il codice: ${referralCode} nella sezione "Il mio account"!`
     });
   }
   openModal() {

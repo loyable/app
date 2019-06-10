@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { TouchableOpacity, StyleSheet } from "react-native";
 
 import PropTypes from "prop-types";
 
@@ -26,14 +26,15 @@ class QRCodeIcon extends Component {
   }
 }
 
-QRCodeIcon.propTypes = {
-  navigation: PropTypes.object.isRequired
-};
-
 const styles = StyleSheet.create({
   icon: {
     width: 32,
     height: 32
   }
 });
+
+QRCodeIcon.propTypes = {
+  navigation: PropTypes.object.isRequired
+};
+
 export default QRCodeIcon;
