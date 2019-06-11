@@ -51,8 +51,7 @@ const UserReducer = (state = initialState, action) => {
         userFiltered
       };
     case "LOAD_USER":
-      let activeMerchant = {},
-        activeCard = {};
+      let activeMerchant, activeCard;
       if (state.activeMerchant.hasOwnProperty("merchantID")) {
         const activeMerchantArray = action.payload.user.merchants.filter(
           merchant => {
@@ -60,7 +59,9 @@ const UserReducer = (state = initialState, action) => {
               return true;
           }
         );
-        activeMerchant = activeMerchantArray[0];
+        if (activeMerchantArray[0]) {
+          activeMerchant = activeMerchantArray[0];
+        }
       }
 
       if (state.activeCard.hasOwnProperty("id")) {
@@ -70,14 +71,16 @@ const UserReducer = (state = initialState, action) => {
           });
           return activeMerchantArray[0];
         });
-        activeCard = activeCardArray[0];
+        if (activeCardArray[0]) {
+          activeCard = activeCardArray[0];
+        }
       }
       return {
         ...state,
         user: action.payload,
         userFiltered: action.payload,
-        activeMerchant,
-        activeCard
+        activeMerchant: activeMerchant ? activeMerchant : state.activeMerchant,
+        activeCard: activeCard ? activeCard : state.activeCard
       };
     case "SET_ACTIVE_MERCHANT":
       return { ...state, activeMerchant: action.payload };

@@ -38,11 +38,7 @@ const mapStateToProps = state => {
 
 //map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
-  return {
-    SET_ACTIVE_MERCHANT: merchant => {
-      dispatch(SET_ACTIVE_MERCHANT(merchant));
-    }
-  };
+  return {};
 };
 
 class DetailsScreen extends Component {

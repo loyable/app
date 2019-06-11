@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
+
+import { connect } from "react-redux";
+
+import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
 
 import vars from "../../../config/styles";
+
+import Utils from "../../../config/utils";
 
 import { Callout } from "react-native-maps";
 
@@ -18,6 +24,23 @@ import { Callout } from "react-native-maps";
   - distance
 */
 
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_ACTIVE_MERCHANT: (merchant, callback) => {
+      dispatch(SET_ACTIVE_MERCHANT(merchant));
+      if (callback) callback();
+    }
+  };
+};
+
 class Tooltip extends Component {
   render() {
     const styles = StyleSheet.create(this.getStyles());
@@ -29,17 +52,18 @@ class Tooltip extends Component {
         <Callout
           tooltip={true}
           onPress={() =>
-            this.props.navigation.navigate("DetailsMapView", {
-              merchant,
-              navigateTo: "CardMapViewDetails"
-            })
+            this.props.SET_ACTIVE_MERCHANT(merchant, () =>
+              this.props.navigation.navigate("DetailsMapView", {
+                navigateTo: "CardMapViewDetails"
+              })
+            )
           }
         >
           <View style={styles.container}>
             <View>
               <Text style={styles.title}>{merchant.merchant.name}</Text>
               <Text style={styles.description}>
-                {merchant.merchant.description}
+                {Utils.truncateString(merchant.merchant.description, 200)}
               </Text>
             </View>
             <View style={styles.footer}>
@@ -53,16 +77,19 @@ class Tooltip extends Component {
         <Callout
           tooltip={true}
           onPress={() =>
-            this.props.navigation.navigate("DetailsMapView", {
-              merchant,
-              navigateTo: "CardMapViewDetails"
-            })
+            this.props.SET_ACTIVE_MERCHANT(merchant, () =>
+              this.props.navigation.navigate("DetailsMapView", {
+                navigateTo: "CardMapViewDetails"
+              })
+            )
           }
         >
           <View style={styles.container}>
             <View>
               <Text style={styles.title}>{merchant.name}</Text>
-              <Text style={styles.description}>{merchant.description}</Text>
+              <Text style={styles.description}>
+                {Utils.truncateString(merchant.description, 200)}
+              </Text>
             </View>
             <View style={styles.footer}>
               <Text style={styles.distance}>{distance}</Text>
@@ -113,4 +140,7 @@ class Tooltip extends Component {
   }
 }
 
-export default Tooltip;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Tooltip);

@@ -75,6 +75,7 @@ class Card extends Component {
               settings={item}
               navigation={this.props.navigation}
               multiple={multiple}
+              navigateTo={this.props.navigateTo}
             />
           );
         }}

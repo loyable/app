@@ -311,7 +311,7 @@ const styles = StyleSheet.create({
     backgroundColor: vars.color.primary,
     borderRadius: 8,
     alignItems: "center",
-    marginVertical: 10
+    marginTop: 10
   },
   buttonText: {
     fontFamily: vars.font.regular,

@@ -15,10 +15,13 @@ import {
   SET_USER_LOCATION,
   SET_MAP_LOCATION,
   REQUEST_MERCHANTS,
-  LOAD_MERCHANTS
+  LOAD_MERCHANTS,
+  SET_ACTIVE_MERCHANT
 } from "../../store/actions";
 
 import vars from "../../config/styles";
+
+import Utils from "../../config/utils";
 
 import MapView from "react-native-maps";
 
@@ -52,6 +55,10 @@ const mapDispatchToProps = dispatch => {
     },
     LOAD_MERCHANTS: merchants => {
       dispatch(LOAD_MERCHANTS(merchants));
+    },
+    SET_ACTIVE_MERCHANT: (merchant, callback) => {
+      dispatch(SET_ACTIVE_MERCHANT(merchant));
+      if (callback) callback();
     }
   };
 };
@@ -71,29 +78,6 @@ class MapViewScreen extends Component {
     this.state = {
       selectedMarkerIndex: undefined
     };
-  }
-
-  static distanceBetweenTwoCoords(lat1, lon1, lat2, lon2) {
-    if (lat2 !== 0 && lon2 !== 0) {
-      var radlat1 = (Math.PI * lat1) / 180;
-      var radlat2 = (Math.PI * lat2) / 180;
-      var radlon1 = (Math.PI * lon1) / 180;
-      var radlon2 = (Math.PI * lon2) / 180;
-      var theta = lon1 - lon2;
-      var radtheta = (Math.PI * theta) / 180;
-      var dist =
-        Math.sin(radlat1) * Math.sin(radlat2) +
-        Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      dist = Math.acos(dist);
-      dist = (dist * 180) / Math.PI;
-      dist = dist * 60 * 1.1515;
-      dist = dist * 1.609344;
-      dist = Math.round(dist * 10) / 10;
-      dist = dist.toString().replace(".", ",");
-      return `${dist} km`;
-    } else {
-      return;
-    }
   }
 
   getInitialMapState() {
@@ -120,6 +104,22 @@ class MapViewScreen extends Component {
       this.map.animateToRegion(location, 1000);
     }
   }
+
+  // onRegionChangeComplete(region) {
+  //   const { latitude, longitude, latitudeDelta, longitudeDelta } = region;
+
+  //   const box = [
+  //     [latitude - latitudeDelta, longitude - longitudeDelta],
+  //     [latitude + latitudeDelta, longitude + longitudeDelta]
+  //   ];
+
+  //   const body = {
+  //     box,
+  //     zoom: Math.round(Math.log(360 / longitudeDelta) / Math.LN2)
+  //   };
+
+  //   console.log(JSON.stringify(body));
+  // }
 
   componentDidMount() {
     this.props.REQUEST_MERCHANTS(this.props.user.userID);
@@ -184,16 +184,6 @@ class MapViewScreen extends Component {
     return (
       <SafeAreaView style={styles.pageContainer}>
         <View style={styles.mapContainer}>
-          {/* <View style={styles.searchContainer}>
-            <SearchBar
-              page="map"
-              shadow={true}
-              navigation={this.props.navigation}
-              navigateTo="MapList"
-              activeArray={[true, false]}
-              search={false}
-            />
-          </View> */}
           <View style={styles.locationContainer}>
             <TouchableOpacity
               activeOpacity={0.8}
@@ -212,6 +202,9 @@ class MapViewScreen extends Component {
               userLocationAnnotationTitle=""
               showsCompass={false}
               showsMyLocationButton={false}
+              // onRegionChangeComplete={region =>
+              //   this.onRegionChangeComplete(region)
+              // }
             >
               {merchants.map((merchant, index) => {
                 if (merchant.hasOwnProperty("merchant")) {
@@ -230,7 +223,7 @@ class MapViewScreen extends Component {
                       <Tooltip
                         merchant={merchant}
                         navigation={this.props.navigation}
-                        distance={MapViewScreen.distanceBetweenTwoCoords(
+                        distance={Utils.distanceBetweenTwoCoords(
                           merchant.merchant.address.location.coordinates[0],
                           merchant.merchant.address.location.coordinates[1],
                           this.props.maps.userLocation.latitude,
@@ -252,7 +245,7 @@ class MapViewScreen extends Component {
                       <Tooltip
                         merchant={merchant}
                         navigation={this.props.navigation}
-                        distance={MapViewScreen.distanceBetweenTwoCoords(
+                        distance={Utils.distanceBetweenTwoCoords(
                           merchant.address.location.coordinates[0],
                           merchant.address.location.coordinates[1],
                           this.props.maps.userLocation.latitude,
@@ -290,13 +283,6 @@ const styles = StyleSheet.create({
     top: 12,
     right: 12,
     zIndex: 1
-  },
-  searchContainer: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    zIndex: 1,
-    width: SCREEN_WIDTH
   },
   loadingContainer: {
     flex: 1,

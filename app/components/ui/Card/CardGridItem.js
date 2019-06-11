@@ -8,6 +8,27 @@ import {
 
 import vars from "../../../config/styles";
 
+import { connect } from "react-redux";
+
+import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
+
+//map redux state to properties
+const mapStateToProps = state => {
+  return {
+    ...state
+  };
+};
+
+//map redux dispatch function to properties
+const mapDispatchToProps = dispatch => {
+  return {
+    SET_ACTIVE_MERCHANT: (merchant, callback) => {
+      dispatch(SET_ACTIVE_MERCHANT(merchant));
+      if (callback) callback();
+    }
+  };
+};
+
 class CardGridItem extends Component {
   static defaultProps = {
     navigateTo: "Details"
@@ -58,12 +79,13 @@ class CardGridItem extends Component {
 
     return (
       <TouchableWithoutFeedback
-        onPress={() =>
-          this.props.navigation.navigate(this.props.navigateTo, {
-            merchant,
-            navigateTo: "CardGridDetails"
-          })
-        }
+        onPress={() => {
+          this.props.SET_ACTIVE_MERCHANT(merchant, () => {
+            this.props.navigation.navigate(this.props.navigateTo, {
+              navigateTo: "CardDetails"
+            });
+          });
+        }}
       >
         <View style={styles.container}>
           <Image
@@ -78,4 +100,7 @@ class CardGridItem extends Component {
   }
 }
 
-export default CardGridItem;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardGridItem);

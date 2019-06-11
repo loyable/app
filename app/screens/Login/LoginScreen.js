@@ -133,7 +133,7 @@ class LoginScreen extends Component {
           Storage.setItem("userID", data)
             .then(() => {
               this.props.SET_USER_ID(data);
-              this.props.navigation.navigate("CardsList");
+              this.props.navigation.navigate("Instructions");
             })
             .catch(err => console.log(err));
         } else if (data.id === "") {
