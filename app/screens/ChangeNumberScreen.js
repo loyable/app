@@ -14,7 +14,7 @@ import vars from "../config/styles";
 
 import settings from "../config/settings";
 
-import PhoneInput from "../components/react-native-phone-input";
+import PhoneInput from "../components/ui/PhoneInput";
 
 const { width } = Dimensions.get("window");
 
@@ -122,9 +122,7 @@ class ChangeNumberScreen extends Component {
     const { newNumber, verificationNumber } = this.state;
 
     fetch(
-      `${
-        settings.url.api
-      }/auth/${phone}/change/${verificationNumber}/${newNumber}`
+      `${settings.url.api}/auth/${phone}/change/${verificationNumber}/${newNumber}`
     )
       .then(res => res.json())
       .then(data => {

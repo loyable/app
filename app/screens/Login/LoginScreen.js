@@ -20,7 +20,7 @@ import vars from "../../config/styles";
 
 import settings from "../../config/settings";
 
-import PhoneInput from "../../components/react-native-phone-input";
+import PhoneInput from "../../components/ui/PhoneInput";
 
 import Storage from "../../store/asyncstorage";
 

@@ -42,6 +42,17 @@ class CardHistoryItem extends Component {
             break;
         }
         break;
+      case "remove":
+        (color = "#fff"), (backgroundColor = "#F00");
+        switch (value) {
+          case "-1":
+            text = "Bollino rimosso";
+            break;
+          default:
+            text = "Bollini rimossi";
+            break;
+        }
+        break;
     }
 
     const dateString = Utils.parseDate(time);

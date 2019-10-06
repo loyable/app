@@ -7,6 +7,15 @@ import PropTypes from "prop-types";
 import Icon from "react-native-vector-icons/FontAwesome5";
 
 class TabIcon extends Component {
+  static defaultProps = {
+    color: "#000"
+  }
+
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    color: PropTypes.string
+  };
+
   render() {
     return (
       <Icon
@@ -18,13 +27,5 @@ class TabIcon extends Component {
     );
   }
 }
-TabIcon.defaultProps = {
-  color: "#000"
-};
-
-TabIcon.propTypes = {
-  name: PropTypes.string.isRequired,
-  color: PropTypes.string
-};
 
 export default TabIcon;
