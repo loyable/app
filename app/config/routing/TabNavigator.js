@@ -8,8 +8,8 @@ import { createBottomTabNavigator } from "react-navigation";
 import CardsScreen from "../../screens/Cards/CardsScreen";
 import MapScreen from "../../screens/Map/MapScreen";
 
-//Tab Icons
-import TabIcon from "../../components/icons/TabIcon";
+//Icons
+import Icon from "../../components/icons/Icon";
 
 //Global Vars
 import vars from "../styles";
@@ -21,7 +21,7 @@ export default createBottomTabNavigator(
       navigationOptions: {
         tabBarLabel: "Carte",
         tabBarIcon: ({ tintColor }) => (
-          <TabIcon name="credit-card" color={tintColor} />
+          <Icon name="credit-card" color={tintColor} />
         )
       }
     },
@@ -29,7 +29,7 @@ export default createBottomTabNavigator(
       screen: MapScreen,
       navigationOptions: {
         tabBarLabel: "Mappa",
-        tabBarIcon: ({ tintColor }) => <TabIcon name="map" color={tintColor} />
+        tabBarIcon: ({ tintColor }) => <Icon name="map" color={tintColor} />
       }
     }
   },

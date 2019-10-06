@@ -2,38 +2,51 @@ import React, { Component } from "react";
 import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import PropTypes from "prop-types";
 
-import vars from "../../../config/styles";
-
-import Icon from "react-native-vector-icons/FontAwesome5";
+//Icon object
+import Icon from "../../icons/Icon";
 
 /*
   PROPS:
   - active: true or false,
-  - icon: name of the icon
-  - align: left or right
+  - icon: name of the icon (required)
+  - align: "left" or "right"
+  - onPress: function onPress (required)
 */
 
 class SearchSwitchItem extends Component {
+  static propTypes = {
+    active: PropTypes.bool,
+    icon: PropTypes.string.isRequired,
+    align: PropTypes.string,
+    onPress: PropTypes.func.isRequired
+  };
+  static defaultProps = {
+    active: false,
+    align: "left"
+  };
+
   render() {
+    const { active, align, icon } = this.props;
+
+    const color = {
+      switchActiveBackground: "#0070f5",
+      switchActiveIcon: "#fff",
+      switchInactiveBackground: "#fff",
+      switchInactiveIcon: "#9a9a9a"
+    };
     const styles = StyleSheet.create({
       switchContainer: {
         backgroundColor:
-          this.props.active === true
-            ? vars.color.switchActiveBackground
-            : vars.color.switchInactiveBackground,
+          active === true
+            ? color.switchActiveBackground
+            : color.switchInactiveBackground,
         justifyContent: "center",
         alignItems: "center",
         padding: 8,
-        borderTopLeftRadius: this.props.align === "left" ? 5 : 0,
-        borderBottomLeftRadius: this.props.align === "left" ? 5 : 0,
-        borderTopRightRadius: this.props.align === "right" ? 5 : 0,
-        borderBottomRightRadius: this.props.align === "right" ? 5 : 0
-      },
-      switchIcon: {
-        color:
-          this.props.active === true
-            ? vars.color.switchActiveIcon
-            : vars.color.switchInactiveIcon
+        borderTopLeftRadius: align === "left" ? 5 : 0,
+        borderBottomLeftRadius: align === "left" ? 5 : 0,
+        borderTopRightRadius: align === "right" ? 5 : 0,
+        borderBottomRightRadius: align === "right" ? 5 : 0
       }
     });
 
@@ -41,21 +54,19 @@ class SearchSwitchItem extends Component {
       <TouchableWithoutFeedback onPress={() => this.props.onPress()}>
         <View style={styles.switchContainer}>
           <Icon
-            name={this.props.icon}
+            name={icon}
             solid
             size={18}
-            style={styles.switchIcon}
+            color={
+              active === true
+                ? color.switchActiveIcon
+                : color.switchInactiveIcon
+            }
           />
         </View>
       </TouchableWithoutFeedback>
     );
   }
 }
-
-SearchSwitchItem.propTypes = {
-  active: PropTypes.bool,
-  icon: PropTypes.string.isRequired,
-  align: PropTypes.string
-};
 
 export default SearchSwitchItem;

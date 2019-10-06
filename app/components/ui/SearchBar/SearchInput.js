@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { View, TextInput, StyleSheet } from "react-native";
-
 import { connect } from "react-redux";
 
+//Redux actions
 import { SET_FILTER, FILTER_MERCHANTS } from "../../../store/actions";
 
-import Icon from "react-native-vector-icons/FontAwesome5";
+//Icon object
+import Icon from "../../icons/Icon";
 
+//Global variables
 import vars from "../../../config/styles";
 
 const mapStateToProps = state => {
@@ -34,15 +36,17 @@ class SearchInput extends Component {
   }
 
   render() {
+    const { user } = this.props;
+
     return (
       <View style={styles.inputContainer}>
-        <Icon name="search" size={18} style={styles.icon} />
+        <Icon name="search" size={18} color="#7b7b7b" style={{ padding: 8 }} />
         <TextInput
           style={styles.input}
           placeholder="Cerca"
-          placeholderTextColor={vars.color.searchInputText}
+          placeholderTextColor="#7b7b7b"
           autoCorrect={false}
-          value={this.props.user.filter}
+          value={user.filter}
           onChangeText={text => this.onChangeText(text)}
         />
       </View>
@@ -54,7 +58,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     flex: 1,
     height: 36,
-    backgroundColor: vars.color.searchInputBackground,
+    backgroundColor: "#fff",
     borderRadius: 5,
     flexDirection: "row",
     alignItems: "center"
@@ -62,11 +66,10 @@ const styles = StyleSheet.create({
   input: {
     paddingVertical: 7,
     flex: 1,
-    fontSize: vars.fontSize.searchInput,
+    fontSize: 18,
     fontFamily: vars.font.regular,
-    color: vars.color.searchInputText
-  },
-  icon: { color: vars.color.searchInputText, padding: 8 }
+    color: "#7b7b7b"
+  }
 });
 
 export default connect(

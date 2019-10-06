@@ -1,53 +1,59 @@
 import React, { Component } from "react";
 import { View, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
 
 import SearchInput from "./SearchInput";
 import SearchSwitchItem from "./SearchSwitchItem";
 
 /*
   PROPS:
-  - shadow: boolean
-  - activeArray: array of 2 boolean values
-  - search: if true display search
+  - shadow: boolean (default: false)
+  - activeArray: array of 2 boolean values (default: [true, false])
+  - onPress: function onPress (required)
 */
 
 class SearchBar extends Component {
+  static propTypes = {
+    activeArray: PropTypes.array,
+    shadow: PropTypes.bool,
+    onPress: PropTypes.func.isRequired
+  };
+
   static defaultProps = {
     activeArray: [true, false],
-    search: true
+    shadow: false
   };
   render() {
-    const iconLeft = "bars";
-    const iconRight = "table";
+    const { onPress, activeArray } = this.props;
 
     const styles = StyleSheet.create(this.getStyles());
 
     return (
       <View style={styles.searchBarContainer}>
-        {this.props.search && <SearchInput />}
-
+        <SearchInput />
         <View style={styles.switchContainer}>
           <SearchSwitchItem
-            active={this.props.activeArray[0]}
-            icon={iconLeft}
+            active={activeArray[0]}
+            icon="bars"
             align="left"
-            onPress={this.props.onPress}
+            onPress={onPress}
           />
           <SearchSwitchItem
-            active={this.props.activeArray[1]}
-            icon={iconRight}
+            active={activeArray[1]}
+            icon="table"
             align="right"
-            onPress={this.props.onPress}
+            onPress={onPress}
           />
         </View>
       </View>
     );
   }
   getStyles() {
+    const { shadow } = this.props;
     return {
       searchBarContainer: {
         height: 60,
-        shadowColor: this.props.shadow ? "#333" : "transparent",
+        shadowColor: shadow ? "#333" : "transparent",
         shadowOffset: {
           width: 0,
           height: 3
@@ -57,7 +63,7 @@ class SearchBar extends Component {
         elevation: 1,
         backgroundColor: "transparent",
         zIndex: 1,
-        justifyContent: this.props.search ? "center" : "flex-end",
+        justifyContent: "center",
         flexDirection: "row",
         padding: 12
       },

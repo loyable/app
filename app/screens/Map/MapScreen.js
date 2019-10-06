@@ -1,8 +1,5 @@
-import React, { Component } from "react";
-
 import { createSwitchNavigator, createStackNavigator } from "react-navigation";
 
-import MapListScreen from "./MapListScreen";
 import MapViewScreen from "./MapViewScreen";
 
 import DetailsScreen from "../Cards/DetailsScreen";
@@ -26,32 +23,11 @@ const MapViewDetailsStack = createStackNavigator(
   }
 );
 
-// const MapListDetailsStack = createStackNavigator(
-//   {
-//     MapList: {
-//       screen: MapListScreen
-//     },
-//     DetailsMapList: {
-//       screen: DetailsScreen
-//     },
-//     CardMapListDetails: {
-//       screen: CardDetailsScreen
-//     }
-//   },
-//   {
-//     initialRouteName: "MapList",
-//     headerMode: "none"
-//   }
-// );
-
 export default createSwitchNavigator(
   {
     MapView: {
       screen: MapViewDetailsStack
     }
-    // MapList: {
-    //   screen: MapListDetailsStack
-    // }
   },
   {
     headerMode: "none",

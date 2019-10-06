@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { AppRegistry, AppState, Alert, Linking, Platform } from "react-native";
+import { AppRegistry, Alert, Linking, Platform } from "react-native";
 
 import App from "./App";
 
@@ -9,8 +9,6 @@ import { name } from "./app.json";
 import { store } from "./app/store";
 
 import { Provider } from "react-redux";
-
-import PushController from "./app/config/pushcontroller";
 
 import settings from "./app/config/settings";
 
@@ -49,7 +47,6 @@ class Root extends Component {
     return (
       <Provider store={store}>
         <App />
-        <PushController />
       </Provider>
     );
   }

@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-
 import { StyleSheet, View, Text } from "react-native";
-
 import { connect } from "react-redux";
 
-import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
-
+//Global variables
 import vars from "../../../config/styles";
 
+//Global functions
 import Utils from "../../../config/utils";
 
+//Redux action
+import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
+
+//React native maps Callout (Tooltip)
 import { Callout } from "react-native-maps";
 
 /*

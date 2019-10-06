@@ -13,14 +13,7 @@ export default {
     inputBorder: "#E5E5E5",
     activeTab: "#0070F5",
     inactiveTab: "#8E8E93",
-    sidebarItem: "#696969",
-    sidebarContainer: "#fff",
-    searchInputText: "#7b7b7b",
-    searchInputBackground: "#fff",
-    switchInactiveBackground: "#fff",
-    switchInactiveIcon: "#9a9a9a",
-    switchActiveBackground: "#0070f5",
-    switchActiveIcon: "#fff",
+    sidebarItem: "#696969", //Sidebar/SidebarItem.js
     noCardsText: "#696969",
     cardBackground: "#000",
     cardTitle: "#000",
@@ -35,8 +28,7 @@ export default {
     subtitle: 22,
     description: 18,
     button: 24,
-    sidebarItem: 20,
-    searchInput: 18,
+    sidebarItem: 20, //Sidebar/SidebarItem.js
     noCardsText: 24,
     cardTitle: 22,
     cardAddress: 16,
@@ -44,15 +36,10 @@ export default {
     cardText1: 20,
     cardText2: 16
   },
-  headerStyle: {
-    height: 60,
-    backgroundColor: "#fff",
-    borderBottomWidth: 0,
-    elevation: 0
-  },
   header: {
     paddingHorizontal: 20,
-    paddingLeftBackArrow: 20
+    height: 60,
+    backgroundColor: "#fff"
   },
   card: {
     logo: {

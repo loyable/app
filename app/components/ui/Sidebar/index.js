@@ -1,25 +1,25 @@
 import React, { Component } from "react";
-
 import { FlatList } from "react-native";
+import { View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import PropTypes from "prop-types";
 
-import { DrawerItems } from "react-navigation";
-
-import {
-  Text,
-  View,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
-
+//Global variables
 import vars from "../../../config/styles";
 
+//Logo icon
 import LogoIcon from "../../icons/LogoIcon";
 
+//Sidebar Item object
 import SidebarItem from "./SidebarItem";
 
+/*
+  PROPS:
+  - navigation: navigation object (required)
+*/
 class Sidebar extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  };
   render() {
     const sidebarItems = [
       {
@@ -76,16 +76,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     paddingVertical: 20
-  },
-  sidebarContainer: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "center",
-    backgroundColor: "#fff"
-  },
-  sidebarItem: {
-    fontFamily: vars.font.regular,
-    fontSize: vars.fontSize.sidebarItem
   }
 });
 

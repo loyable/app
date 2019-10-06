@@ -4,11 +4,7 @@ import settings from "../../config/settings";
 
 import Storage from "../asyncstorage";
 
-import md5 from "md5";
-
 import io from "socket.io-client";
-
-import axios from "axios";
 
 //Filter merchants
 export const FILTER_MERCHANTS = filter => {
@@ -118,28 +114,6 @@ export const REQUEST_USER = (userID, callback) => {
           .catch(() => {
             setTimeout(() => dispatch(REQUEST_USER(userID)), 2000);
           });
-      }
-    });
-  };
-};
-
-//Patch device info to API
-export const SET_DEVICE = (userID, device, callback) => {
-  const { id, token } = userID;
-
-  return function(dispatch) {
-    fetch(
-      `${settings.url.api}/users/${id}/device`,
-      {
-        os: device.os,
-        token: device.token
-      },
-      {
-        headers: { Authorization: "Bearer " + token }
-      }
-    ).then(res => {
-      if (res.data.hasOwnProperty("id")) {
-        if (callback) callback();
       }
     });
   };

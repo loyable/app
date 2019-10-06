@@ -1,27 +1,35 @@
 import React, { Component } from "react";
-
 import { Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
-
 import PropTypes from "prop-types";
 
+//Global variables
 import vars from "../../../config/styles";
 
+//Import AsyncStorage
 import Storage from "../../../store/asyncstorage";
 
 /* 
   PROPS:
-  - name: Name of the list item
-  - navigation: The navigation object
-  - link: The name of the screen to navigate
+  - name: Name of the list item (required)
+  - navigation: The navigation object (required)
+  - link: The name of the screen to navigate (required)
 */
 
 class SidebarItem extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    navigation: PropTypes.object.isRequired,
+    link: PropTypes.string.isRequired
+  };
+
   render() {
+    const { name, navigation, link } = this.props;
+
     return (
       <TouchableOpacity
         style={styles.sidebarContainer}
         onPress={() => {
-          switch (this.props.link) {
+          switch (link) {
             case "Logout":
               Alert.alert(
                 "Sei sicuro di voler fare il logout?",
@@ -35,7 +43,7 @@ class SidebarItem extends Component {
                     text: "Logout",
                     onPress: () => {
                       Storage.removeItem("userID").then(() => {
-                        this.props.navigation.navigate("Login");
+                        navigation.navigate("Login");
                       });
                     }
                   }
@@ -44,12 +52,12 @@ class SidebarItem extends Component {
               );
               break;
             default:
-              this.props.navigation.navigate(this.props.link);
+              navigation.navigate(link);
               break;
           }
         }}
       >
-        <Text style={styles.sidebarItem}>{this.props.name}</Text>
+        <Text style={styles.sidebarItem}>{name}</Text>
       </TouchableOpacity>
     );
   }
@@ -60,8 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "row",
     justifyContent: "center",
-    backgroundColor: "#fff",
-    margin: 15
+    padding: 15
   },
   sidebarItem: {
     fontFamily: vars.font.regular,
@@ -69,11 +76,5 @@ const styles = StyleSheet.create({
     color: vars.color.sidebarItem
   }
 });
-
-SidebarItem.propTypes = {
-  name: PropTypes.string.isRequired,
-  navigation: PropTypes.object.isRequired,
-  link: PropTypes.string.isRequired
-};
 
 export default SidebarItem;

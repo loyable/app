@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet } from "react-native";
 
-import Icon from "react-native-vector-icons/FontAwesome5";
+//Icon object
+import Icon from "../../icons/Icon";
 
 class LocationArrow extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon style={styles.arrow} name="location-arrow" solid />
+        <Icon color="#007aff" name="location-arrow" size={20} />
       </View>
     );
   }
@@ -28,10 +29,6 @@ const styles = StyleSheet.create({
     },
     shadowRadius: 6,
     shadowOpacity: 0.1
-  },
-  arrow: {
-    fontSize: 20,
-    color: "#007aff"
   }
 });
 

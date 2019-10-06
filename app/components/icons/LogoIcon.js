@@ -1,13 +1,22 @@
 import React, { Component } from "react";
-
-import { TouchableOpacity, StyleSheet } from "react-native";
-
+import { TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
 //SVG Library
 import SVG from "react-native-remote-svg";
 
+/*
+  PROPS:
+  - link: screen name as string (to navigate if clicked)
+  - navigation: navigation object
+*/
+
 class LogoIcon extends Component {
+  static propTypes = {
+    link: PropTypes.string.isRequired,
+    navigation: PropTypes.object.isRequired
+  };
+
   render() {
     return (
       <TouchableOpacity
@@ -15,7 +24,7 @@ class LogoIcon extends Component {
         activeOpacity={0.8}
       >
         <SVG
-          style={styles.icon}
+          style={{ width: 110, height: 50 }}
           source={require("../../assets/icons/logo.svg")}
         />
       </TouchableOpacity>
@@ -23,15 +32,4 @@ class LogoIcon extends Component {
   }
 }
 
-LogoIcon.propTypes = {
-  link: PropTypes.string.isRequired,
-  navigation: PropTypes.object.isRequired
-};
-
-const styles = StyleSheet.create({
-  icon: {
-    width: 110,
-    height: 50
-  }
-});
 export default LogoIcon;

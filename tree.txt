@@ -1,61 +1,46 @@
 ├── assets
-│   ├── fonts
-│   ├── icons
+│   ├── fonts                   //font in formato .otf
+│   ├── icons                   //icone in formato .svg
 │   └── img
-│       ├── instructions
-│       └── logo.png
+│       └── instructions        //immagini background istruzioni (.jpg)
 ├── components
-│   ├── icons
-│   │   ├── BackIcon.js
-│   │   ├── HamburgerIcon.js
-│   │   ├── LogoIcon.js
-│   │   ├── QRCodeIcon.js
-│   │   └── TabIcon.js
-│   ├── react-native-phone-input
-│   │   ├── lib
-│   │   │   ├── country.js
-│   │   │   ├── countryPicker.js
-│   │   │   ├── index.js
-│   │   │   ├── phoneNumber.js
-│   │   │   ├── resources
-│   │   │   │   ├── countries.json
-│   │   │   │   ├── flags
-│   │   │   │   │   ├── images
-│   │   │   │   │   └── index.js
-│   │   │   │   └── numberType.json
-│   │   │   └── styles.js
+│   ├── icons                   //componenti icone SVG
+│   │   ├── BackIcon.js             - Icona "Indietro"
+│   │   ├── HamburgerIcon.js        - Icona "Menu"
+│   │   ├── LogoIcon.js             - Logo
+│   │   ├── QRCodeIcon.js           - Icona "QR Code"
+│   │   └── Icon.js                 - Componente icona FontAwesome 
 │   └── ui
 │       ├── Card
 │       │   ├── Box.js
 │       │   ├── CardGridItem.js
 │       │   ├── CardItem.js
 │       │   └── index.js
-│       ├── Header
-│       │   └── index.js
+│       ├── Header                  
+│       │   └── index.js            - Componente Header
 │       ├── Instructions
-│       │   └── Dot.js
-│       ├── Map
-│       │   ├── LocationArrow.js
-│       │   ├── MapListItem.js
-│       │   ├── Marker.js
-│       │   └── Tooltip.js
-│       ├── SearchBar
-│       │   ├── SearchInput.js
-│       │   ├── SearchSwitchItem.js
-│       │   └── index.js
-│       └── Sidebar
-│           ├── SidebarItem.js
-│           └── index.js
+│       │   └── Dot.js              - Componente Pallino Step Istruzioni
+│       ├── Map                   //componenti Mappa
+│       │   ├── LocationArrow.js    - Freccia posizione attuale
+│       │   ├── Marker.js           - Marker mappa
+│       │   └── Tooltip.js          - Tooltip popup marker
+│       ├── PhoneInput            //react-native-phone-input
+│       ├── SearchBar             //barra di ricerca tessere
+│       │   ├── SearchInput.js      - Input
+│       │   ├── SearchSwitchItem.js - Switch Disposizione Griglia / Lista
+│       │   └── index.js            - Input + Switch
+│       └── Sidebar               //componenti sidebar
+│           ├── SidebarItem.js      - Elemento sidebar
+│           └── index.js            - Logo + Elementi sidebar
 ├── config
-│   ├── pushcontroller.js
-│   ├── routing
-│   │   ├── DrawerNavigator.js
-│   │   ├── StackNavigator.js
+│   ├── routing                   //Config routing
+│   │   ├── DrawerNavigator.js     
+│   │   ├── StackNavigator.js    
 │   │   └── TabNavigator.js
-│   ├── settings.js
-│   ├── styles.js
-│   └── utils.js
-├── screens
+│   ├── settings.js               //Impostazioni versione app & url API
+│   ├── styles.js                 //Variabili globali stile
+│   └── utils.js                  //Funzioni globali
+├── screens                       //Schermate applicazione
 │   ├── AccountScreen.js
 │   ├── Cards
 │   │   ├── CardAnalyticsItem.js
@@ -76,14 +61,14 @@
 │   │   └── MapViewScreen.js
 │   ├── QRCodeScreen.js
 │   └── SettingsScreen.js
-└── store
-    ├── actions
-    │   ├── MapsActions.js
+└── store                          //Redux Store
+    ├── actions                       - Azioni
+    │   ├── MapsActions.js         
     │   ├── UserActions.js
     │   └── index.js
-    ├── asyncstorage.js
+    ├── asyncstorage.js            //Classe Storage per interfaccia AsyncStorage
     ├── index.js
-    └── reducers
+    └── reducers                   //Reducers
         ├── AuthReducer.js
         ├── CardsReducer.js
         ├── MapsReducer.js

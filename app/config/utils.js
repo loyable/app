@@ -1,5 +1,3 @@
-import settings from "../config/settings";
-
 export default class Utils {
   //Traverse safely nested objects
   static getNestedObject = (nestedObj, pathArr) => {

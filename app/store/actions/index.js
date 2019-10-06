@@ -23,8 +23,7 @@ import {
   REQUEST_USER,
   REQUEST_CARD,
   SET_USER_ID,
-  WATCH_USER,
-  SET_DEVICE
+  WATCH_USER
 } from "./UserActions";
 
 export {
@@ -36,6 +35,5 @@ export {
   REQUEST_USER,
   REQUEST_CARD,
   SET_USER_ID,
-  WATCH_USER,
-  SET_DEVICE
+  WATCH_USER
 };

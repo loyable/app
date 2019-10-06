@@ -1,7 +1,22 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Image } from "react-native";
+import { View, StyleSheet, Image } from "react-native";
+import PropTypes from "prop-types";
+
+/*
+  PROPS:
+  - size: marker size (default: 30)
+  - logo.width: width of marker logo
+  - logo.height: height of marker logo
+  - logo.src: file source of marker logo
+  - logo.backgroundColor: marker background color
+*/
 
 class Marker extends Component {
+  static propTypes = {
+    size: PropTypes.number,
+    logo: PropTypes.object
+  };
+
   static defaultProps = {
     size: 30
   };
@@ -28,8 +43,10 @@ class Marker extends Component {
   }
 
   getStyles(logo) {
-    let width = this.props.size - 10,
-      height = this.props.size - 10;
+    const { size } = this.props;
+
+    let width = size - 10,
+      height = size - 10;
     if (logo) {
       if (logo.width >= logo.height) {
         height = (width * logo.height) / logo.width;
@@ -38,11 +55,11 @@ class Marker extends Component {
       }
       return {
         marker: {
-          width: this.props.size,
-          height: this.props.size,
+          width: size,
+          height: size,
           borderWidth: 2,
           borderColor: "#fff",
-          borderRadius: this.props.size / 2,
+          borderRadius: size / 2,
           backgroundColor: logo.backgroundColor,
           alignItems: "center",
           justifyContent: "center",
