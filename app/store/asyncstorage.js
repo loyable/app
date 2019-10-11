@@ -1,5 +1,4 @@
 import { AsyncStorage } from "react-native";
-import md5 from "md5";
 
 class Storage {
   static setItem = async (key, value) => {

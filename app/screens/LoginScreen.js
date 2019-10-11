@@ -59,7 +59,7 @@ class LoginScreen extends Component {
       expired: false
     };
 
-    //verifica se l'utente è loggato
+    //verify if user is logged in
     Storage.getItem("userID").then(userID => {
       if (userID) {
         this.props.navigation.navigate("DrawerNavigator");

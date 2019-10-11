@@ -36,11 +36,6 @@ const mapStateToProps = state => {
   };
 };
 
-//map redux dispatch function to properties
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
 class DetailsScreen extends Component {
   getAnalytics(merchant) {
     let added = 0,
@@ -334,7 +329,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(DetailsScreen);
+export default connect(mapStateToProps)(DetailsScreen);

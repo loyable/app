@@ -20,11 +20,6 @@ const mapStateToProps = state => {
   };
 };
 
-//map redux dispatch function to properties
-const mapDispatchToProps = dispatch => {
-  return {};
-};
-
 class CardDetailsScreen extends Component {
   componentDidMount() {
     this.props.navigation.addListener("didFocus", () => {
@@ -205,7 +200,4 @@ const styles = StyleSheet.create({
     textAlign: "right"
   }
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardDetailsScreen);
+export default connect(mapStateToProps)(CardDetailsScreen);

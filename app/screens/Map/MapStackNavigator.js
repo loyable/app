@@ -5,7 +5,7 @@ import MapViewScreen from "./MapViewScreen";
 import MerchantDetailsScreen from "../Cards/MerchantDetailsScreen";
 import CardDetailsScreen from "../Cards/CardDetailsScreen";
 
-const MapViewDetailsStack = createStackNavigator(
+export default createStackNavigator(
   {
     MapView: {
       screen: MapViewScreen
@@ -20,17 +20,5 @@ const MapViewDetailsStack = createStackNavigator(
   {
     initialRouteName: "MapView",
     headerMode: "none"
-  }
-);
-
-export default createSwitchNavigator(
-  {
-    MapView: {
-      screen: MapViewDetailsStack
-    }
-  },
-  {
-    headerMode: "none",
-    initialRouteName: "MapView"
   }
 );
