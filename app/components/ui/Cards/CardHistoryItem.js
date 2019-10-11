@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-import vars from "../../config/styles";
+import vars from "../../../config/styles";
 
-import Utils from "../../config/utils";
+import Utils from "../../../config/utils";
 
 import CardCircle from "./CardCircle";
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
 
-import vars from "../../config/styles";
+import vars from "../../../config/styles";
 
 import CardCircle from "./CardCircle";
 

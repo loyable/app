@@ -105,27 +105,11 @@ class MapViewScreen extends Component {
     }
   }
 
-  // onRegionChangeComplete(region) {
-  //   const { latitude, longitude, latitudeDelta, longitudeDelta } = region;
-
-  //   const box = [
-  //     [latitude - latitudeDelta, longitude - longitudeDelta],
-  //     [latitude + latitudeDelta, longitude + longitudeDelta]
-  //   ];
-
-  //   const body = {
-  //     box,
-  //     zoom: Math.round(Math.log(360 / longitudeDelta) / Math.LN2)
-  //   };
-
-  //   console.log(JSON.stringify(body));
-  // }
-
   componentDidMount() {
     this.props.REQUEST_MERCHANTS(this.props.user.userID);
 
     this.props.navigation.addListener("didFocus", () => {
-      //Metodo che cambia l'Header
+      //Change header state
       changeHeaderState({
         backArrow: false,
         navigation: this.props.navigation
@@ -161,16 +145,16 @@ class MapViewScreen extends Component {
     let merchants = [],
       merchantsMarkers = [];
 
-    //Se l'utente è presente nello store
+    //If user is in the store
     if (user.hasOwnProperty("user")) {
       merchants = user.user.merchants;
     }
 
-    //Se l'utente ha scaricato la lista dei marker
+    //If user has downloaded merchant list
     if (this.props.maps.merchants.length !== 0) {
       merchantsMarkers = this.props.maps.merchants;
 
-      //Loop sull'array degli esercenti associati all'utente
+      //Loop on user-associated merchants
       for (let i = 0; i < merchantsMarkers.length; i++) {
         merchants.filter(item => {
           if (merchantsMarkers[i].id === item.merchant.id) {
@@ -202,9 +186,6 @@ class MapViewScreen extends Component {
               userLocationAnnotationTitle=""
               showsCompass={false}
               showsMyLocationButton={false}
-              // onRegionChangeComplete={region =>
-              //   this.onRegionChangeComplete(region)
-              // }
             >
               {merchants.map((merchant, index) => {
                 if (merchant.hasOwnProperty("merchant")) {

@@ -14,15 +14,15 @@ import {
 
 import { connect } from "react-redux";
 
-import { SET_USER_ID } from "../../store/actions";
+import { SET_USER_ID } from "../store/actions";
 
-import vars from "../../config/styles";
+import vars from "../config/styles";
 
-import settings from "../../config/settings";
+import settings from "../config/settings";
 
-import PhoneInput from "../../components/ui/PhoneInput";
+import PhoneInput from "../components/ui/PhoneInput";
 
-import Storage from "../../store/asyncstorage";
+import Storage from "../store/asyncstorage";
 
 import SVG from "react-native-remote-svg";
 
@@ -160,7 +160,7 @@ class LoginScreen extends Component {
         <View style={styles.logoContainer}>
           <SVG
             style={styles.logo}
-            source={require("../../assets/icons/logo.svg")}
+            source={require("../assets/icons/logo.svg")}
           />
         </View>
         <View style={{ height: 160 }}>

@@ -1,12 +1,10 @@
 import React from "react";
-
 import { Platform } from "react-native";
-
 import { createBottomTabNavigator } from "react-navigation";
 
 //Import screens
-import CardsScreen from "../../screens/Cards/CardsScreen";
-import MapScreen from "../../screens/Map/MapScreen";
+import CardsStackNavigator from "../../screens/Cards/CardsStackNavigator";
+import MapStackNavigator from "../../screens/Map/MapStackNavigator";
 
 //Icons
 import Icon from "../../components/icons/Icon";
@@ -17,7 +15,7 @@ import vars from "../styles";
 export default createBottomTabNavigator(
   {
     Cards: {
-      screen: CardsScreen,
+      screen: CardsStackNavigator,
       navigationOptions: {
         tabBarLabel: "Carte",
         tabBarIcon: ({ tintColor }) => (
@@ -26,7 +24,7 @@ export default createBottomTabNavigator(
       }
     },
     Map: {
-      screen: MapScreen,
+      screen: MapStackNavigator,
       navigationOptions: {
         tabBarLabel: "Mappa",
         tabBarIcon: ({ tintColor }) => <Icon name="map" color={tintColor} />

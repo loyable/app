@@ -2,7 +2,7 @@ import { createSwitchNavigator, createStackNavigator } from "react-navigation";
 
 import MapViewScreen from "./MapViewScreen";
 
-import DetailsScreen from "../Cards/DetailsScreen";
+import MerchantDetailsScreen from "../Cards/MerchantDetailsScreen";
 import CardDetailsScreen from "../Cards/CardDetailsScreen";
 
 const MapViewDetailsStack = createStackNavigator(
@@ -10,8 +10,8 @@ const MapViewDetailsStack = createStackNavigator(
     MapView: {
       screen: MapViewScreen
     },
-    DetailsMapView: {
-      screen: DetailsScreen
+    MerchantDetailsMapView: {
+      screen: MerchantDetailsScreen
     },
     CardMapViewDetails: {
       screen: CardDetailsScreen

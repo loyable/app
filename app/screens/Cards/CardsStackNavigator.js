@@ -1,16 +1,16 @@
 import { createStackNavigator } from "react-navigation";
 
 import CardsListScreen from "./CardsListScreen";
-import DetailsScreen from "./DetailsScreen";
+import MerchantDetailsScreen from "./MerchantDetailsScreen";
 import CardDetailsScreen from "./CardDetailsScreen";
 
-export default (CardDetailsStack = createStackNavigator(
+export default CardDetailsStack = createStackNavigator(
   {
     CardsList: {
       screen: CardsListScreen
     },
-    Details: {
-      screen: DetailsScreen
+    MerchantDetails: {
+      screen: MerchantDetailsScreen
     },
     CardDetails: {
       screen: CardDetailsScreen
@@ -20,4 +20,4 @@ export default (CardDetailsStack = createStackNavigator(
     initialRouteName: "CardsList",
     headerMode: "none"
   }
-));
+);

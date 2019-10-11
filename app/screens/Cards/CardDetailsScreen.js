@@ -8,11 +8,10 @@ import CardItem from "../../components/ui/Card/CardItem";
 //global vars
 import vars from "../../config/styles";
 
-import CardHistoryItem from "./CardHistoryItem";
-import CardCircle from "./CardCircle";
+import CardHistoryItem from "../../components/ui/Cards/CardHistoryItem";
+import CardCircle from "../../components/ui/Cards/CardCircle";
 
 import { changeHeaderState } from "../../components/ui/Header";
-import { makeEmptyAggregatedTestResult } from "@jest/test-result";
 
 //map redux state to properties
 const mapStateToProps = state => {

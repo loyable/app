@@ -55,7 +55,7 @@ class Tooltip extends Component {
           tooltip={true}
           onPress={() =>
             this.props.SET_ACTIVE_MERCHANT(merchant, () =>
-              this.props.navigation.navigate("DetailsMapView", {
+              this.props.navigation.navigate("MerchantDetailsMapView", {
                 navigateTo: "CardMapViewDetails"
               })
             )
@@ -80,7 +80,7 @@ class Tooltip extends Component {
           tooltip={true}
           onPress={() =>
             this.props.SET_ACTIVE_MERCHANT(merchant, () =>
-              this.props.navigation.navigate("DetailsMapView", {
+              this.props.navigation.navigate("MerchantDetailsMapView", {
                 navigateTo: "CardMapViewDetails"
               })
             )

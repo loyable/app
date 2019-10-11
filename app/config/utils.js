@@ -1,4 +1,37 @@
+import { Linking, Platform, Alert } from "react-native";
+import settings from "../config/settings";
+
 export default class Utils {
+  //Check if update available
+  static checkUpdate() {
+    fetch(`${settings.url.api}`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.version !== settings.version) {
+          Alert.alert(
+            settings.popupUpdate.title,
+            settings.popupUpdate.subtitle,
+            [
+              {
+                text: settings.popupUpdate.button,
+                onPress: () => {
+                  let storeURL;
+                  //Check platform to redirect to the store
+                  if (Platform.OS === "ios") {
+                    storeURL = data.store.ios;
+                  } else {
+                    storeURL = data.store.android;
+                  }
+                  Linking.openURL(storeURL);
+                }
+              }
+            ],
+            { cancelable: false }
+          );
+        }
+      });
+  }
+
   //Traverse safely nested objects
   static getNestedObject = (nestedObj, pathArr) => {
     return pathArr.reduce(

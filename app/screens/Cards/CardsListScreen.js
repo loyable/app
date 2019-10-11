@@ -7,8 +7,7 @@ import {
   StyleSheet,
   FlatList,
   ActivityIndicator,
-  RefreshControl,
-  TouchableWithoutFeedback
+  RefreshControl
 } from "react-native";
 
 import { connect } from "react-redux";

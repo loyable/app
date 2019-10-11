@@ -26,8 +26,8 @@ import SVG from "react-native-remote-svg";
 //global vars
 import vars from "../../config/styles";
 
-import CardAnalyticsItem from "./CardAnalyticsItem";
-import CardHistoryItem from "./CardHistoryItem";
+import CardAnalyticsItem from "../../components/ui/Cards/CardAnalyticsItem";
+import CardHistoryItem from "../../components/ui/Cards/CardHistoryItem";
 
 //map redux state to properties
 const mapStateToProps = state => {

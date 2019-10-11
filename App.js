@@ -1,8 +1,6 @@
-import React, { Component } from "react";
-
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 
-import LoginScreen from "./app/screens/Login/LoginScreen";
+import LoginScreen from "./app/screens/LoginScreen";
 
 import DrawerNavigator from "./app/config/routing/DrawerNavigator";
 

@@ -16,6 +16,10 @@
 │       │   ├── CardGridItem.js
 │       │   ├── CardItem.js
 │       │   └── index.js
+│       ├── Cards
+│       │   ├── CardAnalyticsItem.js
+│       │   ├── CardCircle.js
+│       │   └── CardHistoryItem.js
 │       ├── Header                  
 │       │   └── index.js            - Componente Header
 │       ├── Instructions
@@ -43,24 +47,17 @@
 ├── screens                       //Schermate applicazione
 │   ├── AccountScreen.js
 │   ├── Cards
-│   │   ├── CardAnalyticsItem.js
-│   │   ├── CardCircle.js
 │   │   ├── CardDetailsScreen.js
-│   │   ├── CardHistoryItem.js
 │   │   ├── CardsListScreen.js
-│   │   ├── CardsScreen.js
-│   │   └── DetailsScreen.js
+│   │   ├── CardsStackNavigator.js
+│   │   └── MerchantDetailsScreen.js
 │   ├── ChangeNumberScreen.js
-│   ├── ContactScreen.js
 │   ├── InstructionsScreen.js
-│   ├── Login
-│   │   └── LoginScreen.js
+│   ├── LoginScreen.js
 │   ├── Map
-│   │   ├── MapListScreen.js
-│   │   ├── MapScreen.js
+│   │   ├── MapStackNavigator.js
 │   │   └── MapViewScreen.js
-│   ├── QRCodeScreen.js
-│   └── SettingsScreen.js
+│   └── QRCodeScreen.js
 └── store                          //Redux Store
     ├── actions                       - Azioni
     │   ├── MapsActions.js         

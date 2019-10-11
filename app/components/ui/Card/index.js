@@ -98,7 +98,7 @@ class Card extends Component {
             onPress={() => {
               if (this.props.navigateTo !== "none") {
                 this.props.SET_ACTIVE_MERCHANT(merchant, () =>
-                  this.props.navigation.navigate("Details")
+                  this.props.navigation.navigate("MerchantDetails")
                 );
               }
             }}
