@@ -67,7 +67,6 @@
     ├── index.js
     └── reducers                   //Reducers
         ├── AuthReducer.js
-        ├── CardsReducer.js
         ├── MapsReducer.js
         ├── RootReducer.js
         └── UserReducer.js

@@ -76,27 +76,30 @@ class CardGridItem extends Component {
     const merchant = this.props.settings;
 
     const styles = StyleSheet.create(this.getStyles(merchant.merchant));
-
-    return (
-      <TouchableWithoutFeedback
-        onPress={() => {
-          this.props.SET_ACTIVE_MERCHANT(merchant, () => {
-            this.props.navigation.navigate(this.props.navigateTo, {
-              navigateTo: "CardDetails"
+    if (!merchant.hidden) {
+      return (
+        <TouchableWithoutFeedback
+          onPress={() => {
+            this.props.SET_ACTIVE_MERCHANT(merchant, () => {
+              this.props.navigation.navigate(this.props.navigateTo, {
+                navigateTo: "CardDetails"
+              });
             });
-          });
-        }}
-      >
-        <View style={styles.container}>
-          <Image
-            style={styles.logo}
-            source={{
-              uri: merchant.merchant.logo.src
-            }}
-          />
-        </View>
-      </TouchableWithoutFeedback>
-    );
+          }}
+        >
+          <View style={styles.container}>
+            <Image
+              style={styles.logo}
+              source={{
+                uri: merchant.merchant.logo.src
+              }}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      );
+    } else {
+      return null;
+    }
   }
 }
 

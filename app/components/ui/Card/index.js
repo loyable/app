@@ -88,38 +88,41 @@ class Card extends Component {
     const merchant = this.props.settings;
 
     const styles = StyleSheet.create(this.getStyles(merchant.merchant));
+    if (!merchant.hidden) {
+      return (
+        <View style={styles.container}>
+          {this.getCards(merchant)}
 
-    return (
-      <View style={styles.container}>
-        {this.getCards(merchant)}
+          {this.props.showInfo && (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                if (this.props.navigateTo !== "none") {
+                  this.props.SET_ACTIVE_MERCHANT(merchant, () =>
+                    this.props.navigation.navigate("MerchantDetails")
+                  );
+                }
+              }}
+            >
+              <View style={styles.infoContainer}>
+                <View>
+                  <Text style={styles.title}>{merchant.merchant.name}</Text>
 
-        {this.props.showInfo && (
-          <TouchableWithoutFeedback
-            onPress={() => {
-              if (this.props.navigateTo !== "none") {
-                this.props.SET_ACTIVE_MERCHANT(merchant, () =>
-                  this.props.navigation.navigate("MerchantDetails")
-                );
-              }
-            }}
-          >
-            <View style={styles.infoContainer}>
-              <View>
-                <Text style={styles.title}>{merchant.merchant.name}</Text>
-
-                <Text style={styles.address}>
-                  {merchant.merchant.address.value}
-                </Text>
+                  <Text style={styles.address}>
+                    {merchant.merchant.address.value}
+                  </Text>
+                </View>
+                <SVG
+                  style={styles.infoIcon}
+                  source={require("../../../assets/icons/info.svg")}
+                />
               </View>
-              <SVG
-                style={styles.infoIcon}
-                source={require("../../../assets/icons/info.svg")}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        )}
-      </View>
-    );
+            </TouchableWithoutFeedback>
+          )}
+        </View>
+      );
+    } else {
+      return null;
+    }
   }
 
   getStyles(merchant) {
