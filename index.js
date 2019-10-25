@@ -10,9 +10,7 @@ import { Provider } from "react-redux";
 
 import Utils from "./app/config/utils";
 class Root extends Component {
-  constructor(props) {
-    super(props);
-
+  componentDidMount() {
     //Check for updates
     Utils.checkUpdate();
   }
