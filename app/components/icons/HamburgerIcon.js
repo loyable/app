@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { TouchableOpacity, Animated } from "react-native";
 import PropTypes from "prop-types";
 
-//SVG Library
-import SVG from "react-native-remote-svg";
+import Hamburger from "../../assets/icons/hamburger";
 
 /*
   PROPS:
@@ -35,13 +34,7 @@ class HamburgerIcon extends Component {
           onPress={() => this.props.navigation.openDrawer()}
           activeOpacity={0.8}
         >
-          <SVG
-            style={{
-              width: 30, //Icon width
-              height: 25 //Icon height
-            }}
-            source={require("../../assets/icons/hamburger.svg")}
-          />
+          <Hamburger />
         </TouchableOpacity>
       </Animated.View>
     );

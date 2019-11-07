@@ -2,7 +2,7 @@ import { Linking, Platform, Alert } from "react-native";
 import settings from "../config/settings";
 
 export default class Utils {
-  //Check if update available
+  // Check if update available
   static checkUpdate() {
     fetch(`${settings.url.api}`)
       .then(res => res.json())
@@ -16,7 +16,7 @@ export default class Utils {
                 text: settings.popupUpdate.button,
                 onPress: () => {
                   let storeURL;
-                  //Check platform to redirect to the store
+                  // Check platform to redirect to the store
                   if (Platform.OS === "ios") {
                     storeURL = data.store.ios;
                   } else {
@@ -32,7 +32,7 @@ export default class Utils {
       });
   }
 
-  //Traverse safely nested objects
+  // Traverse safely nested objects
   static getNestedObject = (nestedObj, pathArr) => {
     return pathArr.reduce(
       (obj, key) => (obj && obj[key] !== "undefined" ? obj[key] : undefined),
@@ -83,6 +83,7 @@ export default class Utils {
     }
   }
 
+  // Truncate string to specified length
   static truncateString(string, length) {
     const stringLength = string.length;
 
@@ -91,5 +92,11 @@ export default class Utils {
       newString += "...";
     }
     return newString;
+  }
+
+  // Check if number is odd
+  static isOdd(num) {
+    if (num % 2 !== 0 && num !== 0) return true;
+    else return false;
   }
 }

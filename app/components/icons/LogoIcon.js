@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-//SVG Library
-import SVG from "react-native-remote-svg";
+import Logo from "../../assets/icons/logo";
 
 /*
   PROPS:
@@ -23,10 +22,7 @@ class LogoIcon extends Component {
         onPress={() => this.props.navigation.navigate(this.props.link)}
         activeOpacity={0.8}
       >
-        <SVG
-          style={{ width: 110, height: 50 }}
-          source={require("../../assets/icons/logo.svg")}
-        />
+        <Logo style={{ width: 110, height: 50 }} />
       </TouchableOpacity>
     );
   }

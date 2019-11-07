@@ -9,27 +9,29 @@ import {
   Linking
 } from "react-native";
 
+// Import libraries
 import { connect } from "react-redux";
-
 import MapView from "react-native-maps";
-
 import openMap from "react-native-open-maps";
 
-import Card from "../../components/ui/Card";
-
-import Marker from "../../components/ui/Map/Marker";
-
-import { changeHeaderState } from "../../components/ui/Header";
-
-import SVG from "react-native-remote-svg";
-
-//global vars
+// Import global vars
 import vars from "../../config/styles";
 
+// Import icons
+import Chiama from "../../assets/icons/chiama";
+import Indicazioni from "../../assets/icons/indicazioni";
+import SitoWeb from "../../assets/icons/sitoweb";
+
+// Import components
+import Card from "../../components/ui/Card";
 import CardAnalyticsItem from "../../components/ui/Cards/CardAnalyticsItem";
 import CardHistoryItem from "../../components/ui/Cards/CardHistoryItem";
+import Marker from "../../components/ui/Map/Marker";
 
-//map redux state to properties
+// Import methods
+import { changeHeaderState } from "../../components/ui/Header";
+
+// Map redux state to properties
 const mapStateToProps = state => {
   return {
     ...state
@@ -46,7 +48,7 @@ class DetailsScreen extends Component {
       merchant.cards.forEach(card => {
         added++;
         marked += card.marked;
-        if (card.marked === card.card.settings.marks.total) {
+        if (card.marked === card.card.marks.total) {
           completed++;
         }
       });
@@ -60,13 +62,7 @@ class DetailsScreen extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.addListener("didFocus", () => {
-      //Metodo che cambia l'Header
-      changeHeaderState({
-        backArrow: true,
-        navigation: this.props.navigation
-      });
-    });
+    this.changeHeader();
   }
 
   render() {
@@ -108,9 +104,7 @@ class DetailsScreen extends Component {
             <Text style={styles.description}>
               {merchant.merchant.description}
             </Text>
-            <Text style={styles.address}>
-              {merchant.merchant.address.value}
-            </Text>
+            <Text style={styles.address}>{merchant.merchant.address}</Text>
           </View>
           {merchant.merchant.hasOwnProperty("details") && (
             <View style={styles.merchantDetailsContainer}>
@@ -122,7 +116,7 @@ class DetailsScreen extends Component {
                     Linking.openURL(`tel:${merchant.merchant.details.phone}`)
                   }
                 >
-                  <SVG source={require("../../assets/icons/chiama.svg")} />
+                  <Chiama />
                   <Text style={styles.merchantDetailsText}>Chiama</Text>
                 </TouchableOpacity>
               )}
@@ -133,16 +127,14 @@ class DetailsScreen extends Component {
                   style={styles.merchantDetails}
                   onPress={() =>
                     openMap({
-                      latitude:
-                        merchant.merchant.address.location.coordinates[0],
-                      longitude:
-                        merchant.merchant.address.location.coordinates[1],
-                      query: merchant.merchant.address.value,
+                      latitude: merchant.merchant.location.coordinates[0],
+                      longitude: merchant.merchant.location.coordinates[1],
+                      query: merchant.merchant.address,
                       zoom: 10
                     })
                   }
                 >
-                  <SVG source={require("../../assets/icons/indicazioni.svg")} />
+                  <Indicazioni />
                   <Text style={styles.merchantDetailsText}>Indicazioni</Text>
                 </TouchableOpacity>
               )}
@@ -154,7 +146,7 @@ class DetailsScreen extends Component {
                     Linking.openURL(merchant.merchant.details.website)
                   }
                 >
-                  <SVG source={require("../../assets/icons/sitoweb.svg")} />
+                  <SitoWeb />
                   <Text style={styles.merchantDetailsText}>Sito Web</Text>
                 </TouchableOpacity>
               )}
@@ -163,8 +155,8 @@ class DetailsScreen extends Component {
           <MapView
             ref={map => (this.map = map)}
             initialRegion={{
-              latitude: merchant.merchant.address.location.coordinates[0],
-              longitude: merchant.merchant.address.location.coordinates[1],
+              latitude: merchant.merchant.location.coordinates[0],
+              longitude: merchant.merchant.location.coordinates[1],
               latitudeDelta: 0.01,
               longitudeDelta: 0.01
             }}
@@ -178,14 +170,14 @@ class DetailsScreen extends Component {
           >
             <MapView.Marker
               coordinate={{
-                latitude: merchant.merchant.address.location.coordinates[0],
-                longitude: merchant.merchant.address.location.coordinates[1]
+                latitude: merchant.merchant.location.coordinates[0],
+                longitude: merchant.merchant.location.coordinates[1]
               }}
               onPress={() =>
                 openMap({
-                  latitude: merchant.merchant.address.location.coordinates[0],
-                  longitude: merchant.merchant.address.location.coordinates[1],
-                  query: merchant.merchant.address.value,
+                  latitude: merchant.merchant.location.coordinates[0],
+                  longitude: merchant.merchant.location.coordinates[1],
+                  query: merchant.merchant.address,
                   zoom: 10
                 })
               }
@@ -250,6 +242,16 @@ class DetailsScreen extends Component {
       />
     );
   }
+
+  // Change Header State
+  changeHeader() {
+    this.props.navigation.addListener("didFocus", () => {
+      changeHeaderState({
+        backArrow: true,
+        navigation: this.props.navigation
+      });
+    });
+  }
 }
 
 const styles = StyleSheet.create({
@@ -262,10 +264,13 @@ const styles = StyleSheet.create({
   cardInfoContainer: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    shadowColor: vars.cardDetails.style.shadow.color,
-    shadowOffset: vars.cardDetails.style.shadow.offset,
-    shadowOpacity: vars.cardDetails.style.shadow.opacity,
-    shadowRadius: vars.cardDetails.style.shadow.radius,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
     elevation: 1
   },
   cardDetailsContainer: {

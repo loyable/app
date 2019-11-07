@@ -120,10 +120,13 @@ const styles = StyleSheet.create({
   cardInfoContainer: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    shadowColor: vars.cardDetails.style.shadow.color,
-    shadowOffset: vars.cardDetails.style.shadow.offset,
-    shadowOpacity: vars.cardDetails.style.shadow.opacity,
-    shadowRadius: vars.cardDetails.style.shadow.radius,
+    shadowColor: "#000000",
+    shadowOffset: {
+      width: 0,
+      height: 0
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
     elevation: 1
   },
   cardDetailsContainer: {

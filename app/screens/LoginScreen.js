@@ -15,9 +15,9 @@ import {
 // Import libraries
 import axios from "axios";
 import { connect } from "react-redux";
-import SVG from "react-native-remote-svg";
 
 // Import components
+import Logo from "../assets/icons/logo";
 import PhoneInput from "../components/ui/PhoneInput";
 
 // Import Storage
@@ -89,10 +89,7 @@ class LoginScreen extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <View style={styles.logoContainer}>
-          <SVG
-            style={styles.logo}
-            source={require("../assets/icons/logo.svg")}
-          />
+          <Logo style={styles.logo} />
         </View>
         {/* Step Horizontal ScrollView Container */}
         <View style={{ height: 160 }}>

@@ -1,13 +1,30 @@
 import React, { Component } from "react";
 import { View, StyleSheet, Image } from "react-native";
+import PropTypes from "prop-types";
 
+// Import global variables
 import vars from "../../../config/styles";
 
-class Box extends Component {
-  render() {
-    const { card, marked } = this.props;
+/*
+  PROPS:
+  - marks: object
+  - marked: boolean (if mark is marked)
+*/
 
-    const styles = StyleSheet.create(this.getStyles(card));
+class Box extends Component {
+  static defaultProps = {
+    marked: false
+  };
+
+  static propTypes = {
+    marks: PropTypes.object.isRequired,
+    marked: PropTypes.bool
+  };
+
+  render() {
+    const { marks, marked } = this.props;
+
+    const styles = StyleSheet.create(this.getStyles(marks));
 
     if (marked) {
       return (
@@ -15,11 +32,15 @@ class Box extends Component {
           <View style={styles.boxContainer}>
             <Image
               style={{
-                width: card.mark.image.width,
-                height: card.mark.image.height
+                width: marks.mark.image.hasOwnProperty("width")
+                  ? marks.mark.image.width
+                  : 30,
+                height: marks.mark.image.hasOwnProperty("height")
+                  ? marks.mark.image.height
+                  : 30
               }}
               source={{
-                uri: card.mark.image.src
+                uri: marks.mark.image.src
               }}
             />
           </View>
@@ -32,35 +53,39 @@ class Box extends Component {
   getStyles(marks) {
     return {
       box: {
-        width: marks.style.width,
-        height: marks.style.height,
-        backgroundColor: marks.style.backgroundColor
+        width: marks.style.hasOwnProperty("width") ? marks.style.width : 50,
+        height: marks.style.hasOwnProperty("height") ? marks.style.height : 50,
+        backgroundColor: marks.style.hasOwnProperty("backgroundColor")
           ? marks.style.backgroundColor
-          : vars.color.cardBoxBackgroundColor,
-        borderRadius:
-          marks.style.shape.type !== "circle"
-            ? marks.style.shape.value
-            : marks.style.width / 2,
-        borderWidth: marks.style.borderWidth,
-        borderColor: marks.style.borderColor,
-        padding: marks.style.padding
-          ? marks.style.padding
-          : vars.card.marks.style.padding
+          : "#ffffff",
+        borderRadius: marks.style.hasOwnProperty("borderRadius")
+          ? marks.style.borderRadius
+          : 0,
+        borderWidth: marks.style.hasOwnProperty("borderWidth")
+          ? marks.style.borderWidth
+          : 0,
+        borderColor: marks.style.hasOwnProperty("borderColor")
+          ? marks.style.borderColor
+          : "#ffffff",
+        padding: marks.style.hasOwnProperty("padding") ? marks.style.padding : 1
       },
       boxContainer: {
         flex: 1,
         alignSelf: "stretch",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: marks.mark.style.backgroundColor
+        backgroundColor: marks.mark.style.hasOwnProperty("backgroundColor")
           ? marks.mark.style.backgroundColor
-          : card.marks.mark.style.backgroundColor,
-        borderRadius:
-          marks.mark.style.shape.type !== "circle"
-            ? marks.mark.style.shape.value
-            : marks.style.width / 2,
-        borderWidth: marks.mark.style.borderWidth,
-        borderColor: marks.mark.style.borderColor
+          : "#000000",
+        borderRadius: marks.mark.style.hasOwnProperty("borderRadius")
+          ? marks.mark.style.borderRadius
+          : 0,
+        borderWidth: marks.mark.style.hasOwnProperty("borderWidth")
+          ? marks.mark.style.borderWidth
+          : 0,
+        borderColor: marks.mark.style.hasOwnProperty("borderColor")
+          ? marks.mark.style.borderColor
+          : 0
       }
     };
   }

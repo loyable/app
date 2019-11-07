@@ -5,21 +5,30 @@ import {
   StyleSheet,
   TouchableWithoutFeedback
 } from "react-native";
+import PropTypes from "prop-types";
 
-import vars from "../../../config/styles";
-
+// Import libraries
 import { connect } from "react-redux";
 
+// Import redux actions
 import { SET_ACTIVE_MERCHANT } from "../../../store/actions";
 
-//map redux state to properties
+/*
+  PROPS:
+  - settings: object
+  - navigation: object
+  - navigateTo: string (screen to navigate after)
+  - isLastOddItem: boolean
+*/
+
+// Map redux state to properties
 const mapStateToProps = state => {
   return {
     ...state
   };
 };
 
-//map redux dispatch function to properties
+// Map redux dispatch function to properties
 const mapDispatchToProps = dispatch => {
   return {
     SET_ACTIVE_MERCHANT: (merchant, callback) => {
@@ -34,44 +43,13 @@ class CardGridItem extends Component {
     navigateTo: "Details"
   };
 
-  getStyles(merchant) {
-    let width = 130,
-      height = 80;
-    if (merchant.logo.width >= merchant.logo.height) {
-      height = (width * merchant.logo.height) / merchant.logo.width;
-    } else {
-      width = (height * merchant.logo.width) / merchant.logo.height;
-    }
+  static propTypes = {
+    settings: PropTypes.object.isRequired,
+    navigation: PropTypes.object.isRequired,
+    navigateTo: PropTypes.string,
+    isLastOddItem: PropTypes.bool
+  };
 
-    return {
-      container: {
-        flex: 0.5,
-        justifyContent: "center",
-        alignItems: "center",
-        margin: vars.cardGrid.margin,
-        marginRight: this.props.isLastOddItem
-          ? vars.cardGrid.margin * 2 + 3
-          : vars.cardGrid.margin,
-        backgroundColor: merchant.logo.backgroundColor,
-        borderRadius: vars.cardGrid.style.borderRadius,
-        borderColor: merchant.logo.borderColor,
-        borderWidth: merchant.logo.borderWidth,
-        height: vars.cardGrid.style.height,
-        shadowColor: vars.cardGrid.style.shadow.color,
-        shadowOffset: {
-          width: vars.cardGrid.style.shadow.offset.width,
-          height: vars.cardGrid.style.shadow.offset.height
-        },
-        shadowOpacity: vars.cardGrid.style.shadow.opacity,
-        shadowRadius: vars.cardGrid.style.shadow.radius,
-        elevation: vars.cardGrid.style.elevation
-      },
-      logo: {
-        width: width,
-        height: height
-      }
-    };
-  }
   render() {
     const merchant = this.props.settings;
 
@@ -80,11 +58,7 @@ class CardGridItem extends Component {
       return (
         <TouchableWithoutFeedback
           onPress={() => {
-            this.props.SET_ACTIVE_MERCHANT(merchant, () => {
-              this.props.navigation.navigate(this.props.navigateTo, {
-                navigateTo: "CardDetails"
-              });
-            });
+            this.setActiveMerchant(merchant);
           }}
         >
           <View style={styles.container}>
@@ -100,6 +74,61 @@ class CardGridItem extends Component {
     } else {
       return null;
     }
+  }
+
+  setActiveMerchant(merchant) {
+    if (this.props.navigateTo !== "none") {
+      // Set active merchant
+      this.props.SET_ACTIVE_MERCHANT(merchant);
+
+      // Navigate to Merchant Details screen
+      this.props.navigation.navigate("MerchantDetails", {
+        navigateTo: "CardDetails"
+      });
+    }
+  }
+
+  getStyles(merchant) {
+    let width = 130,
+      height = 80;
+    if (merchant.logo.width >= merchant.logo.height) {
+      height = (width * merchant.logo.height) / merchant.logo.width;
+    } else {
+      width = (height * merchant.logo.width) / merchant.logo.height;
+    }
+
+    const margin = 6;
+
+    return {
+      container: {
+        flex: 0.5,
+        justifyContent: "center",
+        alignItems: "center",
+        margin,
+        marginRight: this.props.isLastOddItem ? margin * 2 + 3 : margin,
+        backgroundColor: merchant.logo.backgroundColor,
+        borderRadius: 10,
+        borderColor: merchant.logo.hasOwnProperty("borderColor")
+          ? merchant.logo.borderColor
+          : "#ffffff",
+        borderWidth: merchant.logo.hasOwnProperty("borderWidth")
+          ? merchant.logo.borderWidth
+          : 0,
+        height: 100,
+        shadowColor: "#333333",
+        shadowOffset: {
+          width: 3,
+          height: 0
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 1
+      },
+      logo: {
+        width,
+        height
+      }
+    };
   }
 }
 

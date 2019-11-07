@@ -14,7 +14,7 @@ import vars from "../config/styles";
 
 import Dot from "../components/ui/Instructions/Dot";
 
-import SVG from "react-native-remote-svg";
+import LogoBianco from "../assets/icons/logobianco";
 
 const { width, height } = Dimensions.get("window");
 class InstructionsScreen extends Component {
@@ -139,10 +139,7 @@ class InstructionsScreen extends Component {
           </ImageBackground>
         </ScrollView>
         <SafeAreaView style={styles.logoContainer}>
-          <SVG
-            style={styles.logo}
-            source={require("../assets/icons/logobianco.svg")}
-          />
+          <LogoBianco style={styles.logo} />
         </SafeAreaView>
         <SafeAreaView style={styles.controls}>
           <View style={styles.pagination}>{this.renderPagination()}</View>

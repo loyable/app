@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { TouchableOpacity } from "react-native";
 import PropTypes from "prop-types";
 
-//SVG Library
-import SVG from "react-native-remote-svg";
+import QRCode from "../../assets/icons/qrcode";
 
 /*
   PROPS:
@@ -21,10 +20,7 @@ class QRCodeIcon extends Component {
         onPress={() => this.props.navigation.navigate("QRCode")}
         activeOpacity={0.8}
       >
-        <SVG
-          style={{ width: 32, height: 32 }}
-          source={require("../../assets/icons/qrcode.svg")}
-        />
+        <QRCode style={{ width: 32, height: 32 }} />
       </TouchableOpacity>
     );
   }

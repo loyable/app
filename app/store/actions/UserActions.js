@@ -1,12 +1,15 @@
-import { store } from "../../store";
+// Import libraries
+import io from "socket.io-client";
+import axios from "axios";
 
+// Import global variables
 import settings from "../../config/settings";
 
+// Import storage
 import Storage from "../asyncstorage";
 
-import io from "socket.io-client";
-
-//Filter merchants
+// REDUX ACTIONS
+// Filter merchants
 export const FILTER_MERCHANTS = filter => {
   return {
     type: "FILTER_MERCHANTS",
@@ -14,7 +17,7 @@ export const FILTER_MERCHANTS = filter => {
   };
 };
 
-//Persist to state user data
+// Persist to state user data
 export const LOAD_USER = user => {
   return {
     type: "LOAD_USER",
@@ -22,7 +25,7 @@ export const LOAD_USER = user => {
   };
 };
 
-//Persist to state user data
+// Persist to state user data
 export const SET_USER_ID = userID => {
   return {
     type: "SET_USER_ID",
@@ -30,7 +33,7 @@ export const SET_USER_ID = userID => {
   };
 };
 
-//Set cards filter
+// Set cards filter
 export const SET_FILTER = text => {
   return {
     type: "SET_FILTER",
@@ -38,7 +41,7 @@ export const SET_FILTER = text => {
   };
 };
 
-//Persist to state user data
+// Persist to state active merchant
 export const SET_ACTIVE_MERCHANT = merchant => {
   return {
     type: "SET_ACTIVE_MERCHANT",
@@ -46,7 +49,7 @@ export const SET_ACTIVE_MERCHANT = merchant => {
   };
 };
 
-//Persist to state user data
+// Persist to state active card
 export const SET_ACTIVE_CARD = card => {
   return {
     type: "SET_ACTIVE_CARD",
@@ -54,67 +57,36 @@ export const SET_ACTIVE_CARD = card => {
   };
 };
 
+// ACTIONS FUNCTIONS
+//Fetch user from API
+export const REQUEST_USER = userID => {
+  return async function(dispatch) {
+    const { id, token } = userID;
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    };
+
+    // Fetch user from API
+    const res = await axios.get(`${settings.url.api}/users/${id}`, config);
+
+    await Storage.setItem("user", res.data.data);
+
+    dispatch(LOAD_USER(res.data.data));
+
+    // WATCH_USER(userID);
+  };
+};
+
 //Watch user changes from API
-export const WATCH_USER = (userID, callback) => {
+export const WATCH_USER = userID => {
   return function(dispatch) {
     const socket = io(`${settings.url.watch}`, { query: `id=${userID.id}` });
 
     socket.on("change", () => {
-      dispatch(REQUEST_USER(userID, callback));
-    });
-  };
-};
-
-//Fetch user from API
-export const REQUEST_USER = (userID, callback) => {
-  return function(dispatch) {
-    const { id, token } = userID;
-
-    const state = store.getState(),
-      userState = state.user.user;
-
-    const headers = new Headers({
-      Authorization: `Bearer ${token}`
-    });
-
-    //Fetch user from Storage
-    Storage.getItem("user").then(userStorage => {
-      if (userStorage) {
-        if (JSON.stringify(userStorage) !== JSON.stringify(userState)) {
-          dispatch(LOAD_USER(userStorage));
-        }
-        fetch(`${settings.url.api}/users/${id}`, {
-          headers
-        })
-          .then(res => res.json())
-          .then(user => {
-            if (user.hasOwnProperty("user")) {
-              Storage.setItem("user", user).then(() => {
-                dispatch(LOAD_USER(user));
-                if (callback) callback();
-              });
-            }
-          })
-          .catch(() => {
-            setTimeout(() => dispatch(REQUEST_USER(userID)), 2000);
-          });
-      } else {
-        fetch(`${settings.url.api}/users/${id}`, {
-          headers
-        })
-          .then(res => res.json())
-          .then(user => {
-            if (user.hasOwnProperty("user")) {
-              Storage.setItem("user", user).then(() => {
-                dispatch(LOAD_USER(user));
-                if (callback) callback();
-              });
-            }
-          })
-          .catch(() => {
-            setTimeout(() => dispatch(REQUEST_USER(userID)), 2000);
-          });
-      }
+      dispatch(REQUEST_USER(userID));
     });
   };
 };

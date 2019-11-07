@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { TouchableOpacity, Animated } from "react-native";
 import PropTypes from "prop-types";
 
-//SVG Library
-import SVG from "react-native-remote-svg";
+import Back from "../../assets/icons/back";
 
 /*
   PROPS:
@@ -35,7 +34,7 @@ class BackIcon extends Component {
           onPress={() => this.props.navigation.goBack()}
           activeOpacity={0.8}
         >
-          <SVG source={require("../../assets/icons/back.svg")} />
+          <Back />
         </TouchableOpacity>
       </Animated.View>
     );
