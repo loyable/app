@@ -13,11 +13,11 @@
     ]
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.6.2",
     "axios": "^0.19.0",
     "md5": "^2.2.1",
     "react": "16.8.3",
     "react-native": "0.59.9",
-    "react-native-async-storage": "0.0.1",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-maps": "^0.24.2",
     "react-native-open-maps": "^0.3.3",

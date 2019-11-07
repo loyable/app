@@ -4,7 +4,7 @@ import { View, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import PropTypes from "prop-types";
 
 //Global variables
-import vars from "../../../config/styles";
+import text from "../../../config/text";
 
 //Logo icon
 import LogoIcon from "../../icons/LogoIcon";
@@ -21,20 +21,8 @@ class Sidebar extends Component {
     navigation: PropTypes.object.isRequired
   };
   render() {
-    const sidebarItems = [
-      {
-        name: "Il mio account",
-        link: "Account"
-      },
-      {
-        name: "Istruzioni d'uso",
-        link: "Instructions"
-      },
-      {
-        name: "Logout",
-        link: "Logout"
-      }
-    ];
+    const sidebarItems = text.sidebar.items;
+
     return (
       <ScrollView>
         <SafeAreaView

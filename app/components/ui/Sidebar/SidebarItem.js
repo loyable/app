@@ -4,8 +4,9 @@ import PropTypes from "prop-types";
 
 //Global variables
 import vars from "../../../config/styles";
+import text from "../../../config/text";
 
-//Import AsyncStorage
+//Import Storage
 import Storage from "../../../store/asyncstorage";
 
 /* 
@@ -22,6 +23,14 @@ class SidebarItem extends Component {
     link: PropTypes.string.isRequired
   };
 
+  async logout() {
+    // Remove from AsyncStorage
+    await Storage.removeItem("userID");
+
+    // Redirect to Login Screen
+    this.props.navigation.navigate("Login");
+  }
+
   render() {
     const { name, navigation, link } = this.props;
 
@@ -32,20 +41,16 @@ class SidebarItem extends Component {
           switch (link) {
             case "Logout":
               Alert.alert(
-                "Sei sicuro di voler fare il logout?",
-                "Dovrai rieffettuare la verifica SMS",
+                text.sidebar.logout.title,
+                text.sidebar.logout.subtitle,
                 [
                   {
-                    text: "Annulla",
+                    text: text.sidebar.logout.cancel,
                     style: "cancel"
                   },
                   {
-                    text: "Logout",
-                    onPress: () => {
-                      Storage.removeItem("userID").then(() => {
-                        navigation.navigate("Login");
-                      });
-                    }
+                    text: text.sidebar.logout.button,
+                    onPress: () => this.logout()
                   }
                 ],
                 { cancelable: false }

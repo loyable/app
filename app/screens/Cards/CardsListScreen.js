@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import {
   Text,
   View,
@@ -10,20 +11,24 @@ import {
   RefreshControl
 } from "react-native";
 
+// Import libraries
 import { connect } from "react-redux";
 
-import Storage from "../../store/asyncstorage";
-
-import { SET_USER_ID, REQUEST_USER, WATCH_USER } from "../../store/actions";
-
+// Import global variables
 import vars from "../../config/styles";
 
+// Import components
 import Card from "../../components/ui/Card";
-
 import CardGrid from "../../components/ui/Card/CardGridItem";
-
 import SearchBar from "../../components/ui/SearchBar";
 
+// Import Storage
+import Storage from "../../store/asyncstorage";
+
+// Import redux actions
+import { SET_USER_ID, REQUEST_USER, WATCH_USER } from "../../store/actions";
+
+// Import methods
 import { changeHeaderState } from "../../components/ui/Header";
 
 //map redux state to properties
@@ -176,13 +181,16 @@ class CardsListScreen extends Component {
     return (
       <SafeAreaView style={styles.cardViewContainer}>
         <ScrollView contentContainerStyle={styles.container}>
-          {user.hasOwnProperty("user") ? (
+          {/* {user.hasOwnProperty("user") ? (
             this.getCards(userFiltered)
           ) : (
             <View style={styles.loadingContainer}>
               <ActivityIndicator size="large" color="#000" />
             </View>
-          )}
+          )} */}
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#000" />
+          </View>
         </ScrollView>
       </SafeAreaView>
     );
