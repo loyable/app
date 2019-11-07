@@ -7,13 +7,14 @@ import {
   ActivityIndicator
 } from "react-native";
 
+// Import libraries
 import { connect } from "react-redux";
 
+// Import global variables
 import vars from "../config/styles";
-
 import Utils from "../config/utils";
 
-//map redux state to properties
+// Map redux state to properties
 const mapStateToProps = state => {
   return {
     ...state
@@ -22,28 +23,28 @@ const mapStateToProps = state => {
 
 class AccountScreen extends Component {
   render() {
-    const user = this.props.user.user;
+    const { user } = this.props.user;
 
-    if (user.hasOwnProperty("user")) {
+    if (user.hasOwnProperty("_id")) {
       return (
         <View style={styles.container}>
           <View>
             <View style={styles.group}>
               <View>
                 <Text style={styles.label}>ID account</Text>
-                <Text style={styles.text}>{user.user.id}</Text>
+                <Text style={styles.text}>{user._id}</Text>
               </View>
             </View>
             <View style={styles.group}>
               <View>
                 <Text style={styles.label}>Numero di telefono</Text>
-                <Text style={styles.text}>{user.user.phone}</Text>
+                <Text style={styles.text}>{user.phone}</Text>
               </View>
               <View>
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate("ChangeNumber", {
-                      user: user.user
+                      user
                     });
                   }}
                   activeOpacity={0.8}
@@ -57,7 +58,7 @@ class AccountScreen extends Component {
               <View>
                 <Text style={styles.label}>Data registrazione</Text>
                 <Text style={styles.text}>
-                  {Utils.parseDate(user.user.created)}
+                  {Utils.parseDate(user.createdAt)}
                 </Text>
               </View>
             </View>

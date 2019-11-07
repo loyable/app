@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import { Text, ScrollView, View, StyleSheet, FlatList } from "react-native";
 
+// Import libraries
 import { connect } from "react-redux";
 
-import CardItem from "../../components/ui/Card/CardItem";
-
-//global vars
+// Import global variables
 import vars from "../../config/styles";
 
+// Import components
+import CardItem from "../../components/ui/Card/CardItem";
 import CardHistoryItem from "../../components/ui/Cards/CardHistoryItem";
 import CardCircle from "../../components/ui/Cards/CardCircle";
 
+// Import methods
 import { changeHeaderState } from "../../components/ui/Header";
 
-//map redux state to properties
+// Map redux state to properties
 const mapStateToProps = state => {
   return {
     ...state
@@ -22,22 +24,16 @@ const mapStateToProps = state => {
 
 class CardDetailsScreen extends Component {
   componentDidMount() {
-    this.props.navigation.addListener("didFocus", () => {
-      //Metodo che cambia l'Header
-      changeHeaderState({
-        backArrow: true,
-        navigation: this.props.navigation
-      });
-    });
+    this.changeHeader();
   }
   render() {
+    // Set variables
     const item = this.props.user.activeCard;
-
     const card = item.card;
-
-    const total = card.settings.marks.total;
+    const total = card.marks.total;
     const marked = item.marked ? item.marked : 0;
     const remaining = total - marked;
+
     return (
       <ScrollView style={styles.container}>
         <View style={styles.cardContainer}>
@@ -49,8 +45,8 @@ class CardDetailsScreen extends Component {
         </View>
         <View style={styles.cardInfoContainer}>
           <View style={styles.cardDetailsContainer}>
-            {card.settings.hasOwnProperty("name") && (
-              <Text style={styles.title}>{card.settings.name}</Text>
+            {card.hasOwnProperty("name") && (
+              <Text style={styles.title}>{card.name}</Text>
             )}
             <View style={styles.cardAnalyticsContainer}>
               <View style={styles.cardAnalyticsItem}>
@@ -75,9 +71,7 @@ class CardDetailsScreen extends Component {
               </View>
             </View>
             <Text style={styles.descriptionTitle}>Descrizione</Text>
-            <Text style={styles.description}>
-              {card.settings.description.value}
-            </Text>
+            <Text style={styles.description}>{card.description}</Text>
           </View>
           <View style={styles.cardDetailsContainer}>
             {/* Cronologia */}
@@ -107,6 +101,16 @@ class CardDetailsScreen extends Component {
         renderItem={({ item }) => <CardHistoryItem history={item} />}
       />
     );
+  }
+
+  // Change Header State
+  changeHeader() {
+    this.props.navigation.addListener("didFocus", () => {
+      changeHeaderState({
+        backArrow: true,
+        navigation: this.props.navigation
+      });
+    });
   }
 }
 

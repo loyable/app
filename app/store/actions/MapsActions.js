@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import settings from "../../config/settings";
 
 //Persist to state user data
@@ -22,20 +24,16 @@ export const SET_MAP_LOCATION = position => {
   };
 };
 
-export const REQUEST_MERCHANTS = (userID, callback) => {
-  return function(dispatch) {
+export const REQUEST_MERCHANTS = userID => {
+  return async function(dispatch) {
     const { id, token } = userID;
 
-    const headers = new Headers({
-      Authorization: `Bearer ${token}`
+    const req = await axios.get(`${settings.url.api}/users/${id}/merchants`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
-    fetch(`${settings.url.api}/users/${id}/merchants`, {
-      headers
-    })
-      .then(res => res.json())
-      .then(merchants => {
-        dispatch(LOAD_MERCHANTS(merchants));
-        if (callback) callback();
-      });
+
+    dispatch(LOAD_MERCHANTS(req.data.data));
   };
 };

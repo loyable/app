@@ -10,15 +10,20 @@ import {
   ActivityIndicator
 } from "react-native";
 
-import vars from "../config/styles";
+// Import libraries
+import axios from "axios";
 
+// Import global variables
+import vars from "../config/styles";
 import settings from "../config/settings";
 
+// Import components
 import PhoneInput from "../components/ui/PhoneInput";
 
-const { width } = Dimensions.get("window");
-
+// Import storage
 import Storage from "../store/asyncstorage";
+
+const { width } = Dimensions.get("window");
 
 class ChangeNumberScreen extends Component {
   constructor(props) {

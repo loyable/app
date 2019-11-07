@@ -3,7 +3,7 @@ import Svg, { Defs, LinearGradient, Stop, G, Path } from "react-native-svg";
 /* SVGR has dropped some elements not supported by react-native-svg: style, title */
 
 const LogoBianco = props => (
-  <Svg viewBox="0 0 283.46 91.83" {...props}>
+  <Svg viewBox="0 0 283.46 91.83" fill="#fff" {...props}>
     <Defs>
       <LinearGradient
         id="prefix__Sfumatura_senza_nome_159"

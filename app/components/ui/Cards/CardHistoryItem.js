@@ -18,7 +18,10 @@ import CardCircle from "./CardCircle";
 class CardHistoryItem extends Component {
   render() {
     const { value, time, type } = this.props.history;
-    let color, backgroundColor, text;
+    let color,
+      backgroundColor,
+      text,
+      sign = "+";
 
     switch (type) {
       case "completed":
@@ -34,7 +37,7 @@ class CardHistoryItem extends Component {
       case "add":
         (color = "#fff"), (backgroundColor = "#72E81F");
         switch (value) {
-          case "+1":
+          case 1:
             text = "Bollino aggiunto";
             break;
           default:
@@ -45,11 +48,13 @@ class CardHistoryItem extends Component {
       case "remove":
         (color = "#fff"), (backgroundColor = "#F00");
         switch (value) {
-          case "-1":
+          case -1:
             text = "Bollino rimosso";
+            sign = "-";
             break;
           default:
             text = "Bollini rimossi";
+            sign = "-";
             break;
         }
         break;
@@ -61,7 +66,7 @@ class CardHistoryItem extends Component {
       <View style={styles.cardHistoryItem}>
         <View style={styles.cardHistoryIcon}>
           <CardCircle
-            number={value}
+            number={sign + value}
             size={35}
             fontSize={22}
             color={color}

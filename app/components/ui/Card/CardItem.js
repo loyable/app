@@ -107,13 +107,13 @@ class CardItem extends Component {
     return grid;
   }
 
-  setActiveCard() {
+  setActiveCard(card) {
     if (this.props.navigateTo !== "none") {
       // Set active merchant
       this.props.SET_ACTIVE_CARD(card);
 
-      // Navigate to Merchant Details screen
-      this.props.navigation.navigate("MerchantDetails");
+      // Navigate to Card Details screen
+      this.props.navigation.navigate("CardDetails");
     }
   }
 

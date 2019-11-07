@@ -39,28 +39,6 @@ const mapStateToProps = state => {
 };
 
 class DetailsScreen extends Component {
-  getAnalytics(merchant) {
-    let added = 0,
-      completed = 0,
-      marked = 0;
-
-    if (merchant.hasOwnProperty("merchant")) {
-      merchant.cards.forEach(card => {
-        added++;
-        marked += card.marked;
-        if (card.marked === card.card.marks.total) {
-          completed++;
-        }
-      });
-    }
-
-    return {
-      added,
-      completed,
-      marked
-    };
-  }
-
   componentDidMount() {
     this.changeHeader();
   }
@@ -241,6 +219,28 @@ class DetailsScreen extends Component {
         renderItem={({ item }) => <CardHistoryItem history={item} />}
       />
     );
+  }
+
+  getAnalytics(merchant) {
+    let added = 0,
+      completed = 0,
+      marked = 0;
+
+    if (merchant.hasOwnProperty("merchant")) {
+      merchant.cards.forEach(card => {
+        added++;
+        marked += card.marked;
+        if (card.marked === card.card.marks.total) {
+          completed++;
+        }
+      });
+    }
+
+    return {
+      added,
+      completed,
+      marked
+    };
   }
 
   // Change Header State

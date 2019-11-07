@@ -9,28 +9,28 @@ import {
   Alert
 } from "react-native";
 
+// Import libraries
 import { connect } from "react-redux";
+import MapView from "react-native-maps";
 
+// Import redux actions
 import {
   SET_USER_LOCATION,
   SET_MAP_LOCATION,
   REQUEST_MERCHANTS,
   LOAD_MERCHANTS,
   SET_ACTIVE_MERCHANT
-} from "../../store/actions";
+} from "../../store/actions/MapsActions";
 
-import vars from "../../config/styles";
-
+// Import global vars
 import Utils from "../../config/utils";
 
-import MapView from "react-native-maps";
-
+// Import components
 import Tooltip from "../../components/ui/Map/Tooltip";
-
 import LocationArrow from "../../components/ui/Map/LocationArrow";
-
 import Marker from "../../components/ui/Map/Marker";
 
+// Import methods
 import { changeHeaderState } from "../../components/ui/Header";
 
 //map redux state to properties
@@ -108,13 +108,7 @@ class MapViewScreen extends Component {
   componentDidMount() {
     this.props.REQUEST_MERCHANTS(this.props.user.userID);
 
-    this.props.navigation.addListener("didFocus", () => {
-      //Change header state
-      changeHeaderState({
-        backArrow: false,
-        navigation: this.props.navigation
-      });
-    });
+    this.changeHeader();
 
     navigator.geolocation.getCurrentPosition(
       position => {
@@ -146,23 +140,23 @@ class MapViewScreen extends Component {
       merchantsMarkers = [];
 
     //If user is in the store
-    if (user.hasOwnProperty("user")) {
-      merchants = user.user.merchants;
+    if (user.hasOwnProperty("_id")) {
+      merchants = user.merchants;
     }
 
     //If user has downloaded merchant list
     if (this.props.maps.merchants.length !== 0) {
       merchantsMarkers = this.props.maps.merchants;
 
-      //Loop on user-associated merchants
-      for (let i = 0; i < merchantsMarkers.length; i++) {
-        merchants.filter(item => {
-          if (merchantsMarkers[i].id === item.merchant.id) {
-            merchantsMarkers[i] = item;
-          }
-        });
-      }
-      merchants = merchantsMarkers;
+      // //Loop on user-associated merchants
+      // for (let i = 0; i < merchantsMarkers.length; i++) {
+      //   merchants.forEach(item => {
+      //     if (merchantsMarkers[i]._id === item.merchant.id) {
+      //       merchantsMarkers[i] = item.merchant;
+      //     }
+      //   });
+      // }
+      // merchants = merchantsMarkers;
     }
 
     return (
@@ -176,7 +170,7 @@ class MapViewScreen extends Component {
               <LocationArrow />
             </TouchableOpacity>
           </View>
-          {user.hasOwnProperty("user") ? (
+          {user.hasOwnProperty("_id") ? (
             <MapView
               ref={map => (this.map = map)}
               initialRegion={this.getUserLocation()}
@@ -193,20 +187,18 @@ class MapViewScreen extends Component {
                     <MapView.Marker
                       key={`marker-${index}`}
                       coordinate={{
-                        latitude:
-                          merchant.merchant.address.location.coordinates[0],
-                        longitude:
-                          merchant.merchant.address.location.coordinates[1]
+                        latitude: merchant.merchant.location.coordinates[0],
+                        longitude: merchant.merchant.location.coordinates[1]
                       }}
                     >
-                      <Marker logo={merchant.merchant.logo} />
+                      <Marker logo={merchant.logo} />
 
                       <Tooltip
                         merchant={merchant}
                         navigation={this.props.navigation}
                         distance={Utils.distanceBetweenTwoCoords(
-                          merchant.merchant.address.location.coordinates[0],
-                          merchant.merchant.address.location.coordinates[1],
+                          merchant.merchant.location.coordinates[0],
+                          merchant.merchant.location.coordinates[1],
                           this.props.maps.userLocation.latitude,
                           this.props.maps.userLocation.longitude
                         )}
@@ -246,6 +238,16 @@ class MapViewScreen extends Component {
         </View>
       </SafeAreaView>
     );
+  }
+
+  // Change Header State
+  changeHeader() {
+    this.props.navigation.addListener("didFocus", () => {
+      changeHeaderState({
+        backArrow: false,
+        navigation: this.props.navigation
+      });
+    });
   }
 }
 

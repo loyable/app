@@ -1,18 +1,3 @@
-//MapsActions
-import {
-  SET_USER_LOCATION,
-  SET_MAP_LOCATION,
-  REQUEST_MERCHANTS,
-  LOAD_MERCHANTS
-} from "./MapsActions";
-
-export {
-  SET_USER_LOCATION,
-  SET_MAP_LOCATION,
-  REQUEST_MERCHANTS,
-  LOAD_MERCHANTS
-};
-
 //UserActions
 import {
   FILTER_MERCHANTS,
