@@ -5,7 +5,6 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.horcrux.svg.SvgPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.airbnb.android.react.maps.MapsPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -31,7 +30,6 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new SvgPackage(),
             new AsyncStoragePackage(),
-            new ReactNativePushNotificationPackage(),
             new VectorIconsPackage(),
             new MapsPackage(),
             new RNGestureHandlerPackage()

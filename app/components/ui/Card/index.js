@@ -49,7 +49,7 @@ const mapDispatchToProps = dispatch => {
 class Card extends Component {
   static defaultProps = {
     showInfo: true,
-    navigateTo: "Details"
+    navigateTo: "CardDetails"
   };
 
   static propTypes = {
@@ -191,7 +191,4 @@ class Card extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Card);
+export default connect(mapStateToProps, mapDispatchToProps)(Card);

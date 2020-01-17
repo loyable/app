@@ -113,7 +113,7 @@ class CardItem extends Component {
       this.props.SET_ACTIVE_CARD(card);
 
       // Navigate to Card Details screen
-      this.props.navigation.navigate("CardDetails");
+      this.props.navigation.navigate(this.props.navigateTo);
     }
   }
 
@@ -362,7 +362,4 @@ class CardItem extends Component {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CardItem);

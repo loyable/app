@@ -242,7 +242,7 @@ class MapViewScreen extends Component {
 
   // Change Header State
   changeHeader() {
-    this.props.navigation.addListener("didFocus", () => {
+    this.props.navigation.addListener("willFocus", () => {
       changeHeaderState({
         backArrow: false,
         navigation: this.props.navigation
@@ -274,7 +274,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MapViewScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(MapViewScreen);
