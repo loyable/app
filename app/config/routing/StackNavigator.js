@@ -6,7 +6,6 @@ import TabNavigator from "./TabNavigator";
 
 import QRCodeScreen from "../../screens/QRCodeScreen";
 import AccountScreen from "../../screens/AccountScreen";
-import ChangeNumberScreen from "../../screens/ChangeNumberScreen";
 import InstructionsScreen from "../../screens/InstructionsScreen";
 
 import Header from "../../components/ui/Header";
@@ -31,20 +30,6 @@ export default createStackNavigator(
     },
     Account: {
       screen: AccountScreen,
-      navigationOptions: ({ navigation }) => {
-        return {
-          header: (
-            <Header
-              backArrow={true}
-              navigation={navigation}
-              showBottomShadow={true}
-            />
-          )
-        };
-      }
-    },
-    ChangeNumber: {
-      screen: ChangeNumberScreen,
       navigationOptions: ({ navigation }) => {
         return {
           header: (

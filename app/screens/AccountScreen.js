@@ -40,7 +40,7 @@ class AccountScreen extends Component {
                 <Text style={styles.label}>Numero di telefono</Text>
                 <Text style={styles.text}>{user.phone}</Text>
               </View>
-              <View>
+              {/* <View>
                 <TouchableOpacity
                   onPress={() => {
                     this.props.navigation.navigate("ChangeNumber", {
@@ -52,7 +52,7 @@ class AccountScreen extends Component {
                 >
                   <Text style={styles.actionButtonText}>Cambia</Text>
                 </TouchableOpacity>
-              </View>
+              </View> */}
             </View>
             <View style={styles.group}>
               <View>
