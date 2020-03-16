@@ -1,8 +1,8 @@
 export default {
   version: "1.0.0",
   url: {
-    api: "http://192.168.1.8:5000/api/v1",
-    watch: "http://192.168.1.8:3500"
+    api: "https://api.loyable.com/api/v1",
+    watch: "https://api.loyable.com:3500"
   },
   popupUpdate: {
     title: "Aggiornamento disponibile!",

@@ -16,7 +16,9 @@ import { connect } from "react-redux";
 
 // Import global variables
 import vars from "../../config/styles";
-import Utils from "../../config/utils";
+
+// Import utils functions
+import isOdd from "../../utils/isOdd";
 
 // Import components
 import Card from "../../components/ui/Card";
@@ -128,8 +130,9 @@ class CardsListScreen extends Component {
 
   getCards(user) {
     let lastItem;
-    if (Utils.isOdd(user.merchants.length))
+    if (isOdd(user.merchants.length)) {
       lastItem = user.merchants.length - 1;
+    }
 
     let activeTab = [true, false];
 
@@ -227,7 +230,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CardsListScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(CardsListScreen);
