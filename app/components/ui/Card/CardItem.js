@@ -251,18 +251,6 @@ class CardItem extends Component {
         flexDirection: "row",
         alignItems: "flex-start"
       },
-      // {
-      //     flex: 1,
-      //     flexDirection:
-      //       card.header.logo.verticalPosition !== "center"
-      //         ? "column"
-      //         : "row",
-      //     alignItems:
-      //       card.header.logo.verticalPosition !== "center"
-      //         ? "center"
-      //         : "flex-start",
-      //     justifyContent: "space-between"
-      //   }
       logo: {
         width: card.header.logo.hasOwnProperty("width")
           ? card.header.logo.width
