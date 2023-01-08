@@ -141,7 +141,7 @@ class Card extends Component {
     }
   }
 
-  getStyles() {
+  getStyles(merchant) {
     return {
       container: {
         marginTop: 0,
