@@ -38,7 +38,7 @@
     "@babel/runtime": "7.4.5",
     "babel-jest": "24.8.0",
     "jest": "24.8.0",
-    "json-server": "^0.15.0",
+    "json-server": "^0.17.1",
     "metro-react-native-babel-preset": "0.54.1",
     "react-devtools": "^3.6.1",
     "react-test-renderer": "16.8.6"
